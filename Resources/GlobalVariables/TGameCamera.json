@@ -1,0 +1,61 @@
+{
+    "TGameCamera": {
+        "cameraAngle": 0,
+        "gameEyePos": [
+            0.0,
+            4.0,
+            -0.0
+        ],
+        "highEyePos_": [
+            0.0,
+            10.0,
+            -18.0
+        ],
+        "highTargetPos_": [
+            0.0,
+            1.0,
+            9.0
+        ],
+        "leftEyePos_": [
+            -5.0,
+            6.0,
+            -15.0
+        ],
+        "leftTargetPos_": [
+            0.0,
+            2.0,
+            9.0
+        ],
+        "lightEyePos_": [
+            5.0,
+            6.0,
+            -15.0
+        ],
+        "lightTargetPos_": [
+            0.0,
+            2.0,
+            9.0
+        ],
+        "lowEyePos_": [
+            0.0,
+            4.0,
+            -9.0
+        ],
+        "lowTargetPos_": [
+            0.0,
+            3.0,
+            9.0
+        ],
+        "mediumEyePos_": [
+            0.0,
+            8.0,
+            -12.0
+        ],
+        "mediumTargetPos_": [
+            0.0,
+            1.0,
+            9.0
+        ],
+        "speedLv": 0
+    }
+}

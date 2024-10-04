@@ -1,0 +1,8 @@
+{
+    "playerJump": {
+        "maxHeight": 3.0,
+        "maxSpeed": 1.0,
+        "reachTime": 25,
+        "rotaSpeed": 0.20000000298023224
+    }
+}

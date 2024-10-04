@@ -1,0 +1,16 @@
+{
+    "backBoostParticle": {
+        "alpha": 0.699999988079071,
+        "color": [
+            0.30000001192092896,
+            1.0,
+            1.0
+        ],
+        "endScale": 0.0,
+        "liveTime": 11,
+        "randPos": 0.5,
+        "randVel": 0.019999999552965164,
+        "randVelY": 0.0,
+        "startScale": 0.4000000059604645
+    }
+}
