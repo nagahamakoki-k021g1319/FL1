@@ -22,10 +22,6 @@ void StageSelectScene::Initialize() {
 	Object3d::SetCamera(gameCamera_.get());
 	ParticleManager::SetCamera(gameCamera_.get());
 
-	//スプライト
-	SpriteLoader* spriteLoader = SpriteLoader::GetInstance();
-	stageSelectPic_ = make_unique<Sprite>();
-	stageSelectPic_->Initialize(SpriteCommon::GetInstance(), spriteLoader->GetTextureIndex("select.png"));
 }
 
 StageSelectScene::~StageSelectScene() {
@@ -35,7 +31,6 @@ StageSelectScene::~StageSelectScene() {
 // 更新
 void StageSelectScene::Update() {
 	gameCamera_->Update();
-	stageSelectPic_->Update();
 	
 	StateTransition();
 }
@@ -48,15 +43,13 @@ void StageSelectScene::FbxDraw() {
 }
 
 void StageSelectScene::SpriteDraw() {
-	stageSelectPic_->Draw();
+
 }
 
 void StageSelectScene::StateTransition() {
 	if (Input::GetInstance()->TriggerKey(DIK_1)) {
-		GameScene::stageNum_ = 1;
 		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
 	}else if (Input::GetInstance()->TriggerKey(DIK_2)) {
-		GameScene::stageNum_ = 2;
 		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
 	}
 }

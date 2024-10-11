@@ -49,6 +49,4 @@ private:
 	//カメラ
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
-	//スプライト
-	unique_ptr<Sprite> stageSelectPic_ = nullptr;
 };

@@ -16,9 +16,6 @@
     <Filter Include="User\Source\Scene">
       <UniqueIdentifier>{4349b04e-3d06-488a-9b41-bd725a5b9100}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\Source\Field">
-      <UniqueIdentifier>{21b5912b-a2ac-4e8c-808e-eeff69ad6f95}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\Header">
       <UniqueIdentifier>{1482f690-1c2b-4c21-8274-6de46df1607c}</UniqueIdentifier>
     </Filter>
@@ -112,29 +109,11 @@
     <Filter Include="User\Header\Player">
       <UniqueIdentifier>{dae6b2c4-c2b9-4a6d-b191-cde8ec118100}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\Header\Player\State">
-      <UniqueIdentifier>{d4cd6546-48d4-4217-83e0-96b1253bca20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\Source\Player\State">
-      <UniqueIdentifier>{46e6d412-df92-4f4b-bb99-db6203539277}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\Header\Camera">
       <UniqueIdentifier>{336e2969-a5a3-4f0f-b55d-18e4c5eba4d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="User\Source\Camera">
       <UniqueIdentifier>{1c6cf6d0-c88f-4489-bdb3-16cc7715a1ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\Header\Player\Particle">
-      <UniqueIdentifier>{73c38458-b91b-41c0-8c1c-fb580188bac5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\Source\Player\Particle">
-      <UniqueIdentifier>{0e647565-8867-44e4-9761-b37c538a263d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\Source\Movie">
-      <UniqueIdentifier>{69846abc-4604-483f-ab68-f93ea72e8e34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="User\Header\Movie">
-      <UniqueIdentifier>{610103df-8ed3-490f-862f-21bda15a1650}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,53 +238,11 @@
     <ClCompile Include="Engine\Loader\SpriteLoader.cpp">
       <Filter>Engine\Source\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="User\Player\Player.cpp">
-      <Filter>User\Source\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\State\PlayerState.cpp">
-      <Filter>User\Source\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\State\PlayerDash.cpp">
-      <Filter>User\Source\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\CoinObject.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\GoalObject.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\State\PlayerJump.cpp">
-      <Filter>User\Source\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\State\PlayerSlide.cpp">
-      <Filter>User\Source\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\Particle\PlayerParticleManager.cpp">
-      <Filter>User\Source\Player\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\Particle\Smoke.cpp">
-      <Filter>User\Source\Player\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\Ground.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\Particle\BackBoost.cpp">
-      <Filter>User\Source\Player\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Loader\LevelLoader.cpp">
       <Filter>Engine\Source\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="User\Field\FieldManager.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Loader\ObjLoader.cpp">
       <Filter>Engine\Source\Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\BaseFieldObjectManager.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Player\Particle\Spark.cpp">
-      <Filter>User\Source\Player\Particle</Filter>
     </ClCompile>
     <ClCompile Include="User\Scene\TitleScene.cpp">
       <Filter>User\Source\Scene</Filter>
@@ -313,28 +250,9 @@
     <ClCompile Include="User\Scene\StageSelectScene.cpp">
       <Filter>User\Source\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="User\Player\Particle\StageChangeParticle.cpp">
-      <Filter>User\Source\Player\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\NormalObstacleObject.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Camera\TGameCamera.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Field\CountCoin.cpp">
-      <Filter>User\Source\Field</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Movie\BaseMovie.cpp">
-      <Filter>User\Source\Movie</Filter>
-    </ClCompile>
-    <ClCompile Include="User\Movie\StartMovie.cpp">
-      <Filter>User\Source\Movie</Filter>
-    </ClCompile>
     <ClCompile Include="User\GameManager.cpp">
       <Filter>User\Source</Filter>
     </ClCompile>
-    <ClCompile Include="User\Movie\GoalMovie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BASE\FPS.h">
@@ -463,59 +381,14 @@
     <ClInclude Include="Engine\Loader\SpriteLoader.h">
       <Filter>Engine\Header\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="User\Player\Player.h">
-      <Filter>User\Header\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\State\PlayerState.h">
-      <Filter>User\Header\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\State\PlayerDash.h">
-      <Filter>User\Header\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\BaseFieldObject.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\CoinObject.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\GoalObject.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
     <ClInclude Include="User\Camera\TGameCamera.h">
       <Filter>User\Header\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\State\PlayerJump.h">
-      <Filter>User\Header\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\State\PlayerSlide.h">
-      <Filter>User\Header\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\Particle\PlayerParticleManager.h">
-      <Filter>User\Header\Player\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\Particle\Smoke.h">
-      <Filter>User\Header\Player\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\Particle\BackBoost.h">
-      <Filter>User\Header\Player\Particle</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Loader\LevelLoader.h">
       <Filter>Engine\Header\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="User\Field\Ground.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\FieldManager.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Loader\ObjLoader.h">
       <Filter>Engine\Header\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\BaseFieldObjectManager.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Player\Particle\Spark.h">
-      <Filter>User\Header\Player\Particle</Filter>
     </ClInclude>
     <ClInclude Include="User\Scene\TitleScene.h">
       <Filter>User\Header\Scene</Filter>
@@ -523,25 +396,9 @@
     <ClInclude Include="User\Scene\StageSelectScene.h">
       <Filter>User\Header\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="User\Player\Particle\StageChangeParticle.h">
-      <Filter>User\Header\Player\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\NormalObstacleObject.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Field\CountCoin.h">
-      <Filter>User\Header\Field</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Movie\BaseMovie.h">
-      <Filter>User\Header\Movie</Filter>
-    </ClInclude>
-    <ClInclude Include="User\Movie\StartMovie.h">
-      <Filter>User\Header\Movie</Filter>
-    </ClInclude>
     <ClInclude Include="User\GameManager.h">
       <Filter>User\Header</Filter>
     </ClInclude>
-    <ClInclude Include="User\Movie\GoalMovie.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SHADER\FBX.hlsli">

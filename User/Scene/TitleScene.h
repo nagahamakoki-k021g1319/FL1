@@ -49,12 +49,4 @@ private:
 	//カメラ
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
-	//スプライト
-	unique_ptr<Sprite> titlePic_ = nullptr;
-	unique_ptr<Sprite> spacePic_ = nullptr;
-
-	//点滅
-	int8_t flashTime;
-	const int8_t flashTimer = 40;
-	bool isFlash;
 };
