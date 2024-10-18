@@ -10,6 +10,8 @@
 #include"GameCamera.h"
 
 #include"GameManager.h"
+#include"Skill.h"
+#include"Deck.h"
 
 using namespace std;
 
@@ -48,4 +50,8 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	unique_ptr<GameManager> gameManager_ = nullptr;
+
+
+	Skills skills_;
+	unique_ptr<Deck> deck_ = nullptr;
 };
