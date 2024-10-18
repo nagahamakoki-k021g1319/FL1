@@ -34,6 +34,8 @@ void GameScene::Initialize() {
 	skills_.Initilize();
 	deck_ = make_unique<Deck>();
 	deck_->Initilize(skills_);
+	gameFlow_ = std::make_unique<GameFlow>();
+	gameFlow_->Initialize();
 }
 
 GameScene::~GameScene() {
@@ -43,6 +45,7 @@ GameScene::~GameScene() {
 // 更新
 void GameScene::Update() {
 	gameCamera_->Update();
+	gameFlow_->Update();
 
 
 	if (Input::GetInstance()->TriggerKey(DIK_A)) {
@@ -57,7 +60,7 @@ void GameScene::Update() {
 }
 
 void GameScene::ObjectDraw() {
-
+	gameFlow_->Draw();
 
 }
 

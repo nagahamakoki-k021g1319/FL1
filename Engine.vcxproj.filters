@@ -118,6 +118,12 @@
     <Filter Include="User\Header\Skill">
       <UniqueIdentifier>{f306bc73-e58b-40cb-a340-c75f9160875b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\Header\Game">
+      <UniqueIdentifier>{528e8e0b-2046-4fbc-b96f-611ee1d02286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Source\Game">
+      <UniqueIdentifier>{b50d972c-f38a-439d-835f-ca1ecfb74023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -261,6 +267,18 @@
     </ClCompile>
     <ClCompile Include="User\Skill\Deck.cpp">
       <Filter>User\Source\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="User\game\GameFlow.cpp">
+      <Filter>User\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Game\FinalTest.cpp">
+      <Filter>User\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Game\Consult.cpp">
+      <Filter>User\Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Game\Lesson.cpp">
+      <Filter>User\Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +432,19 @@
     <ClInclude Include="User\Skill\Deck.h">
       <Filter>User\Header\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="User\game\GameFlow.h">
+      <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Game\FinalTest.h">
+      <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="User\Game\Lesson.h">
+      <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Game\Consult.h">
+      <Filter>User\Header\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SHADER\FBX.hlsli">
@@ -457,5 +488,8 @@
     <FxCompile Include="Resources\SHADER\SpriteVS.hlsl">
       <Filter>Engine\Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Enegine.rc" />
   </ItemGroup>
 </Project>
