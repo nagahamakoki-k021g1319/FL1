@@ -29,6 +29,9 @@ void GameScene::Initialize() {
 
 	gameManager_ = std::make_unique<GameManager>();
 	gameManager_->Init();
+
+	gameFlow_ = std::make_unique<GameFlow>();
+	gameFlow_->Initialize();
 }
 
 GameScene::~GameScene() {
@@ -38,12 +41,13 @@ GameScene::~GameScene() {
 // 更新
 void GameScene::Update() {
 	gameCamera_->Update();
+	gameFlow_->Update();
 
 	StateTransition();
 }
 
 void GameScene::ObjectDraw() {
-
+	gameFlow_->Draw();
 
 }
 

@@ -141,6 +141,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="User\COLLISION\CollisionManager.cpp" />
     <ClCompile Include="User\GameMain.cpp" />
+    <ClCompile Include="User\Game\Consult.cpp" />
+    <ClCompile Include="User\Game\FinalTest.cpp" />
+    <ClCompile Include="User\game\GameFlow.cpp" />
+    <ClCompile Include="User\Game\Lesson.cpp" />
     <ClCompile Include="User\SCENE\GameScene.cpp" />
     <ClCompile Include="User\SCENE\SceneChange.cpp" />
     <ClCompile Include="User\SCENE\SceneManager.cpp" />
@@ -149,6 +153,7 @@
     <ClCompile Include="User\Scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="User\GameManager.h" />
     <ClInclude Include="Engine\Loader\LevelLoader.h" />
     <ClInclude Include="Engine\Loader\ObjLoader.h" />
@@ -191,6 +196,10 @@
     <ClInclude Include="User\Camera\TGameCamera.h" />
     <ClInclude Include="User\COLLISION\CollisionManager.h" />
     <ClInclude Include="User\GameMain.h" />
+    <ClInclude Include="User\Game\Consult.h" />
+    <ClInclude Include="User\Game\FinalTest.h" />
+    <ClInclude Include="User\game\GameFlow.h" />
+    <ClInclude Include="User\Game\Lesson.h" />
     <ClInclude Include="User\SCENE\GameScene.h" />
     <ClInclude Include="User\SCENE\SceneChange.h" />
     <ClInclude Include="User\SCENE\SceneManager.h" />
@@ -267,6 +276,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Enegine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
