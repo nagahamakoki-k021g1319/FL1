@@ -62,7 +62,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Enemy;$(SolutionDir)User\Field;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)User\Player\State;$(SolutionDir)User\Enemy\State;$(SolutionDir)User\Enemy\Particle;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Movie;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Enemy;$(SolutionDir)User\Field;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)User\Player\State;$(SolutionDir)User\Enemy\State;$(SolutionDir)User\Enemy\Particle;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Movie;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -151,6 +151,8 @@
     <ClCompile Include="User\SCENE\SceneState.cpp" />
     <ClCompile Include="User\Scene\StageSelectScene.cpp" />
     <ClCompile Include="User\Scene\TitleScene.cpp" />
+    <ClCompile Include="User\Skill\Deck.cpp" />
+    <ClCompile Include="User\Skill\Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -206,6 +208,8 @@
     <ClInclude Include="User\SCENE\SceneState.h" />
     <ClInclude Include="User\Scene\StageSelectScene.h" />
     <ClInclude Include="User\Scene\TitleScene.h" />
+    <ClInclude Include="User\Skill\Deck.h" />
+    <ClInclude Include="User\Skill\Skill.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">

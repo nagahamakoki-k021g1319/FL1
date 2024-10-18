@@ -10,6 +10,8 @@
 #include"GameCamera.h"
 
 #include"GameManager.h"
+#include"Skill.h"
+#include"Deck.h"
 
 #include "Game/GameFlow.h"
 
@@ -51,6 +53,8 @@ private:
 
 	unique_ptr<GameManager> gameManager_ = nullptr;
 
+	Skills skills_;
+	unique_ptr<Deck> deck_ = nullptr;
 	//ゲームフロー(レッスンとか相談とか)
 	unique_ptr<GameFlow> gameFlow_ = nullptr;
 

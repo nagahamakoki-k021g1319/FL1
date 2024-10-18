@@ -19,9 +19,6 @@
     <Filter Include="User\Header">
       <UniqueIdentifier>{1482f690-1c2b-4c21-8274-6de46df1607c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="User\Header\Field">
-      <UniqueIdentifier>{3061c46d-cb3b-48d5-94a8-8a0a21ba1279}</UniqueIdentifier>
-    </Filter>
     <Filter Include="User\Header\Scene">
       <UniqueIdentifier>{30509ed0-ceb3-4348-80b4-d587819c3884}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,12 @@
     </Filter>
     <Filter Include="User\Source\Camera">
       <UniqueIdentifier>{1c6cf6d0-c88f-4489-bdb3-16cc7715a1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Source\Skill">
+      <UniqueIdentifier>{ff698f33-cc05-4953-82cb-929fa883d8d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Header\Skill">
+      <UniqueIdentifier>{f306bc73-e58b-40cb-a340-c75f9160875b}</UniqueIdentifier>
     </Filter>
     <Filter Include="User\Header\Game">
       <UniqueIdentifier>{528e8e0b-2046-4fbc-b96f-611ee1d02286}</UniqueIdentifier>
@@ -258,6 +261,12 @@
     </ClCompile>
     <ClCompile Include="User\GameManager.cpp">
       <Filter>User\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Skill\Skill.cpp">
+      <Filter>User\Source\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="User\Skill\Deck.cpp">
+      <Filter>User\Source\Skill</Filter>
     </ClCompile>
     <ClCompile Include="User\game\GameFlow.cpp">
       <Filter>User\Source\Game</Filter>
@@ -416,6 +425,12 @@
     </ClInclude>
     <ClInclude Include="User\GameManager.h">
       <Filter>User\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Skill\Skill.h">
+      <Filter>User\Header\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Skill\Deck.h">
+      <Filter>User\Header\Skill</Filter>
     </ClInclude>
     <ClInclude Include="User\game\GameFlow.h">
       <Filter>User\Header\Game</Filter>
