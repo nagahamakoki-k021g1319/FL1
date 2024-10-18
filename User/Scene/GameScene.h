@@ -11,6 +11,8 @@
 
 #include"GameManager.h"
 
+#include "Game/GameFlow.h"
+
 using namespace std;
 
 class GameScene : public SceneState {
@@ -48,4 +50,8 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	unique_ptr<GameManager> gameManager_ = nullptr;
+
+	//ゲームフロー(レッスンとか相談とか)
+	unique_ptr<GameFlow> gameFlow_ = nullptr;
+
 };
