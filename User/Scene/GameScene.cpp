@@ -50,11 +50,10 @@ void GameScene::Update() {
 
 	if (Input::GetInstance()->TriggerKey(DIK_A)) {
 		deck_->DrawSkill();
-	}else if (Input::GetInstance()->TriggerKey(DIK_S)) {
-		deck_->UseSkill();
-	}else if (Input::GetInstance()->TriggerKey(DIK_D)) {
-		deck_->Discard();
 	}
+	deck_->UseSkill();
+
+	deck_->SpriteSort();
 
 	StateTransition();
 }
@@ -70,6 +69,7 @@ void GameScene::FbxDraw() {
 
 void GameScene::SpriteDraw() {
 	deck_->DrawHand();
+	deck_->DrawList();
 }
 
 void GameScene::StateTransition() {

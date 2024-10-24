@@ -1,9 +1,7 @@
 #pragma once
 #include<map>
 #include<string>
-
 #include"Sprite.h"
-#include"SpriteLoader.h"
 
 class Skills {
 public:
@@ -12,12 +10,13 @@ public:
 		int cost_;
 		int score_;
 		int shield_;
+		bool isOneTime_;
 		Sprite sprite_;
 	};
 
 public:
 	void Initilize();
-	void AddSkill(std::string name, int score, int cost, int shield);
+	void AddSkill(std::string name, int score, int cost, int shield, bool isOneTime);
 	
 	Skill GetSkill(std::string name);
 private:
