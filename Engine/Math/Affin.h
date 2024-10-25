@@ -7,6 +7,7 @@
 #include "Matrix4.h"
 #include "Vector3.h"
 #include "ConvertXM.h"
+#include "Easing.h"
 
 //#include "WorldTransform.h"
 
