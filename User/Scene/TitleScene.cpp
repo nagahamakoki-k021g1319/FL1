@@ -21,10 +21,10 @@ void TitleScene::Initialize() {
 	Object3d::SetCamera(gameCamera_.get());
 	ParticleManager::SetCamera(gameCamera_.get());
 
-	donut_ = make_unique<DonutGraph>();
-	donut_->SetSizeGraph(Vector2(100, 100));
-	donut_->Initialize(MyEngine::SpriteCommon::GetInstance()->GetDxCommon());
-	
+	//donut_ = make_unique<DonutGraph>();
+	//donut_->SetSizeGraph(Vector2(100, 100));
+	//donut_->Initialize(MyEngine::SpriteCommon::GetInstance()->GetDxCommon());
+	//
 
 }
 
@@ -42,7 +42,7 @@ void TitleScene::Update() {
 
 void TitleScene::ObjectDraw() {
 
-	donut_->Draw(MyEngine::SpriteCommon::GetInstance()->GetDxCommon()->GetCommandList());
+	//donut_->Draw(MyEngine::SpriteCommon::GetInstance()->GetDxCommon()->GetCommandList());
 }
 
 void TitleScene::FbxDraw() {

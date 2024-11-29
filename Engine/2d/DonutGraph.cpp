@@ -10,6 +10,8 @@
 #include <cassert>
 #include <d3dcompiler.h>
 
+#include <DirectXTex.h>
+
 #pragma comment(lib, "d3dcompiler.lib")
 
 ID3D12Device* DonutGraph::device_;
@@ -51,44 +53,59 @@ void DonutGraph::Initialize(DirectXCommon* dxCommon)
 		(UINT)sizeGraph.x,
 		(UINT)sizeGraph.y,
 		1, 0, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
-	{
-
-		//テクスチャバッファの生成
-		//ヒープ設定
-		CD3DX12_HEAP_PROPERTIES heapProp(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK,
-			D3D12_MEMORY_POOL_L0);
-
-		CD3DX12_CLEAR_VALUE clearValue(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor);
-
-		result = device_->CreateCommittedResource(
-			&heapProp,
-			D3D12_HEAP_FLAG_NONE,
-			&texresDesc,
-			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
-			&clearValue,
-			IID_PPV_ARGS(&texBuff));
-		assert(SUCCEEDED(result));
-
-		{//テクスチャを赤クリア
-		//画素数(1280*720=921600ピクセル)
-			const UINT pixelCount = (UINT)sizeGraph.x * (UINT)sizeGraph.y;
-			//画像1行分のデータサイズ
-			const UINT rowPitch = sizeof(UINT) * (UINT)sizeGraph.x;
-			//画像全体のデータサイズ
-			const UINT depthPitch = rowPitch * (UINT)sizeGraph.y;
-			//画像イメージ
-			UINT* img = new UINT[pixelCount];
-			for (size_t j = 0; j < pixelCount; j++) { img[j] = 0xffffffff; }
-
-			result = texBuff->WriteToSubresource(0, nullptr,
-				img, rowPitch, depthPitch);
-			assert(SUCCEEDED(result));
-			delete[] img;
-		}
 
 
+	//テクスチャバッファの生成
+	//ヒープ設定
+	/*CD3DX12_HEAP_PROPERTIES heapProp(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK,
+		D3D12_MEMORY_POOL_L0);*/
 
-	}
+	CD3DX12_CLEAR_VALUE clearValue(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor);
+
+	
+
+	//頂点データ全体のサイズ=頂点データ一つ分のサイズ*頂点データの要素数
+	UINT sizeVB = static_cast<UINT>(sizeof(vertices[0]) * vertices.size());
+	//頂点バッファの設定
+	D3D12_HEAP_PROPERTIES heapProp{};  //ヒープ設定
+	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD; //GPUへの転送用
+
+	TexMetadata metadata{};
+	ScratchImage scratchImg{};
+	// WICテクスチャのロード
+	result = LoadFromWICFile(
+		L"Resources/mario.png",   //「Resources」フォルダの「texture.png」
+		WIC_FLAGS_NONE,
+		&metadata, scratchImg);
+	//リソース設定
+	D3D12_RESOURCE_DESC textureResourceDesc{};
+	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	textureResourceDesc.Format = metadata.format;
+	textureResourceDesc.Width = metadata.width;  // 幅
+	textureResourceDesc.Height = (UINT)metadata.height; // 高さ
+	textureResourceDesc.DepthOrArraySize = (UINT16)metadata.arraySize;
+	textureResourceDesc.MipLevels = (UINT16)metadata.mipLevels;
+	textureResourceDesc.SampleDesc.Count = 1;
+	//頂点バッファの生成
+	result = device_->CreateCommittedResource(
+		&heapProp, //ヒープ設定
+		D3D12_HEAP_FLAG_NONE,
+		&textureResourceDesc, //リソース設定
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&vertBuff));
+	assert(SUCCEEDED(result));
+
+	result = device_->CreateCommittedResource(
+		&heapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&textureResourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&texBuff));
+
+	
+
 	// SRVの最大個数
 	const size_t kMaxSRVCount = 2056;
 	//SRV用のデスクリプタヒープ設定
@@ -101,10 +118,11 @@ void DonutGraph::Initialize(DirectXCommon* dxCommon)
 	assert(SUCCEEDED(result));
 	//SRV設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Format = textureResourceDesc.Format;	//
+	srvDesc.Shader4ComponentMapping =
+		D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;// 2Dテクスチャ
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
 
 	//デスクリプタヒープにSRVを作成
 	device_->CreateShaderResourceView(texBuff.Get(),
@@ -132,29 +150,20 @@ void DonutGraph::Initialize(DirectXCommon* dxCommon)
 
 
 
-	//頂点データ全体のサイズ=頂点データ一つ分のサイズ*頂点データの要素数
-	UINT sizeVB = static_cast<UINT>(sizeof(vertices[0]) * vertices.size());
-	//頂点バッファの設定
-	D3D12_HEAP_PROPERTIES heapProp{};  //ヒープ設定
-	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD; //GPUへの転送用
-	//リソース設定
-	D3D12_RESOURCE_DESC resDesc{};
-	resDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resDesc.Width = sizeVB; //頂点データ全体のサイズ
-	resDesc.Height = 1;
-	resDesc.DepthOrArraySize = 1;
-	resDesc.MipLevels = 1;
-	resDesc.SampleDesc.Count = 1;
-	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	//頂点バッファの生成
-	result = device_->CreateCommittedResource(
-		&heapProp, //ヒープ設定
-		D3D12_HEAP_FLAG_NONE,
-		&resDesc, //リソース設定
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&vertBuff));
-	assert(SUCCEEDED(result));
+	ScratchImage mipChain{};
+	// ミップマップ生成
+	result = GenerateMipMaps(
+		scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(),
+		TEX_FILTER_DEFAULT, 0, mipChain);
+	if (SUCCEEDED(result)) {
+		scratchImg = std::move(mipChain);
+		metadata = scratchImg.GetMetadata();
+	}
+
+	// 読み込んだディフューズテクスチャをSRGBとして扱う
+	metadata.format = MakeSRGB(metadata.format);
+
+
 
 	vertMap.resize(vertices.size());
 	//GPU上のバッファに対応した仮想メモリ（メインメモリ上）を取得
