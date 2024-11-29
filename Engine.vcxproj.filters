@@ -280,6 +280,9 @@
     <ClCompile Include="User\Game\Lesson.cpp">
       <Filter>User\Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\2d\DonutGraph.cpp">
+      <Filter>Engine\Source\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BASE\FPS.h">
@@ -445,6 +448,9 @@
     <ClInclude Include="User\Game\Consult.h">
       <Filter>User\Header\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\2d\DonutGraph.h">
+      <Filter>Engine\Header\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SHADER\FBX.hlsli">
@@ -457,6 +463,9 @@
       <Filter>Engine\Shader</Filter>
     </None>
     <None Include="Resources\SHADER\Sprite.hlsli">
+      <Filter>Engine\Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\DonutGraph.hlsli">
       <Filter>Engine\Shader</Filter>
     </None>
   </ItemGroup>
@@ -486,6 +495,12 @@
       <Filter>Engine\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\SHADER\SpriteVS.hlsl">
+      <Filter>Engine\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\DonutGraphVS.hlsl">
+      <Filter>Engine\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\DonutGraphPS.hlsl">
       <Filter>Engine\Shader</Filter>
     </FxCompile>
   </ItemGroup>

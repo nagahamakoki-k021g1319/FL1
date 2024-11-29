@@ -11,6 +11,7 @@
 #include"FBXObject3d.h"
 #include"Object3d.h"
 #include"ParticleManager.h"
+#include "DonutGraph.h"
 
 using namespace std;
 
@@ -48,5 +49,7 @@ private:
 private:
 	//カメラ
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
+
+	unique_ptr<DonutGraph> donut_;
 
 };
