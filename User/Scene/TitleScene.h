@@ -12,6 +12,7 @@
 #include"Object3d.h"
 #include"ParticleManager.h"
 #include "DonutGraph.h"
+#include "BarGraph.h"
 
 using namespace std;
 
@@ -51,5 +52,6 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	unique_ptr<DonutGraph> donut_;
+	unique_ptr<BarGraph> barGraph_;
 
 };

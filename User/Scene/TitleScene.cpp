@@ -26,6 +26,10 @@ void TitleScene::Initialize() {
 	//donut_->Initialize(MyEngine::SpriteCommon::GetInstance()->GetDxCommon());
 	//
 
+	barGraph_ = make_unique<BarGraph>();
+	barGraph_->SetDivision((uint32_t)12);
+	barGraph_->Initialize();
+
 }
 
 TitleScene::~TitleScene() {
@@ -35,7 +39,7 @@ TitleScene::~TitleScene() {
 // 更新
 void TitleScene::Update() {
 	gameCamera_->Update();
-
+	barGraph_->Update();
 
 	StateTransition();
 }
@@ -49,6 +53,7 @@ void TitleScene::FbxDraw() {
 }
 
 void TitleScene::SpriteDraw() {
+	barGraph_->Draw();
 }
 
 void TitleScene::StateTransition() {
