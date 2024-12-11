@@ -283,6 +283,9 @@
     <ClCompile Include="User\Player\Player.cpp">
       <Filter>User\Source\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\2d\Number.cpp">
+      <Filter>Engine\Source\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BASE\FPS.h">
@@ -450,6 +453,9 @@
     </ClInclude>
     <ClInclude Include="User\Player\Player.h">
       <Filter>User\Header\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2d\Number.h">
+      <Filter>Engine\Header\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

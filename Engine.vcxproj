@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\2d\Number.cpp" />
     <ClCompile Include="User\GameManager.cpp" />
     <ClCompile Include="Engine\Loader\LevelLoader.cpp" />
     <ClCompile Include="Engine\Loader\ObjLoader.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="User\Skill\Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\2d\Number.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User\GameManager.h" />
     <ClInclude Include="Engine\Loader\LevelLoader.h" />

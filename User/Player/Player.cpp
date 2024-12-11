@@ -2,6 +2,17 @@
 #include"Input.h"
 
 void Player::Initilize() {
+	scoreNumber_ = std::make_unique<Number>();
+	scoreNumber_->Initialize();
+	hpNumber_ = std::make_unique<Number>();
+	hpNumber_->Initialize();
+	shieldNumber_ = std::make_unique<Number>();
+	shieldNumber_->Initialize();
+	conditionNumber_ = std::make_unique<Number>();
+	conditionNumber_->Initialize();
+	concentrationNumber_ = std::make_unique<Number>();
+	concentrationNumber_->Initialize();
+
 	score_ = 0;
 	hp_ = 40;
 	shield_ = 0;
@@ -30,11 +41,13 @@ void Player::Update() {
 		}
 
 		//スコア計算
-		if (condition_ > 0) {
-			float addScore = static_cast<float>(scoredata.score_ + concentration_) * 1.5f;
-			score_ += ceil(addScore);
-		}else {
-			score_ += scoredata.score_ + concentration_;
+		if (scoredata.score_ > 0) {
+			if (condition_ > 0) {
+				float addScore = static_cast<float>(scoredata.score_ + concentration_) * 1.5f;
+				score_ += ceil(addScore);
+			}else {
+				score_ += scoredata.score_ + concentration_;
+			}
 		}
 
 		//バフ追加
@@ -58,4 +71,10 @@ void Player::Update() {
 void Player::Draw() {
 	deck_->DrawHand();
 	deck_->DrawList();
+
+	scoreNumber_->Draw({ 0,0 }, score_, 0.8f);
+	hpNumber_->Draw({ 0,80 }, hp_, 0.8f);
+	shieldNumber_->Draw({ 80,80 }, shield_, 0.8f);
+	concentrationNumber_->Draw({ 0,160 }, concentration_, 0.8f);
+	conditionNumber_->Draw({ 0,240 }, condition_, 0.8f);
 }
