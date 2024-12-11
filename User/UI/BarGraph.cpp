@@ -29,6 +29,14 @@ void BarGraph::Initialize()
 
 void BarGraph::Update()
 {
+	for (size_t i = 0; i < bars_.size(); i++) {
+		if (i < progress) {
+			bars_[i].ONDraw();
+		}
+		else {
+			bars_[i].OFFDraw();
+		}
+	}
 	for (Bar bar : bars_) {
 		bar.Update();
 	}
@@ -69,5 +77,10 @@ void Bar::Update()
 
 void Bar::Draw()
 {
-	sprite_.Draw();
+	if (isDraw) {
+		sprite_.Draw();
+	}
+	else {
+
+	}
 }
