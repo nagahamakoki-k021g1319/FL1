@@ -42,6 +42,11 @@ private:
 	Sprite discardSprite_;
 	Sprite banishSprite_;
 
+	Vector2 handPos_[3];
+	float addSelecthandPos_;
+	Vector2 defaultHandPos_[3];
+
+	int selectedSkill_;
 	bool isUsedSkill_;
 	Skill usedSkill_;
 };

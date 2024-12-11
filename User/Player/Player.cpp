@@ -9,13 +9,11 @@ void Player::Initilize() {
 	skills_.Initilize();
 	deck_ = make_unique<Deck>();
 	deck_->Initilize(skills_);
+
+	deck_->DrawSkill();
 }
 
 void Player::Update() {
-	if (Input::GetInstance()->TriggerKey(DIK_A)) {
-		deck_->DrawSkill();
-	}
-
 	deck_->UseSkill();
 	
 	//スキル使用計算
@@ -49,6 +47,9 @@ void Player::Update() {
 			condition_--;
 		}
 		shield_ += scoredata.shield_;
+
+		//ドロー
+		deck_->DrawSkill();
 	}
 
 	deck_->SpriteSort();

@@ -26,7 +26,16 @@ void Deck::Initilize(Skills skills) {
 
 	handSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("hand.png"));
 	handSprite_.SetPozition({ 440,430 });
+
+	addSelecthandPos_ = -20;
+	defaultHandPos_[0] = { 440,500 };
+	defaultHandPos_[1] = { 540,500 };
+	defaultHandPos_[2] = { 640,500 };
+	handPos_[0] = defaultHandPos_[0];
+	handPos_[1] = defaultHandPos_[1];
+	handPos_[2] = defaultHandPos_[2];
 	isUsedSkill_ = false;
+	selectedSkill_ = -1;
 }
 
 void Deck::AddSkill(Skills skills, std::string name) {
@@ -83,30 +92,60 @@ void Deck::DrawSkill() {
 }
 
 void Deck::UseSkill() {
-	if (Input::GetInstance()->TriggerKey(DIK_Z)) {
-		usedSkill_ = hand_[0];
-		isUsedSkill_ = true;
-		if (hand_[0].isOneTime_ == true) {
-			banish_.push_back(hand_[0]);
-			hand_.erase(hand_.begin());
+	Input* input = Input::GetInstance();
+
+	//実行
+	if (input->TriggerKey(DIK_Q)) {
+		if (selectedSkill_ == 0) {
+			usedSkill_ = hand_[0];
+			isUsedSkill_ = true;
+			if (hand_[0].isOneTime_ == true) {
+				banish_.push_back(hand_[0]);
+				hand_.erase(hand_.begin());
+			}
+			handPos_[0].y = defaultHandPos_[0].y;
+			selectedSkill_ = -1;
+			Discard();
+		}else {
+			selectedSkill_ = 0;
+			handPos_[0].y = defaultHandPos_[0].y + addSelecthandPos_;
+			handPos_[1].y = defaultHandPos_[1].y;
+			handPos_[2].y = defaultHandPos_[2].y;
 		}
-		Discard();
-	}else if (Input::GetInstance()->TriggerKey(DIK_X)) {
-		usedSkill_ = hand_[1];
-		isUsedSkill_ = true;
-		if (hand_[1].isOneTime_ == true) {
-			banish_.push_back(hand_[1]);
-			hand_.erase(hand_.begin() + 1);
+	}else if (input->TriggerKey(DIK_W)) {
+		if (selectedSkill_ == 1) {
+			usedSkill_ = hand_[1];
+			isUsedSkill_ = true;
+			if (hand_[1].isOneTime_ == true) {
+				banish_.push_back(hand_[1]);
+				hand_.erase(hand_.begin() + 1);
+			}
+			handPos_[1].y = defaultHandPos_[1].y;
+			selectedSkill_ = -1;
+			Discard();
+		}else {
+			selectedSkill_ = 1;
+			handPos_[0].y = defaultHandPos_[0].y;
+			handPos_[1].y = defaultHandPos_[1].y + addSelecthandPos_;
+			handPos_[2].y = defaultHandPos_[2].y;
 		}
-		Discard();
-	}else if (Input::GetInstance()->TriggerKey(DIK_C)) {
-		usedSkill_ = hand_[2];
-		isUsedSkill_ = true;
-		if (hand_[2].isOneTime_ == true) {
-			banish_.push_back(hand_[2]);
-			hand_.erase(hand_.begin() + 2);
+	}else if (input->TriggerKey(DIK_E)) {
+		if (selectedSkill_ == 2) {
+			usedSkill_ = hand_[2];
+			isUsedSkill_ = true;
+			if (hand_[2].isOneTime_ == true) {
+				banish_.push_back(hand_[2]);
+				hand_.erase(hand_.begin() + 2);
+			}
+			handPos_[2].y = defaultHandPos_[2].y;
+			selectedSkill_ = -1;
+			Discard();
+		}else {
+			selectedSkill_ = 2;
+			handPos_[0].y = defaultHandPos_[0].y;
+			handPos_[1].y = defaultHandPos_[1].y;
+			handPos_[2].y = defaultHandPos_[2].y + addSelecthandPos_;
 		}
-		Discard();
 	}
 }
 
@@ -123,11 +162,11 @@ void Deck::Shuffle() {
 void Deck::SpriteSort() {
 	//hand
 	if (hand_.size() == 3) {
-		hand_[0].sprite_.SetPozition({ 440,500 });
+		hand_[0].sprite_.SetPozition(handPos_[0]);
 		hand_[0].sprite_.Update();
-		hand_[1].sprite_.SetPozition({ 540,500 });
+		hand_[1].sprite_.SetPozition(handPos_[1]);
 		hand_[1].sprite_.Update();
-		hand_[2].sprite_.SetPozition({ 640,500 });
+		hand_[2].sprite_.SetPozition(handPos_[2]);
 		hand_[2].sprite_.Update();
 	}
 
