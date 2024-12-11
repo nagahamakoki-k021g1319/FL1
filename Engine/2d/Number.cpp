@@ -23,6 +23,9 @@ void Number::Draw(const Vector2& pos, size_t num, float scl){
 		calculatedNum /= 10;
 		digit++;
 	}
+	if (digit == 0) {
+		digit = 1;
+	}
 
 	size_t div = 1;
 

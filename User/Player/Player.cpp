@@ -2,6 +2,31 @@
 #include"Input.h"
 
 void Player::Initilize() {
+	scoreSprite_ = std::make_unique<Sprite>();
+	scoreSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("score.png"));
+	scoreSprite_->SetPozition({ 0,0 });
+	scoreSprite_->Update();
+
+	hpSprite_ = std::make_unique<Sprite>();
+	hpSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("hp.png"));
+	hpSprite_->SetPozition({ 0,130 });
+	hpSprite_->Update();
+	
+	shieldSprite_ = std::make_unique<Sprite>();
+	shieldSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("shield.png"));
+	shieldSprite_->SetPozition({ 120,130 });
+	shieldSprite_->Update();
+	
+	concentrationSprite_ = std::make_unique<Sprite>();
+	concentrationSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("concentration.png"));
+	concentrationSprite_->SetPozition({ 0,260 });
+	concentrationSprite_->Update();
+	
+	conditionSprite_ = std::make_unique<Sprite>();
+	conditionSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("condition.png"));
+	conditionSprite_->SetPozition({ 0,390 });
+	conditionSprite_->Update();
+
 	scoreNumber_ = std::make_unique<Number>();
 	scoreNumber_->Initialize();
 	hpNumber_ = std::make_unique<Number>();
@@ -72,9 +97,18 @@ void Player::Draw() {
 	deck_->DrawHand();
 	deck_->DrawList();
 
-	scoreNumber_->Draw({ 0,0 }, score_, 0.8f);
-	hpNumber_->Draw({ 0,80 }, hp_, 0.8f);
-	shieldNumber_->Draw({ 80,80 }, shield_, 0.8f);
-	concentrationNumber_->Draw({ 0,160 }, concentration_, 0.8f);
-	conditionNumber_->Draw({ 0,240 }, condition_, 0.8f);
+	scoreSprite_->Draw();
+	scoreNumber_->Draw({ 0,64 }, score_, 0.8f);
+	
+	hpSprite_->Draw();
+	hpNumber_->Draw({ 0,194 }, hp_, 0.8f);
+	
+	shieldSprite_->Draw();
+	shieldNumber_->Draw({ 120,194 }, shield_, 0.8f);
+	
+	concentrationSprite_->Draw();
+	concentrationNumber_->Draw({ 0,324 }, concentration_, 0.8f);
+	
+	conditionSprite_->Draw();
+	conditionNumber_->Draw({ 0, 454 }, condition_, 0.8f);
 }

@@ -17,6 +17,12 @@ private:
 	int concentration_;
 	int condition_;
 
+	std::unique_ptr<Sprite>	scoreSprite_;
+	std::unique_ptr<Sprite>	hpSprite_;
+	std::unique_ptr<Sprite>	shieldSprite_;
+	std::unique_ptr<Sprite>	concentrationSprite_;
+	std::unique_ptr<Sprite>	conditionSprite_;
+
 	std::unique_ptr<Number>	scoreNumber_;
 	std::unique_ptr<Number>	hpNumber_;
 	std::unique_ptr<Number>	shieldNumber_;
