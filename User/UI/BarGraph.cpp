@@ -21,6 +21,7 @@ void BarGraph::Initialize()
 	maxSize = diff;
 	bars_.resize(division_);
 	for (size_t i = 0; i < bars_.size(); i++) {
+		bars_[i].SetStartPos(startPos_);
 		bars_[i].Initialize({ minSize,maxSize });
 		minSize = maxSize;
 		maxSize += diff;
@@ -64,7 +65,7 @@ void Bar::Initialize(Vector2 minMax)
 	minBarSize_ = minMax.x;
 	maxBarSize_ = minMax.y;
 	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
-	sprite_.SetPozition({ minMax.x,30 });
+	sprite_.SetPozition({startPos_.x + minMax.x,startPos_.y });
 	sprite_.SetSize({ 60, 30 });
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
 }

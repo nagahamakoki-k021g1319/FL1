@@ -24,11 +24,17 @@ void TitleScene::Initialize() {
 	//donut_ = make_unique<DonutGraph>();
 	//donut_->SetSizeGraph(Vector2(100, 100));
 	//donut_->Initialize(MyEngine::SpriteCommon::GetInstance()->GetDxCommon());
+	
+	// 
 	//
-
+	uint32_t division = 12;
+	Vector2 startpos = {250,30};
 	barGraph_ = make_unique<BarGraph>();
-	barGraph_->SetDivision((uint32_t)12);
+	barGraph_->SetDivision(division);
+	barGraph_->NowProgres(division);
+	barGraph_->SetStartPos(startpos);
 	barGraph_->Initialize();
+
 
 }
 

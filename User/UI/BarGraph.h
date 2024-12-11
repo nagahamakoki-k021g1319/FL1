@@ -16,12 +16,14 @@ public:
 	void Draw();
 	void ONDraw() { isDraw = true; };
 	void OFFDraw() { isDraw = false; };
+	void SetStartPos(Vector2 startPos) { startPos_ = startPos; }
 
 private:
 	float maxBarSize_;
 	float minBarSize_;
 	Sprite sprite_;
 	bool isDraw;
+	Vector2 startPos_;
 private:
 
 };
@@ -38,9 +40,10 @@ public:
 	void Draw();
 	void SetDivision(uint32_t div) { division_ = div; }
 	void NowProgres(uint32_t num) { progress = num; }
-	
+	void SetStartPos(Vector2 startPos) { startPos_ = startPos; }
 
 private:
+	Vector2 startPos_;
 	float maxSize_ = 800;
 	float minSize_ = 0;
 	uint32_t progress;
@@ -48,7 +51,7 @@ private:
 	uint32_t division_;
 	std::vector<Bar> bars_;
 private:
-	
+
 };
 
 
