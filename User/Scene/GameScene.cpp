@@ -30,10 +30,8 @@ void GameScene::Initialize() {
 	gameManager_ = std::make_unique<GameManager>();
 	gameManager_->Init();
 
-
-	skills_.Initilize();
-	deck_ = make_unique<Deck>();
-	deck_->Initilize(skills_);
+	player_ = make_unique<Player>();
+	player_->Initilize();
 	gameFlow_ = std::make_unique<GameFlow>();
 	gameFlow_->Initialize();
 }
@@ -47,13 +45,7 @@ void GameScene::Update() {
 	gameCamera_->Update();
 	gameFlow_->Update();
 
-
-	if (Input::GetInstance()->TriggerKey(DIK_A)) {
-		deck_->DrawSkill();
-	}
-	deck_->UseSkill();
-
-	deck_->SpriteSort();
+	player_->Update();
 
 	StateTransition();
 }
@@ -68,8 +60,7 @@ void GameScene::FbxDraw() {
 }
 
 void GameScene::SpriteDraw() {
-	deck_->DrawHand();
-	deck_->DrawList();
+	player_->Draw();
 }
 
 void GameScene::StateTransition() {

@@ -28,17 +28,20 @@ public:
 	void DrawList();
 	void DrawDeck();
 
+	bool IsUsedSkill();
+	Skill GetUsedSkil();
 private:
-	vector<Skills::Skill> hasSkills_;
-	vector<Skills::Skill> deck_;
-	vector<Skills::Skill> hand_;
-	vector<Skills::Skill> discard_;
-	vector<Skills::Skill> banish_ ;
+	vector<Skill> hasSkills_;
+	vector<Skill> deck_;
+	vector<Skill> hand_;
+	vector<Skill> discard_;
+	vector<Skill> banish_ ;
 
 	Sprite deckSprite_;
 	Sprite handSprite_;
 	Sprite discardSprite_;
 	Sprite banishSprite_;
 
-	Skills::Skill usedSkill_;
+	bool isUsedSkill_;
+	Skill usedSkill_;
 };

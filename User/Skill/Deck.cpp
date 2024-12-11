@@ -12,6 +12,7 @@ void Deck::Initilize(Skills skills) {
 	AddSkill(skills, "expression");
 	AddSkill(skills, "face");
 	AddSkill(skills, "face");
+	AddSkill(skills, "behavior");
 
 	SetDeck();
 	Shuffle();
@@ -25,10 +26,11 @@ void Deck::Initilize(Skills skills) {
 
 	handSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("hand.png"));
 	handSprite_.SetPozition({ 440,430 });
+	isUsedSkill_ = false;
 }
 
 void Deck::AddSkill(Skills skills, std::string name) {
-	Skills::Skill newSkill = skills.GetSkill(name);
+	Skill newSkill = skills.GetSkill(name);
 	newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(newSkill.name_ + ".png"));
 	newSkill.sprite_.SetSize({ 64,64 });
 	hasSkills_.push_back(newSkill);
@@ -43,43 +45,64 @@ void Deck::Update() {
 
 }
 
+
+Skill Deck::GetUsedSkil() {
+	return usedSkill_;
+};
+
+bool Deck::IsUsedSkill() {
+	if (isUsedSkill_ == true) {
+		isUsedSkill_ = false;
+		return true;
+	}
+	return false;
+}
+
 void Deck::DrawSkill() {
-	int drawNum = 3;
-	std::size_t deckNum = deck_.size();
+	if (hand_.size() != 3) {
+		int drawNum = 3;
+		std::size_t deckNum = deck_.size();
 
-	if (deckNum >= drawNum) {
-		copy(deck_.begin(), deck_.begin() + drawNum, back_inserter(hand_));
-		deck_.erase(deck_.begin(), deck_.begin() + drawNum);
+		if (deckNum >= drawNum) {
+			copy(deck_.begin(), deck_.begin() + drawNum, back_inserter(hand_));
+			deck_.erase(deck_.begin(), deck_.begin() + drawNum);
 
-	}else {
-		copy(deck_.begin(), deck_.begin() + deckNum, back_inserter(hand_));
-		deck_.erase(deck_.begin(), deck_.begin() + deckNum);
+		}
+		else {
+			copy(deck_.begin(), deck_.begin() + deckNum, back_inserter(hand_));
+			deck_.erase(deck_.begin(), deck_.begin() + deckNum);
 
-		copy(discard_.begin(), discard_.end(), back_inserter(deck_));
-		discard_.clear();
-		Shuffle();
+			copy(discard_.begin(), discard_.end(), back_inserter(deck_));
+			discard_.clear();
+			Shuffle();
 
-		copy(deck_.begin(), deck_.begin() + (drawNum - deckNum), back_inserter(hand_));
-		deck_.erase(deck_.begin(), deck_.begin() + (drawNum - deckNum));
+			copy(deck_.begin(), deck_.begin() + (drawNum - deckNum), back_inserter(hand_));
+			deck_.erase(deck_.begin(), deck_.begin() + (drawNum - deckNum));
+		}
 	}
 }
 
 void Deck::UseSkill() {
 	if (Input::GetInstance()->TriggerKey(DIK_Z)) {
 		usedSkill_ = hand_[0];
+		isUsedSkill_ = true;
 		if (hand_[0].isOneTime_ == true) {
 			banish_.push_back(hand_[0]);
 			hand_.erase(hand_.begin());
 		}
 		Discard();
 	}else if (Input::GetInstance()->TriggerKey(DIK_X)) {
-		usedSkill_ = hand_[1]; if (hand_[1].isOneTime_ == true) {
+		usedSkill_ = hand_[1];
+		isUsedSkill_ = true;
+		if (hand_[1].isOneTime_ == true) {
 			banish_.push_back(hand_[1]);
 			hand_.erase(hand_.begin() + 1);
 		}
 		Discard();
 	}else if (Input::GetInstance()->TriggerKey(DIK_C)) {
-		usedSkill_ = hand_[2]; if (hand_[2].isOneTime_ == true) {
+		usedSkill_ = hand_[2];
+		isUsedSkill_ = true;
+		if (hand_[2].isOneTime_ == true) {
 			banish_.push_back(hand_[2]);
 			hand_.erase(hand_.begin() + 2);
 		}

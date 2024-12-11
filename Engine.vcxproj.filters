@@ -280,6 +280,9 @@
     <ClCompile Include="User\Game\Lesson.cpp">
       <Filter>User\Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="User\Player\Player.cpp">
+      <Filter>User\Source\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BASE\FPS.h">
@@ -444,6 +447,9 @@
     </ClInclude>
     <ClInclude Include="User\Game\Consult.h">
       <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="User\Player\Player.h">
+      <Filter>User\Header\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
