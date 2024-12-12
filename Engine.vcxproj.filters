@@ -301,6 +301,12 @@
     <ClCompile Include="Engine\2d\Number.cpp">
       <Filter>Engine\Source\2d</Filter>
     </ClCompile>
+    <ClCompile Include="User\UI\HpShieldUI.cpp">
+      <Filter>User\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="User\UI\BufUI.cpp">
+      <Filter>User\Source\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BASE\FPS.h">
@@ -483,6 +489,12 @@
     </ClInclude>
     <ClInclude Include="User\Game\PhaseBase.h">
       <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="User\UI\HpShieldUI.h">
+      <Filter>User\Header\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="User\UI\BufUI.h">
+      <Filter>User\Header\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

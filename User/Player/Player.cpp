@@ -111,11 +111,11 @@ void Player::Draw() {
 	scoreSprite_->Draw();
 	scoreNumber_->Draw({ 0,64 }, scoreData_.score, 0.8f);
 	
-	hpSprite_->Draw();
+	/*hpSprite_->Draw();
 	hpNumber_->Draw({ 0,194 }, hp_, 0.8f);
 	
 	shieldSprite_->Draw();
-	shieldNumber_->Draw({ 220,194 }, scoreData_.shield, 0.8f);
+	shieldNumber_->Draw({ 220,194 }, scoreData_.shield, 0.8f);*/
 	
 	concentrationSprite_->Draw();
 	concentrationNumber_->Draw({ 0,324 }, scoreData_.concentration, 0.8f);

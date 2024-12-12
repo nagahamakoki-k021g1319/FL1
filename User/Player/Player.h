@@ -9,6 +9,7 @@ public:
 	void Initilize();
 	void Update();
 	void Draw();
+
 	void DrawStatus();
 	bool IsTurnEnd();
 	int GetScore() { return scoreData_.score; };
@@ -18,6 +19,11 @@ public:
 	void AddRandSkillDraw() { deck_->AddRandSkillDraw(skills_); };
 	bool addRandSkill() { return deck_->AddRandSkill(); };
 	void DrawAddSkill() { deck_->DrawAddSkill(); };
+
+	int* GetHP() { return &hp_; }
+	int* GetShield() { return &scoreData_.shield; }
+	ScoreData GetScoreData() { return scoreData_; }
+  
 private:
 	//スコア関連
 	ScoreData scoreData_;
