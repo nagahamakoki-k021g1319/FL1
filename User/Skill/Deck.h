@@ -20,7 +20,7 @@ public:
 	void DrawSkill();
 	void UseSkill(ScoreData* scoreData,int* hp);
 	ScoreData GetChangedScoreData(ScoreData* scoreData);
-	int GetChangedHp(ScoreData* scoreData,int* hp);
+	int GetChangedHp(ScoreData* scoreData);
 	void Discard();
 	void Shuffle();
 

@@ -136,7 +136,7 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData) {
 	if (scoredata.score > 0) {
 		if (scoreData->condition > 0) {
 			float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
-			changedScoreData.score += ceil(addScore);
+			changedScoreData.score += static_cast<int>(ceil(addScore));
 		}
 		else {
 			changedScoreData.score += scoredata.score + scoreData->concentration;
@@ -144,7 +144,7 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData) {
 		if (GetSelectedSkill().name_ == "twice") {
 			if (scoreData->condition > 0) {
 				float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
-				changedScoreData.score += ceil(addScore);
+				changedScoreData.score += static_cast<int>(ceil(addScore));
 			}
 			else {
 				changedScoreData.score += scoredata.score + scoreData->concentration;
@@ -160,7 +160,7 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData) {
 	return changedScoreData;
 }
 
-int Deck::GetChangedHp(ScoreData* scoreData, int* hp) {
+int Deck::GetChangedHp(ScoreData* scoreData) {
 	//スキル使用後予想
 	ScoreData changedScoreData;
 	ScoreData scoredata = GetSelectedSkill().GetScoreData();

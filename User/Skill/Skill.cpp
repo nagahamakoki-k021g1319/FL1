@@ -63,7 +63,7 @@ void Skill::Use(ScoreData* scoreData, int* hp) {
 		//--基本--
 		if (scoreData->condition > 0) {
 			float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
-			scoreData->score += ceil(addScore);
+			scoreData->score += static_cast<int>(ceil(addScore));
 		}
 		else {
 			scoreData->score += scoreData_.score + scoreData->concentration;
@@ -73,7 +73,7 @@ void Skill::Use(ScoreData* scoreData, int* hp) {
 		if (name_ == "twice") {
 			if (scoreData->condition > 0) {
 				float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
-				scoreData->score += ceil(addScore);
+				scoreData->score += static_cast<int>(ceil(addScore));
 			}
 			else {
 				scoreData->score += scoreData_.score + scoreData->concentration;

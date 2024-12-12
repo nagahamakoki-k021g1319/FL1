@@ -112,7 +112,7 @@ void Player::Draw() {
 
 	if (deck_->IsSelectedSkill()) {
 		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_);
-		int changeHp = deck_->GetChangedHp(&scoreData_, &hp_);
+		int changeHp = deck_->GetChangedHp(&scoreData_);
 
 		if (changedScoreData.score != 0) {
 			changeScoreNumber_->Draw({ 150,64 }, changedScoreData.score, 0.8f);
