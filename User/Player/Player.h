@@ -15,13 +15,6 @@ private:
 	int maxHp_;
 	int hp_;
 
-	//スコア予想
-	int changeScore_;
-	int changeHp_;
-	int changeShield_;
-	int changeConcentration_;
-	int changeCondition_;
-
 	std::unique_ptr<Sprite>	scoreSprite_;
 	std::unique_ptr<Sprite>	scorePlusSprite_;
 	std::unique_ptr<Sprite>	hpSprite_;

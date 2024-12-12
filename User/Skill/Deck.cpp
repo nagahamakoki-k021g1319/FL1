@@ -4,7 +4,7 @@
 #include"Input.h"
 
 void Deck::Initilize(Skills skills) {
-	AddSkill(skills,"appeal");
+	AddSkill(skills, "appeal");
 	AddSkill(skills, "appeal");
 	AddSkill(skills, "pose");
 	AddSkill(skills, "twice");
@@ -50,7 +50,7 @@ void Deck::SetDeck() {
 	copy(hasSkills_.begin(), hasSkills_.end(), back_inserter(deck_));
 }
 
-void Deck::Update(ScoreData* scoreData,int* hp) {
+void Deck::Update(ScoreData* scoreData, int* hp) {
 	UseSkill(scoreData, hp);
 
 	//スキップ
@@ -69,7 +69,6 @@ void Deck::Update(ScoreData* scoreData,int* hp) {
 
 	SpriteSort();
 }
-
 
 Skill Deck::GetUsedSkil() {
 	return usedSkill_;
@@ -118,10 +117,67 @@ void Deck::DrawSkill() {
 	}
 }
 
+ScoreData Deck::GetChangedScoreData(ScoreData* scoreData) {
+	//スキル使用後予想
+	ScoreData changedScoreData;
+	changedScoreData.score = 0;
+	ScoreData scoredata = GetSelectedSkill().GetScoreData();
+
+	//体力計算
+	if (scoreData->shield >= scoredata.cost) {
+		changedScoreData.shield = -scoredata.cost;
+	}
+	else {
+		changedScoreData.shield = -scoreData->shield;
+		scoredata.cost -= scoreData->shield;
+	}
+
+	//スコア計算
+	if (scoredata.score > 0) {
+		if (scoreData->condition > 0) {
+			float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
+			changedScoreData.score += ceil(addScore);
+		}
+		else {
+			changedScoreData.score += scoredata.score + scoreData->concentration;
+		}
+		if (GetSelectedSkill().name_ == "twice") {
+			if (scoreData->condition > 0) {
+				float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
+				changedScoreData.score += ceil(addScore);
+			}
+			else {
+				changedScoreData.score += scoredata.score + scoreData->concentration;
+			}
+		}
+	}
+
+	//バフ追加
+	changedScoreData.concentration = scoredata.concentration;
+	changedScoreData.condition = scoredata.condition;
+	changedScoreData.shield += scoredata.shield;
+
+	return changedScoreData;
+}
+
+int Deck::GetChangedHp(ScoreData* scoreData, int* hp) {
+	//スキル使用後予想
+	ScoreData changedScoreData;
+	ScoreData scoredata = GetSelectedSkill().GetScoreData();
+
+	//体力計算
+	if (scoreData->shield < scoredata.cost) {
+		changedScoreData.shield = -scoreData->shield;
+		scoredata.cost -= scoreData->shield;
+		return scoredata.cost;
+	}
+	return 0;
+}
+
 void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 	Input* input = Input::GetInstance();
 
-	for (int i=0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) {
 		canUseSkill_[i] = hand_[i].CanUseSkill(scoreData, *hp);
 	}
 
@@ -140,7 +196,8 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 			isSelectedSkill_ = false;
 			Discard();
 			DrawSkill();
-		}else {
+		}
+		else {
 			isSelectedSkill_ = true;
 			selectedSkill_ = hand_[0];
 			selectedSkillNum_ = 0;
@@ -148,7 +205,8 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 			handPos_[1].y = defaultHandPos_[1].y;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
-	}else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
+	}
+	else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
 			usedSkill_.Use(scoreData, hp);
@@ -162,7 +220,8 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 			isSelectedSkill_ = false;
 			Discard();
 			DrawSkill();
-		}else {
+		}
+		else {
 			isSelectedSkill_ = true;
 			selectedSkillNum_ = 1;
 			selectedSkill_ = hand_[1];
@@ -170,7 +229,8 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 			handPos_[1].y = defaultHandPos_[1].y + addSelecthandPos_;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
-	}else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
+	}
+	else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
 			usedSkill_.Use(scoreData, hp);
@@ -184,7 +244,8 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 			isSelectedSkill_ = false;
 			Discard();
 			DrawSkill();
-		}else {
+		}
+		else {
 			isSelectedSkill_ = true;
 			selectedSkill_ = hand_[2];
 			selectedSkillNum_ = 2;

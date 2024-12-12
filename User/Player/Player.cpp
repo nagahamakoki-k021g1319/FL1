@@ -79,12 +79,6 @@ void Player::Initilize() {
 	hp_ = maxHp_;
 	scoreData_.shield = 0;
 
-	changeScore_ = 0;
-	changeHp_ = 0;
-	changeShield_ = 0;
-	changeConcentration_ = 0;
-	changeCondition_ = 0;
-
 	skills_.Initilize();
 	deck_ = make_unique<Deck>();
 	deck_->Initilize(skills_);
@@ -93,43 +87,6 @@ void Player::Initilize() {
 }
 
 void Player::Update() {
-	
-	//スキル使用後予想
-	if (deck_->IsSelectedSkill()) {
-
-		changeScore_ = 0;
-		changeHp_ = 0;
-		changeShield_ = 0;
-		changeConcentration_ = 0;
-		changeCondition_ = 0;
-
-		ScoreData scoredata = deck_->GetSelectedSkill().GetScoreData();
-
-		//体力計算
-		if (scoreData_.shield >= scoredata.cost) {
-			changeShield_ = -scoredata.cost;
-		}else {
-			changeShield_ = -scoreData_.shield;
-			scoredata.cost -= scoreData_.shield;
-			changeHp_ = scoredata.cost;
-		}
-
-		//スコア計算
-		if (scoredata.score > 0) {
-			if (scoreData_.condition > 0) {
-				float addScore = static_cast<float>(scoredata.score + scoreData_.concentration) * 1.5f;
-				changeScore_ = ceil(addScore);
-			}
-			else {
-				changeScore_ = scoredata.score + scoreData_.concentration;
-			}
-		}
-
-		//バフ追加
-		changeConcentration_ = scoredata.concentration;
-		changeCondition_ = scoredata.condition;
-		changeShield_ += scoredata.shield;
-	}
 
 	deck_->Update(&scoreData_, &hp_);
 }
@@ -154,27 +111,34 @@ void Player::Draw() {
 	conditionNumber_->Draw({ 0, 454 }, scoreData_.condition, 0.8f);
 
 	if (deck_->IsSelectedSkill()) {
-		if (changeScore_ != 0) {
-			changeScoreNumber_->Draw({ 150,64 }, changeScore_, 0.8f);
+		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_);
+		int changeHp = deck_->GetChangedHp(&scoreData_, &hp_);
+
+		if (changedScoreData.score != 0) {
+			changeScoreNumber_->Draw({ 150,64 }, changedScoreData.score, 0.8f);
 			scorePlusSprite_->Draw();
 		}
-		if (changeHp_ != 0) {
-			changeHpNumber_->Draw({ 100,194 }, changeHp_, 0.8f);
+
+		if (changeHp != 0) {
+			changeHpNumber_->Draw({ 100,194 }, changeHp, 0.8f);
 			hpMinusSprite_->Draw();
 		}
-		if (changeShield_ > 0) {
+
+		if (changedScoreData.shield > 0) {
 			shieldPlusSprite_->Draw();
-			changeShieldNumber_->Draw({ 320,194 }, changeShield_, 0.8f);
-		}else if (changeShield_ < 0) {
-			changeShieldNumber_->Draw({ 320,194 }, -changeShield_, 0.8f);
+			changeShieldNumber_->Draw({ 320,194 }, changedScoreData.shield, 0.8f);
+		}else if (changedScoreData.shield < 0) {
+			changeShieldNumber_->Draw({ 320,194 }, -changedScoreData.shield, 0.8f);
 			shieldMinusSprite_->Draw();
 		}
-		if (changeConcentration_ != 0) {
-			changeConcentrationNumber_->Draw({ 100,324 }, changeConcentration_, 0.8f);
+
+		if (changedScoreData.concentration != 0) {
+			changeConcentrationNumber_->Draw({ 100,324 }, changedScoreData.concentration, 0.8f);
 			concentrationPlusSprite_->Draw();
 		}
-		if (changeCondition_ != 0) {
-			changeConditionNumber_->Draw({ 100, 454 }, changeCondition_, 0.8f);
+
+		if (changedScoreData.condition != 0) {
+			changeConditionNumber_->Draw({ 100, 454 }, changedScoreData.condition, 0.8f);
 			conditionPlusSprite_->Draw();
 		}
 	}

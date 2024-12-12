@@ -60,12 +60,24 @@ void Skill::Use(ScoreData* scoreData, int* hp) {
 
 	//スコア計算
 	if (scoreData_.score > 0) {
+		//--基本--
 		if (scoreData->condition > 0) {
 			float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
 			scoreData->score += ceil(addScore);
 		}
 		else {
 			scoreData->score += scoreData_.score + scoreData->concentration;
+		}
+		//------
+
+		if (name_ == "twice") {
+			if (scoreData->condition > 0) {
+				float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
+				scoreData->score += ceil(addScore);
+			}
+			else {
+				scoreData->score += scoreData_.score + scoreData->concentration;
+			}
 		}
 	}
 
