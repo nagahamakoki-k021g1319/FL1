@@ -3,24 +3,92 @@
 #include <algorithm>
 
 void Skills::Initilize() {
-	AddSkill("appeal", 9, 4, 0);
-	AddSkill("pose", 2, 3, 2);
-	AddSkill("twice", 8, 7, 0);
-	AddSkill("expression", 0, 0, 4);
-	AddSkill("face", 0, 1, 1);
+	AddSkill("appeal", 9, 4, 0, 0, 0, false);
+	AddSkill("pose", 2, 3, 2, 0, 0, false);
+	AddSkill("twice", 8, 7, 0, 0, 0, true);
+	AddSkill("expression", 0, 0, 4, 0, 0, true);
+	AddSkill("face", 0, 1, 1, 2, 0, false);
+	AddSkill("behavior", 0, 1, 1, 0, 2, false);
 }
 
-void Skills::AddSkill(std::string name, int score, int cost, int shield) {
+void Skills::AddSkill(std::string name, int score, int cost, int shield, int concentration, int condition, bool isOneTime) {
 	Skill newSkill{};
 	newSkill.name_ = name;
-	newSkill.score_ = score;
-	newSkill.cost_ = cost;
-	newSkill.shield_ = shield;
-	newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(name+".png"));
+	ScoreData newScoreData;
+	newScoreData.score = score;
+	newScoreData.cost = cost;
+	newScoreData.shield = shield;
+	newScoreData.concentration = concentration;
+	newScoreData.condition = condition;
+	newSkill.SetScoreData(newScoreData);
+	newSkill.isOneTime_ = isOneTime;
 
 	skills_[name] = newSkill;
 }
 
-Skills::Skill Skills::GetSkill(std::string name) {
+Skill Skills::GetSkill(std::string name) {
 	return skills_.at(name);
+}
+
+bool Skill::CanUseSkill(ScoreData* scoreData, int hp) {
+	int newHp;
+
+	if (scoreData->shield >= scoreData_.cost) {
+		return true;
+	}
+	else {
+		newHp = (hp + scoreData->shield) - scoreData_.cost;
+	}
+
+	if (newHp >= 0) {
+		return true;
+	}
+	return false;
+}
+
+
+void Skill::Use(ScoreData* scoreData, int* hp) {
+	//体力計算
+	if (scoreData->shield >= scoreData_.cost) {
+		scoreData->shield -= scoreData_.cost;
+	}
+	else {
+		scoreData_.cost -= scoreData->shield;
+		scoreData->shield = 0;
+		*(hp) -= scoreData_.cost;
+	}
+
+	//スコア計算
+	if (scoreData_.score > 0) {
+		//--基本--
+		if (scoreData->condition > 0) {
+			float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
+			scoreData->score += static_cast<int>(ceil(addScore));
+		}
+		else {
+			scoreData->score += scoreData_.score + scoreData->concentration;
+		}
+		//------
+
+		if (name_ == "twice") {
+			if (scoreData->condition > 0) {
+				float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
+				scoreData->score += static_cast<int>(ceil(addScore));
+			}
+			else {
+				scoreData->score += scoreData_.score + scoreData->concentration;
+			}
+		}
+	}
+
+	//バフ追加
+	scoreData->concentration += scoreData_.concentration;
+	if (scoreData->condition == 0) {
+		scoreData->condition += scoreData_.condition;
+	}
+	else if (scoreData->condition > 0) {
+		scoreData->condition += scoreData_.condition;
+		scoreData->condition--;
+	}
+	scoreData->shield += scoreData_.shield;
 }

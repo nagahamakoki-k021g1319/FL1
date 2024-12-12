@@ -124,6 +124,12 @@
     <Filter Include="User\Source\Game">
       <UniqueIdentifier>{b50d972c-f38a-439d-835f-ca1ecfb74023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User\Header\UI">
+      <UniqueIdentifier>{7e119ced-824b-4b66-a312-b117396f4130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Source\UI">
+      <UniqueIdentifier>{38fe9328-2ceb-496c-8884-a281e4abdd55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -282,6 +288,18 @@
     </ClCompile>
     <ClCompile Include="Engine\Input\Mouse.cpp">
       <Filter>Engine\Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\2d\DonutGraph.cpp">
+      <Filter>Engine\Source\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="User\UI\BarGraph.cpp">
+      <Filter>User\Source\UI</Filter>
+      </ClCompile>
+    <ClCompile Include="User\Player\Player.cpp">
+      <Filter>User\Source\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\2d\Number.cpp">
+      <Filter>Engine\Source\2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +469,18 @@
     <ClInclude Include="Engine\Input\Mouse.h">
       <Filter>Engine\Header\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\2d\DonutGraph.h">
+      <Filter>Engine\Header\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="User\UI\BarGraph.h">
+      <Filter>User\Header\UI</Filter>
+      </ClInclude>
+    <ClInclude Include="User\Player\Player.h">
+      <Filter>User\Header\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2d\Number.h">
+      <Filter>Engine\Header\2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SHADER\FBX.hlsli">
@@ -463,6 +493,9 @@
       <Filter>Engine\Shader</Filter>
     </None>
     <None Include="Resources\SHADER\Sprite.hlsli">
+      <Filter>Engine\Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\DonutGraph.hlsli">
       <Filter>Engine\Shader</Filter>
     </None>
   </ItemGroup>
@@ -492,6 +525,12 @@
       <Filter>Engine\Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\SHADER\SpriteVS.hlsl">
+      <Filter>Engine\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\DonutGraphVS.hlsl">
+      <Filter>Engine\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\DonutGraphPS.hlsl">
       <Filter>Engine\Shader</Filter>
     </FxCompile>
   </ItemGroup>
