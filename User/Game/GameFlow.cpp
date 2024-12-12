@@ -8,6 +8,15 @@ void GameFlow::Initialize(){
 	lesson_->Initialize(6, 60, 90,0);
 
 	lesson_->SetPlayer(&player_);
+
+
+	hpShieldUI_ = make_unique<HpShieldUI>();
+	hpShieldUI_->GetHPpt(player_.GetHP());
+	hpShieldUI_->GetShieldpt(player_.GetShield());
+	hpShieldUI_->Initialize();
+
+	bufUI_ = make_unique<BufUI>();
+	bufUI_->Initialize();
 }
 
 void GameFlow::Update(){
@@ -29,6 +38,10 @@ void GameFlow::Update(){
 		}
 	}else {
 		lesson_->Update();
+		hpShieldUI_->GetHPpt(player_.GetHP());
+		hpShieldUI_->GetShieldpt(player_.GetShield());
+		hpShieldUI_->Update();
+		bufUI_->Update();
 	}
 }
 
@@ -36,6 +49,8 @@ void GameFlow::Draw(){
 	if (lesson_->GetIsLessonEnd() == true) {
 		player_.DrawStatus();
 	}else {
+		hpShieldUI_->Draw();
+		bufUI_->Draw();
 		lesson_->Draw();
 	}
 }

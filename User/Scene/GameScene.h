@@ -12,8 +12,6 @@
 #include"GameManager.h"
 
 #include "Game/GameFlow.h"
-#include "HpShieldUI.h"
-#include "BufUI.h"
 
 using namespace std;
 
@@ -55,6 +53,4 @@ private:
 
 	//ゲームフロー(レッスンとか相談とか)
 	unique_ptr<GameFlow> gameFlow_ = nullptr;
-	unique_ptr<HpShieldUI> hpShieldUI_ = nullptr;
-	unique_ptr<BufUI> bufUI_ = nullptr;
 };
