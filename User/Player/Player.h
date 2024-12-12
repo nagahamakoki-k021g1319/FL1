@@ -9,6 +9,10 @@ public:
 	void Initilize();
 	void Update();
 	void Draw();
+
+	int* GetHP() { return &hp_; }
+	int* GetShield() { return &scoreData_.shield; }
+	ScoreData GetScoreData() { return scoreData_; }
 private:
 	//スコア関連
 	ScoreData scoreData_;

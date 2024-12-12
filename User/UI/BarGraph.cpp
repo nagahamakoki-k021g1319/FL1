@@ -94,13 +94,13 @@ BarGraph::~BarGraph()
 {
 }
 
-void BarGraph::Initialize(Vector2 startPos)
+void BarGraph::Initialize(Vector2 startPos,const std::string& spriteName)
 {
 	startPos_ = startPos;
 	isDraw = true;
-	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
+	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(spriteName));
 	sprite_.SetPozition({ startPos_.x ,startPos_.y });
-	sprite_.SetSize({ 0, 30 });
+	sprite_.SetSize({ 0, size_.y });
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
 }
 
@@ -108,7 +108,7 @@ void BarGraph::Update()
 {
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
 	sprite_.SetPozition({ startPos_.x ,startPos_.y });
-	sprite_.SetSize({ (float)HP_* 8.0f, 30 });
+	sprite_.SetSize({ (float)params_* size_.x, size_.y });
 	sprite_.Update();
 }
 
