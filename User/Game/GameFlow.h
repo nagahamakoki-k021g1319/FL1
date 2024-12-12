@@ -3,10 +3,11 @@
 #include "Consult.h"
 #include "FinalTest.h"
 
-class GameFlow
-{
-public:
+#include"Player.h"
+#include "Game/Lesson.h"
 
+class GameFlow{
+public:
 	void Initialize();
 
 	void Update();
@@ -16,6 +17,8 @@ public:
 	void ApplyGlobalVariables();
 
 private:
-
+	Player player_;
+	
+	unique_ptr<Lesson> lesson_ = nullptr;
 };
 

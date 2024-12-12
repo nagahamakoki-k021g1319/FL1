@@ -212,6 +212,7 @@
     <ClInclude Include="User\Game\FinalTest.h" />
     <ClInclude Include="User\game\GameFlow.h" />
     <ClInclude Include="User\Game\Lesson.h" />
+    <ClInclude Include="User\Game\PhaseBase.h" />
     <ClInclude Include="User\Player\Player.h" />
     <ClInclude Include="User\SCENE\GameScene.h" />
     <ClInclude Include="User\SCENE\SceneChange.h" />

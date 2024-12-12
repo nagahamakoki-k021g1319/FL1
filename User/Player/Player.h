@@ -10,9 +10,20 @@ public:
 	void Update();
 	void Draw();
 
+	void DrawStatus();
+	bool IsTurnEnd();
+	int GetScore() { return scoreData_.score; };
+	void DeckReset();
+	void ScoreReset();
+	void AddStatus(int add,int type);
+	void AddRandSkillDraw() { deck_->AddRandSkillDraw(skills_); };
+	bool addRandSkill() { return deck_->AddRandSkill(); };
+	void DrawAddSkill() { deck_->DrawAddSkill(); };
+
 	int* GetHP() { return &hp_; }
 	int* GetShield() { return &scoreData_.shield; }
 	ScoreData GetScoreData() { return scoreData_; }
+  
 private:
 	//スコア関連
 	ScoreData scoreData_;
@@ -43,6 +54,11 @@ private:
 	std::unique_ptr<Number>	changeConcentrationNumber_;
 	std::unique_ptr<Number>	changeConditionNumber_;
 
+	std::unique_ptr<Number>	statusNumber_[3];
+
 	Skills skills_;
 	unique_ptr<Deck> deck_ = nullptr;
+	
+	bool isTurnEnd_;
+	int status_[3];
 };

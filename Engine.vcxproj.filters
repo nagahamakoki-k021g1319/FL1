@@ -487,6 +487,9 @@
     <ClInclude Include="Engine\2d\Number.h">
       <Filter>Engine\Header\2d</Filter>
     </ClInclude>
+    <ClInclude Include="User\Game\PhaseBase.h">
+      <Filter>User\Header\Game</Filter>
+    </ClInclude>
     <ClInclude Include="User\UI\HpShieldUI.h">
       <Filter>User\Header\UI</Filter>
     </ClInclude>
