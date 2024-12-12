@@ -14,7 +14,7 @@ public:
 	void Initilize(Skills skills);
 	void AddSkill(Skills skills, std::string name);
 
-	void Update();
+	void Update(ScoreData* scoreData, int* hp);
 	
 	void SetDeck();
 	void DrawSkill();

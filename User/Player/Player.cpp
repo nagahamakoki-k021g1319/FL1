@@ -93,7 +93,6 @@ void Player::Initilize() {
 }
 
 void Player::Update() {
-	deck_->UseSkill(&scoreData_, &hp_);
 	
 	//スキル使用後予想
 	if (deck_->IsSelectedSkill()) {
@@ -132,18 +131,7 @@ void Player::Update() {
 		changeShield_ += scoredata.shield;
 	}
 
-	//スキップ
-	if (Input::GetInstance()->TriggerKey(DIK_S)) {
-		hp_ += 2;
-		if (maxHp_ < hp_) {
-			hp_ = maxHp_;
-		}
-		scoreData_.condition--;
-		deck_->Discard();
-		deck_->DrawSkill();
-	}
-
-	deck_->SpriteSort();
+	deck_->Update(&scoreData_, &hp_);
 }
 
 void Player::Draw() {

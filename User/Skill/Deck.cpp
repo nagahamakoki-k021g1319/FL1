@@ -50,9 +50,24 @@ void Deck::SetDeck() {
 	copy(hasSkills_.begin(), hasSkills_.end(), back_inserter(deck_));
 }
 
-void Deck::Update() {
+void Deck::Update(ScoreData* scoreData,int* hp) {
+	UseSkill(scoreData, hp);
 
+	//スキップ
+	if (Input::GetInstance()->TriggerKey(DIK_S)) {
+		*(hp) += 2;
+		const int maxHp = 40;
+		if (*(hp) > maxHp) {
+			*(hp) = maxHp;
+		}
+		if (scoreData->condition > 0) {
+			scoreData->condition--;
+		}
+		Discard();
+		DrawSkill();
+	}
 
+	SpriteSort();
 }
 
 
