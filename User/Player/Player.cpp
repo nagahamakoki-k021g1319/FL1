@@ -74,6 +74,11 @@ void Player::Initilize() {
 	changeConcentrationNumber_ = std::make_unique<Number>();
 	changeConcentrationNumber_->Initialize();
 
+	for (int i = 0; i < 3; i++) {
+		statusNumber_[i] = std::make_unique<Number>();
+		statusNumber_[i]->Initialize();
+	}
+
 	scoreData_.score = 0;
 	maxHp_ = 40;
 	hp_ = maxHp_;
@@ -86,6 +91,10 @@ void Player::Initilize() {
 	deck_->DrawSkill();
 
 	isTurnEnd_ = false;
+
+	status_[0] = 150;
+	status_[1] = 150;
+	status_[2] = 150;
 }
 
 void Player::Update() {
@@ -148,6 +157,12 @@ void Player::Draw() {
 	}
 }
 
+void Player::DrawStatus() {
+	for (int i = 0; i < 3; i++) {
+		statusNumber_[i]->Draw({ 490.0f + (100.0f * static_cast<float>(i)),400.0f }, status_[i], 0.8f);
+	}
+}
+
 bool Player::IsTurnEnd() {
 	if (isTurnEnd_ == true) {
 		isTurnEnd_ = false;
@@ -166,4 +181,8 @@ void Player::ScoreReset() {
 	scoreData_.shield = 0;
 	scoreData_.concentration = 0;
 	scoreData_.condition = 0;
+}
+
+void Player::AddStatus(int add, int type) {
+	status_[type] += add;
 }

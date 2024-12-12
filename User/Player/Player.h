@@ -9,10 +9,12 @@ public:
 	void Initilize();
 	void Update();
 	void Draw();
+	void DrawStatus();
 	bool IsTurnEnd();
 	int GetScore() { return scoreData_.score; };
 	void DeckReset();
 	void ScoreReset();
+	void AddStatus(int add,int type);
 private:
 	//スコア関連
 	ScoreData scoreData_;
@@ -43,8 +45,11 @@ private:
 	std::unique_ptr<Number>	changeConcentrationNumber_;
 	std::unique_ptr<Number>	changeConditionNumber_;
 
+	std::unique_ptr<Number>	statusNumber_[3];
+
 	Skills skills_;
 	unique_ptr<Deck> deck_ = nullptr;
 	
 	bool isTurnEnd_;
+	int status_[3];
 };
