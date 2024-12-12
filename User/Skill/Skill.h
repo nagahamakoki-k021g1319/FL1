@@ -16,7 +16,8 @@ public:
 	void SetScoreData(ScoreData scoreData) { scoreData_ = scoreData; };
 	ScoreData GetScoreData() { return scoreData_; };
 
-	bool CanUseSkill(ScoreData scoreData, int hp);
+	bool CanUseSkill(ScoreData* scoreData, int hp);
+	void Use(ScoreData* scoreData, int* hp);
 public:
 	std::string name_;
 	ScoreData scoreData_;

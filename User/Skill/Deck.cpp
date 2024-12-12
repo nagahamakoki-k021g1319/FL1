@@ -103,17 +103,18 @@ void Deck::DrawSkill() {
 	}
 }
 
-void Deck::UseSkill(ScoreData scoreData, int hp) {
+void Deck::UseSkill(ScoreData* scoreData, int* hp) {
 	Input* input = Input::GetInstance();
 
 	for (int i=0; i < 3; i++) {
-		canUseSkill_[i] = hand_[i].CanUseSkill(scoreData, hp);
+		canUseSkill_[i] = hand_[i].CanUseSkill(scoreData, *hp);
 	}
 
 	//実行
 	if (input->TriggerKey(DIK_Q) && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
 			usedSkill_ = hand_[0];
+			usedSkill_.Use(scoreData, hp);
 			isUsedSkill_ = true;
 			if (hand_[0].isOneTime_ == true) {
 				banish_.push_back(hand_[0]);
@@ -123,6 +124,7 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 			selectedSkillNum_ = -1;
 			isSelectedSkill_ = false;
 			Discard();
+			DrawSkill();
 		}else {
 			isSelectedSkill_ = true;
 			selectedSkill_ = hand_[0];
@@ -134,6 +136,7 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 	}else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
+			usedSkill_.Use(scoreData, hp);
 			isUsedSkill_ = true;
 			if (hand_[1].isOneTime_ == true) {
 				banish_.push_back(hand_[1]);
@@ -143,6 +146,7 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 			selectedSkillNum_ = -1;
 			isSelectedSkill_ = false;
 			Discard();
+			DrawSkill();
 		}else {
 			isSelectedSkill_ = true;
 			selectedSkillNum_ = 1;
@@ -154,6 +158,7 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 	}else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
+			usedSkill_.Use(scoreData, hp);
 			isUsedSkill_ = true;
 			if (hand_[2].isOneTime_ == true) {
 				banish_.push_back(hand_[2]);
@@ -163,6 +168,7 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 			selectedSkillNum_ = -1;
 			isSelectedSkill_ = false;
 			Discard();
+			DrawSkill();
 		}else {
 			isSelectedSkill_ = true;
 			selectedSkill_ = hand_[2];

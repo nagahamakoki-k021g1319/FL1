@@ -132,44 +132,6 @@ void Player::Update() {
 		changeShield_ += scoredata.shield;
 	}
 
-	//スキル使用計算
-	if (deck_->IsUsedSkill()) {
-		ScoreData scoredata = deck_->GetUsedSkil().GetScoreData();
-
-		//体力計算
-		if (scoreData_.shield >= scoredata.cost) {
-			scoreData_.shield -= scoredata.cost;
-		}else {
-			scoredata.cost -= scoreData_.shield;
-			scoreData_.shield = 0;
-			hp_ -= scoredata.cost;
-		}
-
-		//スコア計算
-		if (scoredata.score > 0) {
-			if (scoreData_.condition > 0) {
-				float addScore = static_cast<float>(scoredata.score + scoreData_.concentration) * 1.5f;
-				scoreData_.score += ceil(addScore);
-			}else {
-				scoreData_.score += scoredata.score + scoreData_.concentration;
-			}
-		}
-
-		//バフ追加
-		scoreData_.concentration += scoredata.concentration;
-		if (scoreData_.condition == 0) {
-			scoreData_.condition += scoredata.condition;
-		}
-		else if (scoreData_.condition > 0) {
-			scoreData_.condition += scoredata.condition;
-			scoreData_.condition--;
-		}
-		scoreData_.shield += scoredata.shield;
-
-		//ドロー
-		deck_->DrawSkill();
-	}
-
 	//スキップ
 	if (Input::GetInstance()->TriggerKey(DIK_S)) {
 		hp_ += 2;
@@ -217,7 +179,7 @@ void Player::Draw() {
 			changeShieldNumber_->Draw({ 320,194 }, changeShield_, 0.8f);
 		}else if (changeShield_ < 0) {
 			changeShieldNumber_->Draw({ 320,194 }, -changeShield_, 0.8f);
-			shieldPlusSprite_->Draw();
+			shieldMinusSprite_->Draw();
 		}
 		if (changeConcentration_ != 0) {
 			changeConcentrationNumber_->Draw({ 100,324 }, changeConcentration_, 0.8f);

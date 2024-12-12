@@ -5,7 +5,7 @@
 void Skills::Initilize() {
 	AddSkill("appeal", 9, 4, 0, 0, 0, false);
 	AddSkill("pose", 2, 3, 2, 0, 0, false);
-	AddSkill("twice", 8, 7, 0, 0, 0,true);
+	AddSkill("twice", 8, 7, 0, 0, 0, true);
 	AddSkill("expression", 0, 0, 4, 0, 0, true);
 	AddSkill("face", 0, 1, 1, 2, 0, false);
 	AddSkill("behavior", 0, 1, 1, 0, 2, false);
@@ -30,17 +30,53 @@ Skill Skills::GetSkill(std::string name) {
 	return skills_.at(name);
 }
 
-bool Skill::CanUseSkill(ScoreData scoreData, int hp) {	
+bool Skill::CanUseSkill(ScoreData* scoreData, int hp) {
 	int newHp;
 
-	if (scoreData.shield >= scoreData_.cost) {
+	if (scoreData->shield >= scoreData_.cost) {
 		return true;
-	}else {
-		newHp = (hp + scoreData.shield) - scoreData_.cost;
+	}
+	else {
+		newHp = (hp + scoreData->shield) - scoreData_.cost;
 	}
 
 	if (newHp >= 0) {
 		return true;
 	}
 	return false;
+}
+
+
+void Skill::Use(ScoreData* scoreData, int* hp) {
+	//体力計算
+	if (scoreData->shield >= scoreData_.cost) {
+		scoreData->shield -= scoreData_.cost;
+	}
+	else {
+		scoreData_.cost -= scoreData->shield;
+		scoreData->shield = 0;
+		*(hp) -= scoreData_.cost;
+	}
+
+	//スコア計算
+	if (scoreData_.score > 0) {
+		if (scoreData->condition > 0) {
+			float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
+			scoreData->score += ceil(addScore);
+		}
+		else {
+			scoreData->score += scoreData_.score + scoreData->concentration;
+		}
+	}
+
+	//バフ追加
+	scoreData->concentration += scoreData_.concentration;
+	if (scoreData->condition == 0) {
+		scoreData->condition += scoreData_.condition;
+	}
+	else if (scoreData->condition > 0) {
+		scoreData->condition += scoreData_.condition;
+		scoreData->condition--;
+	}
+	scoreData->shield += scoreData_.shield;
 }

@@ -18,7 +18,7 @@ public:
 	
 	void SetDeck();
 	void DrawSkill();
-	void UseSkill(ScoreData scoreData,int hp);
+	void UseSkill(ScoreData* scoreData,int* hp);
 	void Discard();
 	void Shuffle();
 
