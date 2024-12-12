@@ -46,7 +46,7 @@ GameScene::~GameScene() {
 void GameScene::Update() {
 	gameCamera_->Update();
 	gameFlow_->Update();
-
+	
 
 	if (Input::GetInstance()->TriggerKey(DIK_A)) {
 		deck_->DrawSkill();

@@ -9,6 +9,8 @@
 #include <dinput.h>
 #include "WinApp.h"
 #include"Controller.h"
+#include "Mouse.h"
+
 //#define DIRECTINPUT_VERSION 0x0800 // DirectInputのバージョン指定
 
 // 入力
@@ -102,6 +104,27 @@ namespace MyEngine {
 		*/
 		void ShakeController(const float& power, const int& span);
 
+		/**
+		 * @brief コントローラーを振動させる
+		*/
+		Vector2 MousePos();
+
+		//キーを押したかをチェック
+		//0　左クリック
+		//1　右クリック
+		//2　マウスカーソルクリック
+		bool PushMouse(int mouseButton_);
+		//キーのトリガーをチェック
+		//0　左クリック
+		//1　右クリック
+		//2　マウスカーソルクリック
+		bool TriggerMouse(int mouseButton_);
+		//マウスのリリースをチェック
+		//0　左クリック
+		//1　右クリック
+		//2　マウスカーソルクリック
+		bool ReleaseMouse(int mouseButton_);
+
 
 	private: // メンバ変数
 		// キーボードのデバイス
@@ -116,5 +139,7 @@ namespace MyEngine {
 		BYTE keyPre_[256] = {};
 		//windwsAPI
 		WinApp* winApp_ = nullptr;
+		//マウス
+		Mouse* mouse_ = nullptr;
 	};
 }

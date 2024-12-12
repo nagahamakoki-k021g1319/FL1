@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Input\Mouse.cpp" />
     <ClCompile Include="User\GameManager.cpp" />
     <ClCompile Include="Engine\Loader\LevelLoader.cpp" />
     <ClCompile Include="Engine\Loader\ObjLoader.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="User\Skill\Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Input\Mouse.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User\GameManager.h" />
     <ClInclude Include="Engine\Loader\LevelLoader.h" />

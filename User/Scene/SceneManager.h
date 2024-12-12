@@ -45,4 +45,6 @@ private:
 	std::unique_ptr<SceneState> state_ = nullptr;
 	SCENE nextScene_;
 	std::unique_ptr<SceneChange> sceneChange_ = nullptr;
+
+	Vector2 mousePos;
 };
