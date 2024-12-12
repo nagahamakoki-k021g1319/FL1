@@ -75,7 +75,8 @@ void Player::Initilize() {
 	changeConcentrationNumber_->Initialize();
 
 	scoreData_.score = 0;
-	hp_ = 40;
+	maxHp_ = 40;
+	hp_ = maxHp_;
 	scoreData_.shield = 0;
 
 	changeScore_ = 0;
@@ -166,6 +167,17 @@ void Player::Update() {
 		scoreData_.shield += scoredata.shield;
 
 		//ドロー
+		deck_->DrawSkill();
+	}
+
+	//スキップ
+	if (Input::GetInstance()->TriggerKey(DIK_S)) {
+		hp_ += 2;
+		if (maxHp_ < hp_) {
+			hp_ = maxHp_;
+		}
+		scoreData_.condition--;
+		deck_->Discard();
 		deck_->DrawSkill();
 	}
 

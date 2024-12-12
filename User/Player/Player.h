@@ -12,6 +12,7 @@ public:
 private:
 	//スコア関連
 	ScoreData scoreData_;
+	int maxHp_;
 	int hp_;
 
 	//スコア予想

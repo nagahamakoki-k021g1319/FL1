@@ -175,6 +175,11 @@ void Deck::UseSkill(ScoreData scoreData, int hp) {
 }
 
 void Deck::Discard() {
+	selectedSkillNum_ = -1;
+	isSelectedSkill_ = false;
+	handPos_[0].y = defaultHandPos_[0].y;
+	handPos_[1].y = defaultHandPos_[1].y;
+	handPos_[2].y = defaultHandPos_[2].y;
 	discard_.insert(discard_.end(), hand_.begin(), hand_.end());
 	hand_.clear();
 }
