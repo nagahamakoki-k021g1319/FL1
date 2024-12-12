@@ -18,7 +18,7 @@ public:
 	void AddStatus(int add,int type);
 	void AddRandSkillDraw() { deck_->AddRandSkillDraw(skills_); };
 	bool addRandSkill() { return deck_->AddRandSkill(); };
-	void DrawAddSkill() { deck_->DrawAddSkill(); };
+	void DrawAddSkill() { addSelectSprite_->Draw(); deck_->DrawAddSkill(); };
 
 	int* GetHP() { return &hp_; }
 	int* GetShield() { return &scoreData_.shield; }
@@ -41,6 +41,7 @@ private:
 	std::unique_ptr<Sprite>	concentrationPlusSprite_;
 	std::unique_ptr<Sprite>	conditionSprite_;
 	std::unique_ptr<Sprite>	conditionPlusSprite_;
+	std::unique_ptr<Sprite>	addSelectSprite_;
 
 	std::unique_ptr<Number>	scoreNumber_;
 	std::unique_ptr<Number>	hpNumber_;
