@@ -29,16 +29,19 @@ void Lesson::Update() {
 		//終了判定
 		if (turn_ == maxTurn_) {
 			isLoopEnd_ = true;
+			player_->AddRandSkillDraw();
+			player_->AddStatus(player_->GetScore(), type_);
 		}
 		if (player_->GetScore() > perfectScore_) {
 			isLoopEnd_ = true;
+			player_->AddRandSkillDraw();
+			player_->AddStatus(player_->GetScore(),type_);
 		}
-	}else {
-		//ステータス上昇
-		player_->AddStatus(player_->GetScore(),type_);
-		//スキル追加処理追加予定
-		//追加したらtrueにする
-		isLessonEnd_ = true;
+	}
+	else {
+		if (player_->addRandSkill()) {
+			isLessonEnd_ = true;
+		}
 	}
 
 }
@@ -47,4 +50,7 @@ void Lesson::Draw() {
 	player_->Draw();
 	remainingTurnPing_->Draw();
 	turnNumber_->Draw({ 640,64 }, maxTurn_ - turn_, 0.8f);
+	if (isLoopEnd_==true) {
+		player_->DrawAddSkill();
+	}
 }

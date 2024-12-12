@@ -15,6 +15,9 @@ public:
 	void DeckReset();
 	void ScoreReset();
 	void AddStatus(int add,int type);
+	void AddRandSkillDraw() { deck_->AddRandSkillDraw(skills_); };
+	bool addRandSkill() { return deck_->AddRandSkill(); };
+	void DrawAddSkill() { deck_->DrawAddSkill(); };
 private:
 	//スコア関連
 	ScoreData scoreData_;

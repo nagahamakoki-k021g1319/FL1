@@ -9,6 +9,13 @@ void Skills::Initilize() {
 	AddSkill("expression", 0, 0, 4, 0, 0, true);
 	AddSkill("face", 0, 1, 1, 2, 0, false);
 	AddSkill("behavior", 0, 1, 1, 0, 2, false);
+
+	AddSkill("step", 6, 4, 0, 0, 3, false);
+	AddSkill("warmUp", 6, 4, 0, 3, 0, false);
+	AddSkill("fanService", 10, 2, 0, 0, 0, false);
+	AddSkill("talkTime", 27, 6, 0, 0, 0, true);
+	AddSkill("stubborn", 0, 2, 3, 4, 0, true);
+	AddSkill("sign", 0, 3, 0, 0, 5, true);
 }
 
 void Skills::AddSkill(std::string name, int score, int cost, int shield, int concentration, int condition, bool isOneTime) {

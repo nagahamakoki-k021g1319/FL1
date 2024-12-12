@@ -46,6 +46,39 @@ void Deck::AddSkill(Skills skills, std::string name) {
 	hasSkills_.push_back(newSkill);
 }
 
+void Deck::AddRandSkillDraw(Skills skills) {
+	string skillName[6];
+	skillName[0] = "step";
+	skillName[1] = "warmUp";
+	skillName[2] = "fanService";
+	skillName[3] = "talkTime";
+	skillName[4] = "stubborn";
+	skillName[5] = "sign";
+
+	addRandList_.clear();
+	for (int i = 0; i < 3; i++) {
+		Skill newSkill = skills.GetSkill(skillName[rand() % 6]);
+		newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(newSkill.name_ + ".png"));
+		newSkill.sprite_.SetSize({ 64,64 });
+		newSkill.sprite_.SetPozition({440.0f+100.0f*static_cast<float>(i),450});
+		addRandList_.push_back(newSkill);
+	}
+}
+
+bool Deck::AddRandSkill() {
+	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
+		hasSkills_.push_back(addRandList_[0]);
+		return true;
+	}else if (Input::GetInstance()->TriggerKey(DIK_W)) {
+		hasSkills_.push_back(addRandList_[1]);
+		return true;
+	}else if (Input::GetInstance()->TriggerKey(DIK_E)) {
+		hasSkills_.push_back(addRandList_[2]);
+		return true;
+	}
+	return false;
+}
+
 void Deck::SetDeck() {
 	copy(hasSkills_.begin(), hasSkills_.end(), back_inserter(deck_));
 }
@@ -341,5 +374,11 @@ void Deck::DrawList() {
 void Deck::DrawDeck() {
 	for (int i = 0; i < hasSkills_.size(); i++) {
 		hasSkills_[i].sprite_.Draw();
+	}
+}
+
+void Deck::DrawAddSkill() {
+	for (int i = 0; i < 3; i++) {
+		addRandList_[i].sprite_.Draw();
 	}
 }

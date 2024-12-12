@@ -13,6 +13,8 @@ class Deck {
 public:
 	void Initilize(Skills skills);
 	void AddSkill(Skills skills, std::string name);
+	bool AddRandSkill();
+	void AddRandSkillDraw(Skills skills);
 
 	void Update(ScoreData* scoreData, int* hp);
 	
@@ -30,6 +32,7 @@ public:
 	void DrawHand();
 	void DrawList();
 	void DrawDeck();
+	void DrawAddSkill();
 
 	bool IsUsedSkill();
 	Skill GetUsedSkil();
@@ -41,6 +44,7 @@ private:
 	vector<Skill> hand_;
 	vector<Skill> discard_;
 	vector<Skill> banish_ ;
+	vector<Skill> addRandList_;
 
 	Sprite deckSprite_;
 	Sprite handSprite_;
