@@ -49,4 +49,6 @@ private:
 	//カメラ
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
+	std::unique_ptr<Sprite> select_;
+
 };

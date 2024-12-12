@@ -41,7 +41,8 @@ void TitleScene::Initialize() {
 	HPkari = 100;
 	barGraph_->SetHP(HPkari);
 
-
+	title_ = std::make_unique<Sprite>();
+	title_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("title.png"));
 }
 
 TitleScene::~TitleScene() {
@@ -61,6 +62,8 @@ void TitleScene::Update() {
 	ImGui::End();
 	HPkari = (uint32_t)hp;
 
+	title_->Update();
+
 	StateTransition();
 }
 
@@ -73,8 +76,10 @@ void TitleScene::FbxDraw() {
 }
 
 void TitleScene::SpriteDraw() {
+	title_->Draw();
 	blockBarGraph_->Draw();
 	barGraph_->Draw();
+	
 }
 
 void TitleScene::StateTransition() {

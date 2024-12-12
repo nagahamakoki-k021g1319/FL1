@@ -55,5 +55,4 @@ private:
 	std::unique_ptr<Player> player_;
 	//ゲームフロー(レッスンとか相談とか)
 	unique_ptr<GameFlow> gameFlow_ = nullptr;
-
 };
