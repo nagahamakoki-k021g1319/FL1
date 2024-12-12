@@ -30,6 +30,8 @@ public:
 
 	bool IsUsedSkill();
 	Skill GetUsedSkil();
+	bool IsSelectedSkill();
+	Skill GetSelectedSkill();
 private:
 	vector<Skill> hasSkills_;
 	vector<Skill> deck_;
@@ -46,7 +48,9 @@ private:
 	float addSelecthandPos_;
 	Vector2 defaultHandPos_[3];
 
-	int selectedSkill_;
+	int selectedSkillNum_;
 	bool isUsedSkill_;
 	Skill usedSkill_;
+	bool isSelectedSkill_;
+	Skill selectedSkill_;
 };

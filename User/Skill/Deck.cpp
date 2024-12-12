@@ -35,7 +35,8 @@ void Deck::Initilize(Skills skills) {
 	handPos_[1] = defaultHandPos_[1];
 	handPos_[2] = defaultHandPos_[2];
 	isUsedSkill_ = false;
-	selectedSkill_ = -1;
+	isSelectedSkill_ = false;
+	selectedSkillNum_ = -1;
 }
 
 void Deck::AddSkill(Skills skills, std::string name) {
@@ -59,9 +60,20 @@ Skill Deck::GetUsedSkil() {
 	return usedSkill_;
 };
 
+Skill Deck::GetSelectedSkill() {
+	return selectedSkill_;
+};
+
 bool Deck::IsUsedSkill() {
 	if (isUsedSkill_ == true) {
 		isUsedSkill_ = false;
+		return true;
+	}
+	return false;
+}
+
+bool Deck::IsSelectedSkill() {
+	if (isSelectedSkill_ == true) {
 		return true;
 	}
 	return false;
@@ -96,7 +108,7 @@ void Deck::UseSkill() {
 
 	//実行
 	if (input->TriggerKey(DIK_Q)) {
-		if (selectedSkill_ == 0) {
+		if (selectedSkillNum_ == 0) {
 			usedSkill_ = hand_[0];
 			isUsedSkill_ = true;
 			if (hand_[0].isOneTime_ == true) {
@@ -104,16 +116,19 @@ void Deck::UseSkill() {
 				hand_.erase(hand_.begin());
 			}
 			handPos_[0].y = defaultHandPos_[0].y;
-			selectedSkill_ = -1;
+			selectedSkillNum_ = -1;
+			isSelectedSkill_ = false;
 			Discard();
 		}else {
-			selectedSkill_ = 0;
+			isSelectedSkill_ = true;
+			selectedSkill_ = hand_[0];
+			selectedSkillNum_ = 0;
 			handPos_[0].y = defaultHandPos_[0].y + addSelecthandPos_;
 			handPos_[1].y = defaultHandPos_[1].y;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
 	}else if (input->TriggerKey(DIK_W)) {
-		if (selectedSkill_ == 1) {
+		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
 			isUsedSkill_ = true;
 			if (hand_[1].isOneTime_ == true) {
@@ -121,16 +136,19 @@ void Deck::UseSkill() {
 				hand_.erase(hand_.begin() + 1);
 			}
 			handPos_[1].y = defaultHandPos_[1].y;
-			selectedSkill_ = -1;
+			selectedSkillNum_ = -1;
+			isSelectedSkill_ = false;
 			Discard();
 		}else {
-			selectedSkill_ = 1;
+			isSelectedSkill_ = true;
+			selectedSkillNum_ = 1;
+			selectedSkill_ = hand_[1];
 			handPos_[0].y = defaultHandPos_[0].y;
 			handPos_[1].y = defaultHandPos_[1].y + addSelecthandPos_;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
 	}else if (input->TriggerKey(DIK_E)) {
-		if (selectedSkill_ == 2) {
+		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
 			isUsedSkill_ = true;
 			if (hand_[2].isOneTime_ == true) {
@@ -138,10 +156,13 @@ void Deck::UseSkill() {
 				hand_.erase(hand_.begin() + 2);
 			}
 			handPos_[2].y = defaultHandPos_[2].y;
-			selectedSkill_ = -1;
+			selectedSkillNum_ = -1;
+			isSelectedSkill_ = false;
 			Discard();
 		}else {
-			selectedSkill_ = 2;
+			isSelectedSkill_ = true;
+			selectedSkill_ = hand_[2];
+			selectedSkillNum_ = 2;
 			handPos_[0].y = defaultHandPos_[0].y;
 			handPos_[1].y = defaultHandPos_[1].y;
 			handPos_[2].y = defaultHandPos_[2].y + addSelecthandPos_;
