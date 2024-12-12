@@ -38,6 +38,9 @@ void GameScene::Initialize() {
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Initialize();
+
+	bufUI_ = make_unique<BufUI>();
+	bufUI_->Initialize();
 }
 
 GameScene::~GameScene() {
@@ -52,7 +55,7 @@ void GameScene::Update() {
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Update();
-
+	bufUI_->Update();
 	StateTransition();
 }
 
@@ -68,6 +71,7 @@ void GameScene::FbxDraw() {
 void GameScene::SpriteDraw() {
 	hpShieldUI_->Draw();
 	player_->Draw();
+	bufUI_->Draw();
 }
 
 void GameScene::StateTransition() {
