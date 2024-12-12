@@ -10,7 +10,6 @@
 #include"GameCamera.h"
 
 #include"GameManager.h"
-#include"Player.h"
 
 #include "Game/GameFlow.h"
 
@@ -52,8 +51,6 @@ private:
 
 	unique_ptr<GameManager> gameManager_ = nullptr;
 
-	std::unique_ptr<Player> player_;
 	//ゲームフロー(レッスンとか相談とか)
 	unique_ptr<GameFlow> gameFlow_ = nullptr;
-
 };

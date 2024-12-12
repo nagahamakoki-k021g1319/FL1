@@ -84,11 +84,15 @@ void Player::Initilize() {
 	deck_->Initilize(skills_);
 
 	deck_->DrawSkill();
+
+	isTurnEnd_ = false;
 }
 
 void Player::Update() {
-
 	deck_->Update(&scoreData_, &hp_);
+	if (deck_->IsUsedSkill() == true) {
+		isTurnEnd_ = true;
+	}
 }
 
 void Player::Draw() {
@@ -142,4 +146,16 @@ void Player::Draw() {
 			conditionPlusSprite_->Draw();
 		}
 	}
+}
+
+bool Player::IsTurnEnd() {
+	if (isTurnEnd_ == true) {
+		isTurnEnd_ = false;
+		return true;
+	}
+	return false;
+}
+
+void Player::DeckReset() {
+	deck_->ResetDeck();
 }

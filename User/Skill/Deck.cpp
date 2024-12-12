@@ -63,6 +63,7 @@ void Deck::Update(ScoreData* scoreData, int* hp) {
 		if (scoreData->condition > 0) {
 			scoreData->condition--;
 		}
+		isUsedSkill_ = true;
 		Discard();
 		DrawSkill();
 	}
@@ -269,6 +270,16 @@ void Deck::Discard() {
 void Deck::Shuffle() {
 	mt19937_64 get_rand_mt(0);
 	shuffle(deck_.begin(), deck_.end(), get_rand_mt);
+}
+
+void Deck::ResetDeck() {
+	deck_.clear();
+	SetDeck();
+	Shuffle();
+	hand_.clear();
+	discard_.clear();
+	banish_.clear();
+	DrawSkill();
 }
 
 void Deck::SpriteSort() {

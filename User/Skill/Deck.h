@@ -23,6 +23,7 @@ public:
 	int GetChangedHp(ScoreData* scoreData);
 	void Discard();
 	void Shuffle();
+	void ResetDeck();
 
 	void SpriteSort();
 

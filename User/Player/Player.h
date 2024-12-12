@@ -9,6 +9,10 @@ public:
 	void Initilize();
 	void Update();
 	void Draw();
+	bool IsTurnEnd();
+	int GetScore() { return scoreData_.score; };
+	void DeckReset();
+	void ScoreReset() { scoreData_.score = 0; };
 private:
 	//スコア関連
 	ScoreData scoreData_;
@@ -41,4 +45,6 @@ private:
 
 	Skills skills_;
 	unique_ptr<Deck> deck_ = nullptr;
+	
+	bool isTurnEnd_;
 };
