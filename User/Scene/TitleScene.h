@@ -52,6 +52,6 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	unique_ptr<DonutGraph> donut_;
-	unique_ptr<BarGraph> barGraph_;
+	unique_ptr<BlockBarGraph> blockBarGraph_;
 
 };

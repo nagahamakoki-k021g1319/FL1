@@ -2,17 +2,17 @@
 #include "SpriteLoader.h"
 #include "Easing.h"
 
-BarGraph::BarGraph()
+BlockBarGraph::BlockBarGraph()
 {
 
 }
 
-BarGraph::~BarGraph()
+BlockBarGraph::~BlockBarGraph()
 {
 
 }
 
-void BarGraph::Initialize()
+void BlockBarGraph::Initialize()
 {
 	float minSize = 0;
 	float maxSize = 0;
@@ -28,7 +28,7 @@ void BarGraph::Initialize()
 	}
 }
 
-void BarGraph::Update()
+void BlockBarGraph::Update()
 {
 	for (size_t i = 0; i < bars_.size(); i++) {
 		if (i < progress) {
@@ -38,45 +38,79 @@ void BarGraph::Update()
 			bars_[i].OFFDraw();
 		}
 	}
-	for (Bar bar : bars_) {
+	for (Block bar : bars_) {
 		bar.Update();
 	}
 }
 
-void BarGraph::Draw()
+void BlockBarGraph::Draw()
 {
-	for (Bar bar : bars_) {
+	for (Block bar : bars_) {
 		bar.Draw();
 	}
 }
 
-Bar::Bar()
+Block::Block()
 {
 
 }
 
-Bar::~Bar()
+Block::~Block()
 {
 
 }
 
-void Bar::Initialize(Vector2 minMax)
+void Block::Initialize(Vector2 minMax)
 {
 	minBarSize_ = minMax.x;
 	maxBarSize_ = minMax.y;
 	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
-	sprite_.SetPozition({startPos_.x + minMax.x,startPos_.y });
+	sprite_.SetPozition({ startPos_.x + minMax.x,startPos_.y });
 	sprite_.SetSize({ 60, 30 });
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
 }
 
-void Bar::Update()
+void Block::Update()
 {
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
 	sprite_.Update();
 }
 
-void Bar::Draw()
+void Block::Draw()
+{
+	if (isDraw) {
+		sprite_.Draw();
+	}
+	else {
+
+	}
+}
+
+BarGraph::BarGraph()
+{
+}
+
+BarGraph::~BarGraph()
+{
+}
+
+void BarGraph::Initialize(Vector2 minMax)
+{
+	minBarSize_ = minMax.x;
+	maxBarSize_ = minMax.y;
+	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
+	sprite_.SetPozition({ startPos_.x + minMax.x,startPos_.y });
+	sprite_.SetSize({ 60, 30 });
+	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
+}
+
+void BarGraph::Update()
+{
+	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
+	sprite_.Update();
+}
+
+void BarGraph::Draw()
 {
 	if (isDraw) {
 		sprite_.Draw();

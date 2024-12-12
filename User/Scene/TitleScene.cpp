@@ -29,11 +29,11 @@ void TitleScene::Initialize() {
 	//
 	uint32_t division = 12;
 	Vector2 startpos = {250,30};
-	barGraph_ = make_unique<BarGraph>();
-	barGraph_->SetDivision(division);
-	barGraph_->NowProgres(division);
-	barGraph_->SetStartPos(startpos);
-	barGraph_->Initialize();
+	blockBarGraph_ = make_unique<BlockBarGraph>();
+	blockBarGraph_->SetDivision(division);
+	blockBarGraph_->NowProgres(division);
+	blockBarGraph_->SetStartPos(startpos);
+	blockBarGraph_->Initialize();
 
 
 }
@@ -45,7 +45,7 @@ TitleScene::~TitleScene() {
 // 更新
 void TitleScene::Update() {
 	gameCamera_->Update();
-	barGraph_->Update();
+	blockBarGraph_->Update();
 
 	StateTransition();
 }
@@ -59,7 +59,7 @@ void TitleScene::FbxDraw() {
 }
 
 void TitleScene::SpriteDraw() {
-	barGraph_->Draw();
+	blockBarGraph_->Draw();
 }
 
 void TitleScene::StateTransition() {
