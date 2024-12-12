@@ -34,6 +34,10 @@ void GameScene::Initialize() {
 	player_->Initilize();
 	gameFlow_ = std::make_unique<GameFlow>();
 	gameFlow_->Initialize();
+	hpShieldUI_ = make_unique<HpShieldUI>();
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Initialize();
 }
 
 GameScene::~GameScene() {
@@ -45,6 +49,9 @@ void GameScene::Update() {
 	gameCamera_->Update();
 	gameFlow_->Update();
 	player_->Update();
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Update();
 
 	StateTransition();
 }
@@ -59,6 +66,7 @@ void GameScene::FbxDraw() {
 }
 
 void GameScene::SpriteDraw() {
+	hpShieldUI_->Draw();
 	player_->Draw();
 }
 
