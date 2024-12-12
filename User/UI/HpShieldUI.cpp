@@ -32,11 +32,13 @@ void HpShieldUI::Initialize()
 	hpSprite_ = std::make_unique<Sprite>();
 	hpSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("hp.png"));
 	hpSprite_->SetPozition({ 0,130 });
+	hpSprite_->SetColor({ 1,1,0,1 });
 	hpSprite_->Update();
 
 	shieldSprite_ = std::make_unique<Sprite>();
 	shieldSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("shield.png"));
 	shieldSprite_->SetPozition({ 130,130 });
+	shieldSprite_->SetColor({0,1,1,1});
 	shieldSprite_->Update();
 }
 
@@ -56,8 +58,8 @@ void HpShieldUI::Draw()
 	hpSprite_->Draw();
 	shieldSprite_->Draw();
 
-	shieldNumber_->Draw({ 190,194 }, *shield_, 0.4f);
-	hpNumber_->Draw({ 60,194 }, *hp_, 0.4f);
+	shieldNumber_->Draw({ 245,195 }, *shield_, 0.4f);
+	hpNumber_->Draw({ 60,234 }, *hp_, 0.4f);
 }
 
 void HpShieldUI::GetHPpt(int* num)
