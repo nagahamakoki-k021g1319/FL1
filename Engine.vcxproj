@@ -158,6 +158,8 @@
     <ClCompile Include="User\Skill\Deck.cpp" />
     <ClCompile Include="User\Skill\Skill.cpp" />
     <ClCompile Include="User\UI\BarGraph.cpp" />
+    <ClCompile Include="User\UI\BufUI.cpp" />
+    <ClCompile Include="User\UI\HpShieldUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Input\Mouse.h" />
@@ -220,6 +222,8 @@
     <ClInclude Include="User\Skill\Deck.h" />
     <ClInclude Include="User\Skill\Skill.h" />
     <ClInclude Include="User\UI\BarGraph.h" />
+    <ClInclude Include="User\UI\BufUI.h" />
+    <ClInclude Include="User\UI\HpShieldUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
