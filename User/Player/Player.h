@@ -12,7 +12,7 @@ public:
 	bool IsTurnEnd();
 	int GetScore() { return scoreData_.score; };
 	void DeckReset();
-	void ScoreReset() { scoreData_.score = 0; };
+	void ScoreReset();
 private:
 	//スコア関連
 	ScoreData scoreData_;

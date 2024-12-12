@@ -159,3 +159,11 @@ bool Player::IsTurnEnd() {
 void Player::DeckReset() {
 	deck_->ResetDeck();
 }
+
+
+void Player::ScoreReset() {
+	scoreData_.score = 0;
+	scoreData_.shield = 0;
+	scoreData_.concentration = 0;
+	scoreData_.condition = 0;
+}
