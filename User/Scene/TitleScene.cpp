@@ -8,6 +8,7 @@
 #include"FbxLoader.h"
 #include"SpriteLoader.h"
 #include"LightGroup.h"
+#include <imgui.h>
 
 TitleScene::TitleScene() {}
 
@@ -29,7 +30,7 @@ void TitleScene::Initialize() {
 	//
 	uint32_t division = 12;
 	Vector2 startpos = {250,30};
-	blockBarGraph_ = make_unique<BlockBarGraph>();
+	blockBarGraph_ = make_unique<BlockGraph>();
 	blockBarGraph_->SetDivision(division);
 	blockBarGraph_->NowProgres(division);
 	blockBarGraph_->SetStartPos(startpos);
@@ -50,8 +51,15 @@ TitleScene::~TitleScene() {
 // 更新
 void TitleScene::Update() {
 	gameCamera_->Update();
+
+	barGraph_->SetHP(HPkari);
 	blockBarGraph_->Update();
 	barGraph_->Update();
+	int hp = (int)HPkari;
+	ImGui::Begin("playerHP");
+	ImGui::SliderInt("HP", &hp, 0, 100);
+	ImGui::End();
+	HPkari = (uint32_t)hp;
 
 	StateTransition();
 }

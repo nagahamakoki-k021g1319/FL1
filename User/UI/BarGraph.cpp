@@ -2,17 +2,17 @@
 #include "SpriteLoader.h"
 #include "Easing.h"
 
-BlockBarGraph::BlockBarGraph()
+BlockGraph::BlockGraph()
 {
 
 }
 
-BlockBarGraph::~BlockBarGraph()
+BlockGraph::~BlockGraph()
 {
 
 }
 
-void BlockBarGraph::Initialize()
+void BlockGraph::Initialize()
 {
 	float minSize = 0;
 	float maxSize = 0;
@@ -28,7 +28,7 @@ void BlockBarGraph::Initialize()
 	}
 }
 
-void BlockBarGraph::Update()
+void BlockGraph::Update()
 {
 	for (size_t i = 0; i < bars_.size(); i++) {
 		if (i < progress) {
@@ -43,7 +43,7 @@ void BlockBarGraph::Update()
 	}
 }
 
-void BlockBarGraph::Draw()
+void BlockGraph::Draw()
 {
 	for (Block bar : bars_) {
 		bar.Draw();
@@ -100,7 +100,7 @@ void BarGraph::Initialize(Vector2 startPos)
 	isDraw = true;
 	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
 	sprite_.SetPozition({ startPos_.x ,startPos_.y });
-	sprite_.SetSize({ 60, 30 });
+	sprite_.SetSize({ 0, 30 });
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
 }
 
@@ -108,7 +108,7 @@ void BarGraph::Update()
 {
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
 	sprite_.SetPozition({ startPos_.x ,startPos_.y });
-	sprite_.SetSize({ 60+(float)HP_* 7.3f, 30 });
+	sprite_.SetSize({ (float)HP_* 8.0f, 30 });
 	sprite_.Update();
 }
 

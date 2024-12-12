@@ -4,6 +4,7 @@
 #include "Vector2.h"
 #include <vector>
 #include "Sprite.h"
+#include "ImGuiManager.h"
 
 class Block
 {
@@ -29,11 +30,11 @@ private:
 };
 
 
-class BlockBarGraph
+class BlockGraph
 {
 public:
-	BlockBarGraph();
-	~BlockBarGraph();
+	BlockGraph();
+	~BlockGraph();
 
 	void Initialize();
 	void Update();
