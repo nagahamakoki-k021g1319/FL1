@@ -93,7 +93,7 @@ void Player::Initilize() {
 }
 
 void Player::Update() {
-	deck_->UseSkill(scoreData_, hp_);
+	deck_->UseSkill(&scoreData_, &hp_);
 	
 	//スキル使用後予想
 	if (deck_->IsSelectedSkill()) {
