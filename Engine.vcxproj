@@ -62,8 +62,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;$(SolutionDir)User\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;$(SolutionDir)User\UI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;$(SolutionDir)User\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)User\Scene;$(SolutionDir)Engine\ImGui;$(SolutionDir)Engine\2d;$(SolutionDir)Engine\3d\Particle;$(SolutionDir)Engine\3d;$(SolutionDir)Engine\Collision;$(SolutionDir)Engine\Audio;$(SolutionDir)Engine\Input;$(SolutionDir)Engine\Math;$(SolutionDir)Engine\Base;$(SolutionDir)DirectXTex;$(SolutionDir)imgui;$(SolutionDir)User;$(SolutionDir)User\Player;$(SolutionDir)Engine\Camera;$(SolutionDir)User\Loader;$(SolutionDir)User\Collision;$(SolutionDir)Engine\Loader;$(SolutionDir)Engine\3d\Light;$(SolutionDir)User\Camera;$(SolutionDir)User\Skill;$(SolutionDir)User\UI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\2d\DonutGraph.cpp" />
     <ClCompile Include="Engine\2d\Number.cpp" />
     <ClCompile Include="User\GameManager.cpp" />
     <ClCompile Include="Engine\Loader\LevelLoader.cpp" />
@@ -155,8 +156,10 @@
     <ClCompile Include="User\Scene\TitleScene.cpp" />
     <ClCompile Include="User\Skill\Deck.cpp" />
     <ClCompile Include="User\Skill\Skill.cpp" />
+    <ClCompile Include="User\UI\BarGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\2d\DonutGraph.h" />
     <ClInclude Include="Engine\2d\Number.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="User\GameManager.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="User\Scene\TitleScene.h" />
     <ClInclude Include="User\Skill\Deck.h" />
     <ClInclude Include="User\Skill\Skill.h" />
+    <ClInclude Include="User\UI\BarGraph.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
@@ -224,12 +228,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shader\DonutGraph.hlsli" />
     <None Include="Resources\SHADER\FBX.hlsli" />
     <None Include="Resources\SHADER\OBJShaderHeader.hlsli" />
     <None Include="Resources\SHADER\Particle.hlsli" />
     <None Include="Resources\SHADER\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\Shader\DonutGraphPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\DonutGraphVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Resources\SHADER\FBXPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
