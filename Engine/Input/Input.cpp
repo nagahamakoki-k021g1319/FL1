@@ -38,6 +38,10 @@ void Input::Initialize(WinApp* winApp)
 
 	//コントローラーの初期化
 	controller_ = new Controller;
+
+	//マウスの操作
+	mouse_ = new Mouse;
+	mouse_->Initialize(winApp);
 }
 
 Input* Input::GetInstance() {
@@ -61,6 +65,9 @@ void Input::Update()
 
 	//コントローラーデバイスの更新
 	controller_->Update();
+
+	//マウスの更新
+	mouse_->Update();
 }
 
 bool Input::PushKey(BYTE keyNumber)
@@ -150,4 +157,24 @@ Vector2 Input::GetRightStickVec(const Vector2& deadRate)
 void Input::ShakeController(const float& power, const int& span)
 {
 	controller_->ShakeController(power, span);
+}
+
+Vector2 MyEngine::Input::MousePos()
+{
+	return mouse_->MousePos();
+}
+
+bool MyEngine::Input::PushMouse(int mouseButton_)
+{
+	return mouse_->PushMouse(mouseButton_);
+}
+
+bool MyEngine::Input::TriggerMouse(int mouseButton_)
+{
+	return mouse_->TriggerMouse(mouseButton_);
+}
+
+bool MyEngine::Input::ReleaseMouse(int mouseButton_)
+{
+	return mouse_->ReleaseMouse(mouseButton_);
 }

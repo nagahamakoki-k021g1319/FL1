@@ -286,6 +286,9 @@
     <ClCompile Include="User\Game\Lesson.cpp">
       <Filter>User\Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Input\Mouse.cpp">
+      <Filter>Engine\Source\Input</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\2d\DonutGraph.cpp">
       <Filter>Engine\Source\2d</Filter>
     </ClCompile>
@@ -462,6 +465,9 @@
     </ClInclude>
     <ClInclude Include="User\Game\Consult.h">
       <Filter>User\Header\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Input\Mouse.h">
+      <Filter>Engine\Header\Input</Filter>
     </ClInclude>
     <ClInclude Include="Engine\2d\DonutGraph.h">
       <Filter>Engine\Header\2d</Filter>

@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Input\Mouse.cpp" />
     <ClCompile Include="Engine\2d\DonutGraph.cpp" />
     <ClCompile Include="Engine\2d\Number.cpp" />
     <ClCompile Include="User\GameManager.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="User\UI\BarGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Input\Mouse.h" />
     <ClInclude Include="Engine\2d\DonutGraph.h" />
     <ClInclude Include="Engine\2d\Number.h" />
     <ClInclude Include="resource.h" />

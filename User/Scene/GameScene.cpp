@@ -44,7 +44,6 @@ GameScene::~GameScene() {
 void GameScene::Update() {
 	gameCamera_->Update();
 	gameFlow_->Update();
-
 	player_->Update();
 
 	StateTransition();
