@@ -53,5 +53,7 @@ private:
 
 	unique_ptr<DonutGraph> donut_;
 	unique_ptr<BlockBarGraph> blockBarGraph_;
+	unique_ptr<BarGraph> barGraph_;
+	uint32_t HPkari;
 
 };

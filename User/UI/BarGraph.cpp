@@ -94,12 +94,12 @@ BarGraph::~BarGraph()
 {
 }
 
-void BarGraph::Initialize(Vector2 minMax)
+void BarGraph::Initialize(Vector2 startPos)
 {
-	minBarSize_ = minMax.x;
-	maxBarSize_ = minMax.y;
+	startPos_ = startPos;
+	isDraw = true;
 	sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("white.png"));
-	sprite_.SetPozition({ startPos_.x + minMax.x,startPos_.y });
+	sprite_.SetPozition({ startPos_.x ,startPos_.y });
 	sprite_.SetSize({ 60, 30 });
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30 });
 }
@@ -107,6 +107,8 @@ void BarGraph::Initialize(Vector2 minMax)
 void BarGraph::Update()
 {
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
+	sprite_.SetPozition({ startPos_.x ,startPos_.y });
+	sprite_.SetSize({ 60+(float)HP_* 7.3f, 30 });
 	sprite_.Update();
 }
 

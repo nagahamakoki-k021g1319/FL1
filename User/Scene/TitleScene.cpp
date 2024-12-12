@@ -35,6 +35,11 @@ void TitleScene::Initialize() {
 	blockBarGraph_->SetStartPos(startpos);
 	blockBarGraph_->Initialize();
 
+	barGraph_ = make_unique<BarGraph>();
+	barGraph_->Initialize({250,70});
+	HPkari = 100;
+	barGraph_->SetHP(HPkari);
+
 
 }
 
@@ -46,6 +51,7 @@ TitleScene::~TitleScene() {
 void TitleScene::Update() {
 	gameCamera_->Update();
 	blockBarGraph_->Update();
+	barGraph_->Update();
 
 	StateTransition();
 }
@@ -60,6 +66,7 @@ void TitleScene::FbxDraw() {
 
 void TitleScene::SpriteDraw() {
 	blockBarGraph_->Draw();
+	barGraph_->Draw();
 }
 
 void TitleScene::StateTransition() {
