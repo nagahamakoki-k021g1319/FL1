@@ -103,11 +103,15 @@ void Deck::DrawSkill() {
 	}
 }
 
-void Deck::UseSkill() {
+void Deck::UseSkill(ScoreData scoreData, int hp) {
 	Input* input = Input::GetInstance();
 
+	for (int i=0; i < 3; i++) {
+		canUseSkill_[i] = hand_[i].CanUseSkill(scoreData, hp);
+	}
+
 	//実行
-	if (input->TriggerKey(DIK_Q)) {
+	if (input->TriggerKey(DIK_Q) && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
 			usedSkill_ = hand_[0];
 			isUsedSkill_ = true;
@@ -127,7 +131,7 @@ void Deck::UseSkill() {
 			handPos_[1].y = defaultHandPos_[1].y;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
-	}else if (input->TriggerKey(DIK_W)) {
+	}else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
 			isUsedSkill_ = true;
@@ -147,7 +151,7 @@ void Deck::UseSkill() {
 			handPos_[1].y = defaultHandPos_[1].y + addSelecthandPos_;
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
-	}else if (input->TriggerKey(DIK_E)) {
+	}else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
 			isUsedSkill_ = true;

@@ -15,11 +15,11 @@ void Skills::AddSkill(std::string name, int score, int cost, int shield, int con
 	Skill newSkill{};
 	newSkill.name_ = name;
 	ScoreData newScoreData;
-	newScoreData.score_ = score;
-	newScoreData.cost_ = cost;
-	newScoreData.shield_ = shield;
-	newScoreData.concentration_ = concentration;
-	newScoreData.condition_ = condition;
+	newScoreData.score = score;
+	newScoreData.cost = cost;
+	newScoreData.shield = shield;
+	newScoreData.concentration = concentration;
+	newScoreData.condition = condition;
 	newSkill.SetScoreData(newScoreData);
 	newSkill.isOneTime_ = isOneTime;
 
@@ -28,4 +28,19 @@ void Skills::AddSkill(std::string name, int score, int cost, int shield, int con
 
 Skill Skills::GetSkill(std::string name) {
 	return skills_.at(name);
+}
+
+bool Skill::CanUseSkill(ScoreData scoreData, int hp) {	
+	int newHp;
+
+	if (scoreData.shield >= scoreData_.cost) {
+		return true;
+	}else {
+		newHp = (hp + scoreData.shield) - scoreData_.cost;
+	}
+
+	if (newHp >= 0) {
+		return true;
+	}
+	return false;
 }

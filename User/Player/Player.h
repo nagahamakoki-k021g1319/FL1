@@ -11,11 +11,8 @@ public:
 	void Draw();
 private:
 	//スコア関連
-	int score_;
+	ScoreData scoreData_;
 	int hp_;
-	int shield_;
-	int concentration_;
-	int condition_;
 
 	//スコア予想
 	int changeScore_;

@@ -74,9 +74,9 @@ void Player::Initilize() {
 	changeConcentrationNumber_ = std::make_unique<Number>();
 	changeConcentrationNumber_->Initialize();
 
-	score_ = 0;
+	scoreData_.score = 0;
 	hp_ = 40;
-	shield_ = 0;
+	scoreData_.shield = 0;
 
 	changeScore_ = 0;
 	changeHp_ = 0;
@@ -92,7 +92,7 @@ void Player::Initilize() {
 }
 
 void Player::Update() {
-	deck_->UseSkill();
+	deck_->UseSkill(scoreData_, hp_);
 	
 	//スキル使用後予想
 	if (deck_->IsSelectedSkill()) {
@@ -106,29 +106,29 @@ void Player::Update() {
 		ScoreData scoredata = deck_->GetSelectedSkill().GetScoreData();
 
 		//体力計算
-		if (shield_ >= scoredata.cost_) {
-			changeShield_ = -scoredata.cost_;
+		if (scoreData_.shield >= scoredata.cost) {
+			changeShield_ = -scoredata.cost;
 		}else {
-			changeShield_ = -shield_;
-			scoredata.cost_ -= shield_;
-			changeHp_ = scoredata.cost_;
+			changeShield_ = -scoreData_.shield;
+			scoredata.cost -= scoreData_.shield;
+			changeHp_ = scoredata.cost;
 		}
 
 		//スコア計算
-		if (scoredata.score_ > 0) {
-			if (condition_ > 0) {
-				float addScore = static_cast<float>(scoredata.score_ + concentration_) * 1.5f;
+		if (scoredata.score > 0) {
+			if (scoreData_.condition > 0) {
+				float addScore = static_cast<float>(scoredata.score + scoreData_.concentration) * 1.5f;
 				changeScore_ = ceil(addScore);
 			}
 			else {
-				changeScore_ = scoredata.score_ + concentration_;
+				changeScore_ = scoredata.score + scoreData_.concentration;
 			}
 		}
 
 		//バフ追加
-		changeConcentration_ = scoredata.concentration_;
-		changeCondition_ = scoredata.condition_;
-		changeShield_ += scoredata.shield_;
+		changeConcentration_ = scoredata.concentration;
+		changeCondition_ = scoredata.condition;
+		changeShield_ += scoredata.shield;
 	}
 
 	//スキル使用計算
@@ -136,34 +136,34 @@ void Player::Update() {
 		ScoreData scoredata = deck_->GetUsedSkil().GetScoreData();
 
 		//体力計算
-		if (shield_ >= scoredata.cost_) {
-			shield_ -= scoredata.cost_;
+		if (scoreData_.shield >= scoredata.cost) {
+			scoreData_.shield -= scoredata.cost;
 		}else {
-			scoredata.cost_ -= shield_;
-			shield_ = 0;
-			hp_ -= scoredata.cost_;
+			scoredata.cost -= scoreData_.shield;
+			scoreData_.shield = 0;
+			hp_ -= scoredata.cost;
 		}
 
 		//スコア計算
-		if (scoredata.score_ > 0) {
-			if (condition_ > 0) {
-				float addScore = static_cast<float>(scoredata.score_ + concentration_) * 1.5f;
-				score_ += ceil(addScore);
+		if (scoredata.score > 0) {
+			if (scoreData_.condition > 0) {
+				float addScore = static_cast<float>(scoredata.score + scoreData_.concentration) * 1.5f;
+				scoreData_.score += ceil(addScore);
 			}else {
-				score_ += scoredata.score_ + concentration_;
+				scoreData_.score += scoredata.score + scoreData_.concentration;
 			}
 		}
 
 		//バフ追加
-		concentration_ += scoredata.concentration_;
-		if (condition_ == 0) {
-			condition_ += scoredata.condition_;
+		scoreData_.concentration += scoredata.concentration;
+		if (scoreData_.condition == 0) {
+			scoreData_.condition += scoredata.condition;
 		}
-		else if (condition_ > 0) {
-			condition_ += scoredata.condition_;
-			condition_--;
+		else if (scoreData_.condition > 0) {
+			scoreData_.condition += scoredata.condition;
+			scoreData_.condition--;
 		}
-		shield_ += scoredata.shield_;
+		scoreData_.shield += scoredata.shield;
 
 		//ドロー
 		deck_->DrawSkill();
@@ -177,19 +177,19 @@ void Player::Draw() {
 	deck_->DrawList();
 
 	scoreSprite_->Draw();
-	scoreNumber_->Draw({ 0,64 }, score_, 0.8f);
+	scoreNumber_->Draw({ 0,64 }, scoreData_.score, 0.8f);
 	
 	hpSprite_->Draw();
 	hpNumber_->Draw({ 0,194 }, hp_, 0.8f);
 	
 	shieldSprite_->Draw();
-	shieldNumber_->Draw({ 220,194 }, shield_, 0.8f);
+	shieldNumber_->Draw({ 220,194 }, scoreData_.shield, 0.8f);
 	
 	concentrationSprite_->Draw();
-	concentrationNumber_->Draw({ 0,324 }, concentration_, 0.8f);
+	concentrationNumber_->Draw({ 0,324 }, scoreData_.concentration, 0.8f);
 	
 	conditionSprite_->Draw();
-	conditionNumber_->Draw({ 0, 454 }, condition_, 0.8f);
+	conditionNumber_->Draw({ 0, 454 }, scoreData_.condition, 0.8f);
 
 	if (deck_->IsSelectedSkill()) {
 		if (changeScore_ != 0) {

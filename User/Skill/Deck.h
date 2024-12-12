@@ -18,7 +18,7 @@ public:
 	
 	void SetDeck();
 	void DrawSkill();
-	void UseSkill();
+	void UseSkill(ScoreData scoreData,int hp);
 	void Discard();
 	void Shuffle();
 
@@ -48,6 +48,7 @@ private:
 	float addSelecthandPos_;
 	Vector2 defaultHandPos_[3];
 
+	bool canUseSkill_[3];
 	int selectedSkillNum_;
 	bool isUsedSkill_;
 	Skill usedSkill_;
