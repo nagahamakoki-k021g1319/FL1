@@ -56,4 +56,6 @@ private:
 	unique_ptr<BarGraph> barGraph_;
 	uint32_t HPkari;
 
+
+	unique_ptr<Sprite> title_;
 };

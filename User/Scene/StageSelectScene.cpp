@@ -22,6 +22,9 @@ void StageSelectScene::Initialize() {
 	Object3d::SetCamera(gameCamera_.get());
 	ParticleManager::SetCamera(gameCamera_.get());
 
+	select_ = std::make_unique<Sprite>();
+	select_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("select.png"));
+
 }
 
 StageSelectScene::~StageSelectScene() {
@@ -31,7 +34,7 @@ StageSelectScene::~StageSelectScene() {
 // 更新
 void StageSelectScene::Update() {
 	gameCamera_->Update();
-	
+	select_->Update();
 	StateTransition();
 }
 
@@ -43,7 +46,7 @@ void StageSelectScene::FbxDraw() {
 }
 
 void StageSelectScene::SpriteDraw() {
-
+	select_->Draw();
 }
 
 void StageSelectScene::StateTransition() {
