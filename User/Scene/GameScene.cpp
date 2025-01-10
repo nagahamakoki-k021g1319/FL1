@@ -44,7 +44,6 @@ void GameScene::Update() {
 	gameCamera_->Update();
 
 	gameFlow_->Update();
-  
 
 	StateTransition();
 }
@@ -65,6 +64,9 @@ void GameScene::SpriteDraw() {
 
 void GameScene::StateTransition() {
 	if (Input::GetInstance()->TriggerKey(DIK_T)) {
+		sceneManager_->TransitionTo(SceneManager::SCENE::TITLE);
+	}
+	if (gameFlow_->IsEndSchedule()) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::TITLE);
 	}
 }

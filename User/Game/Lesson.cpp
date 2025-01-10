@@ -22,6 +22,18 @@ void Lesson::Initialize(int maxTurn, int clearScore, int perfectScore,int type) 
 	explanationPing_->Update();
 
 	type_ = type;
+
+	hpShieldUI_ = make_unique<HpShieldUI>();
+	bufUI_ = make_unique<BufUI>();
+	bufUI_->Initialize();
+
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Initialize();
+}
+
+void Lesson::SetPlayer(Player* player){
+	player_ = player;
 }
 
 void Lesson::Update() {
@@ -49,6 +61,10 @@ void Lesson::Update() {
 		}
 	}
 
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Update();
+	bufUI_->Update();
 }
 
 void Lesson::Draw() {
@@ -59,4 +75,6 @@ void Lesson::Draw() {
 	if (isLoopEnd_==true) {
 		player_->DrawAddSkill();
 	}
+	hpShieldUI_->Draw();
+	bufUI_->Draw();
 }

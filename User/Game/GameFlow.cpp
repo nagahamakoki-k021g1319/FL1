@@ -5,43 +5,53 @@ void GameFlow::Initialize(){
 	player_.Initilize();
 
 	lesson_ = std::make_unique<Lesson>();
+	lesson_->SetPlayer(&player_);
 	lesson_->Initialize(6, 60, 90,0);
 
-	lesson_->SetPlayer(&player_);
+	
+	isEndSchedule_ = false;
 
-
-	hpShieldUI_ = make_unique<HpShieldUI>();
-	hpShieldUI_->GetHPpt(player_.GetHP());
-	hpShieldUI_->GetShieldpt(player_.GetShield());
-	hpShieldUI_->Initialize();
-
-	bufUI_ = make_unique<BufUI>();
-	bufUI_->Initialize();
+	scheduleCount_ = 1;
+	schedule_[0] = 1;
+	schedule_[1] = 1;
+	schedule_[2] = 1;
+	schedule_[3] = 1;
+	schedule_[4] = 1;
+	schedule_[5] = 1;
 }
 
 void GameFlow::Update(){
 	if (lesson_->GetIsLessonEnd() == true) {
-		if(Input::GetInstance()->TriggerKey(DIK_Q)) {
-			lesson_->Initialize(6, 60, 90,0);
-			player_.DeckReset();
-			player_.ScoreReset();
+		//----次のスケジュールへ-----
+		if (scheduleCount_ < scheduleNum_) {
+			if (Input::GetInstance()->TriggerKey(DIK_Q)) {
+				lesson_->Initialize(6, 60, 90, 0);
+				player_.DeckReset();
+				player_.ScoreReset();
+				scheduleCount_++;
 
-		}else if (Input::GetInstance()->TriggerKey(DIK_W)) {
-			lesson_->Initialize(6, 60, 90,1);
-			player_.DeckReset();
-			player_.ScoreReset();
+			}
+			else if (Input::GetInstance()->TriggerKey(DIK_W)) {
+				lesson_->Initialize(6, 60, 90, 1);
+				player_.DeckReset();
+				player_.ScoreReset();
+				scheduleCount_++;
 
-		}else if (Input::GetInstance()->TriggerKey(DIK_E)) {
-			lesson_->Initialize(6, 60, 90,2);
-			player_.DeckReset();
-			player_.ScoreReset();
+			}
+			else if (Input::GetInstance()->TriggerKey(DIK_E)) {
+				lesson_->Initialize(6, 60, 90, 2);
+				player_.DeckReset();
+				player_.ScoreReset();
+				scheduleCount_++;
+			}
 		}
+		//--------全スケジュール終了時------
+		else {
+			isEndSchedule_ = true;
+		}
+	//---レッスン中------
 	}else {
 		lesson_->Update();
-		hpShieldUI_->GetHPpt(player_.GetHP());
-		hpShieldUI_->GetShieldpt(player_.GetShield());
-		hpShieldUI_->Update();
-		bufUI_->Update();
 	}
 }
 
@@ -50,8 +60,6 @@ void GameFlow::Draw(){
 		player_.DrawStatus();
 	}else {
 		lesson_->Draw();
-		hpShieldUI_->Draw();
-		bufUI_->Draw();
 	}
 }
 
