@@ -4,11 +4,15 @@
 void Player::Initilize() {
 	scoreSprite_ = std::make_unique<Sprite>();
 	scoreSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("score.png"));
-	scoreSprite_->SetPozition({ 0,0 });
+	scoreSprite_->SetAnchorPoint({ 0.5f,0.0f });
+	scoreSprite_->SetSize({123,48});
+	scoreSprite_->SetPozition({ 640,0 });
 	scoreSprite_->Update();
 	scorePlusSprite_ = std::make_unique<Sprite>();
 	scorePlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	scorePlusSprite_->SetPozition({ 118,64 });
+	scorePlusSprite_->SetPozition({ 640,90 });
+	scorePlusSprite_->SetAnchorPoint({ 0.5f,0 });
+	scorePlusSprite_->SetSize({32,32});
 	scorePlusSprite_->Update();
 
 	hpSprite_ = std::make_unique<Sprite>();
@@ -35,20 +39,24 @@ void Player::Initilize() {
 	
 	concentrationSprite_ = std::make_unique<Sprite>();
 	concentrationSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("concentration.png"));
-	concentrationSprite_->SetPozition({ 0,260 });
+	concentrationSprite_->SetPozition({ 426,70 });
+	concentrationSprite_->SetSize({ 32,32 });
 	concentrationSprite_->Update();
 	concentrationPlusSprite_ = std::make_unique<Sprite>();
 	concentrationPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	concentrationPlusSprite_->SetPozition({ 68,324 });
+	concentrationPlusSprite_->SetPozition({ 466,80 });
+	concentrationPlusSprite_->SetSize({ 32,32 });
 	concentrationPlusSprite_->Update();
 	
 	conditionSprite_ = std::make_unique<Sprite>();
 	conditionSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("condition.png"));
-	conditionSprite_->SetPozition({ 0,390 });
+	conditionSprite_->SetPozition({ 426,114 });
+	conditionSprite_->SetSize({ 32,32 });
 	conditionSprite_->Update();
 	conditionPlusSprite_ = std::make_unique<Sprite>();
 	conditionPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	conditionPlusSprite_->SetPozition({ 68,454 });
+	conditionPlusSprite_->SetPozition({ 466,124 });
+	conditionPlusSprite_->SetSize({ 32,32 });
 	conditionPlusSprite_->Update();
 
 
@@ -73,6 +81,12 @@ void Player::Initilize() {
 	changeConditionNumber_->Initialize();
 	changeConcentrationNumber_ = std::make_unique<Number>();
 	changeConcentrationNumber_->Initialize();
+
+
+	addSelectSprite_ = std::make_unique<Sprite>();
+	addSelectSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("addselect.png"));
+	addSelectSprite_->SetPozition({425,360});
+	addSelectSprite_->Update();
 
 	for (int i = 0; i < 3; i++) {
 		statusNumber_[i] = std::make_unique<Number>();
@@ -109,26 +123,20 @@ void Player::Draw() {
 	deck_->DrawList();
 
 	scoreSprite_->Draw();
-	scoreNumber_->Draw({ 0,64 }, scoreData_.score, 0.8f);
-	
-	/*hpSprite_->Draw();
-	hpNumber_->Draw({ 0,194 }, hp_, 0.8f);
-	
-	shieldSprite_->Draw();
-	shieldNumber_->Draw({ 220,194 }, scoreData_.shield, 0.8f);*/
+	scoreNumber_->Draw({ 605,48 }, scoreData_.score, 0.8f);
 	
 	concentrationSprite_->Draw();
-	concentrationNumber_->Draw({ 0,324 }, scoreData_.concentration, 0.8f);
+	concentrationNumber_->Draw({ 440,85 }, scoreData_.concentration, 0.35f);
 	
 	conditionSprite_->Draw();
-	conditionNumber_->Draw({ 0, 454 }, scoreData_.condition, 0.8f);
+	conditionNumber_->Draw({ 440, 129 }, scoreData_.condition, 0.35f);
 
 	if (deck_->IsSelectedSkill()) {
 		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_);
 		int changeHp = deck_->GetChangedHp(&scoreData_);
 
 		if (changedScoreData.score != 0) {
-			changeScoreNumber_->Draw({ 150,64 }, changedScoreData.score, 0.8f);
+			changeScoreNumber_->Draw({ 615,110 }, changedScoreData.score, 0.4f);
 			scorePlusSprite_->Draw();
 		}
 
@@ -146,12 +154,12 @@ void Player::Draw() {
 		}
 
 		if (changedScoreData.concentration != 0) {
-			changeConcentrationNumber_->Draw({ 100,324 }, changedScoreData.concentration, 0.8f);
+			changeConcentrationNumber_->Draw({ 480,85 }, changedScoreData.concentration, 0.35f);
 			concentrationPlusSprite_->Draw();
 		}
 
 		if (changedScoreData.condition != 0) {
-			changeConditionNumber_->Draw({ 100, 454 }, changedScoreData.condition, 0.8f);
+			changeConditionNumber_->Draw({ 480, 129 }, changedScoreData.condition, 0.35f);
 			conditionPlusSprite_->Draw();
 		}
 	}

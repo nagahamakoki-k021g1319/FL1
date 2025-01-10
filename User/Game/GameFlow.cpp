@@ -49,9 +49,9 @@ void GameFlow::Draw(){
 	if (lesson_->GetIsLessonEnd() == true) {
 		player_.DrawStatus();
 	}else {
+		lesson_->Draw();
 		hpShieldUI_->Draw();
 		bufUI_->Draw();
-		lesson_->Draw();
 	}
 }
 
