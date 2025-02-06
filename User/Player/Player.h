@@ -7,8 +7,8 @@
 class Player {
 public:
 	void Initilize();
-	void Update();
-	void Draw();
+	void Update(float rate = 1);
+	void Draw(float rate=1);
 
 	void DrawStatus();
 	bool IsTurnEnd();
@@ -23,7 +23,8 @@ public:
 	int* GetHP() { return &hp_; }
 	int* GetShield() { return &scoreData_.shield; }
 	ScoreData GetScoreData() { return scoreData_; }
-  
+	Vector3 GetStatus() { return status_; }
+
 private:
 	//スコア関連
 	ScoreData scoreData_;
@@ -61,5 +62,5 @@ private:
 	unique_ptr<Deck> deck_ = nullptr;
 	
 	bool isTurnEnd_;
-	int status_[3];
+	Vector3 status_;
 };

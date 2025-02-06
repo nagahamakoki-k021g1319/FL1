@@ -5,6 +5,7 @@
 
 #include"Player.h"
 #include "Game/Lesson.h"
+#include"FinalTest.h"
 
 
 class GameFlow{
@@ -22,10 +23,12 @@ private:
 	Player player_;
 	
 	unique_ptr<Lesson> lesson_ = nullptr;
+	unique_ptr<FinalTest> finalTest_ = nullptr;
 
-	const int scheduleNum_ = 2;
+	const int scheduleNum_ = 6;
 	int scheduleCount_;
 	int schedule_[6];
 	bool isEndSchedule_;
+	bool isFinalTest_;
 };
 
