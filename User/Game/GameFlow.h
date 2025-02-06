@@ -30,5 +30,6 @@ private:
 	int schedule_[6];
 	bool isEndSchedule_;
 	bool isFinalTest_;
+	bool isFirstPick_;
 };
 
