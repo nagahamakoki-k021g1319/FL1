@@ -17,6 +17,22 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	turnNumber_ = std::make_unique<Number>();
 	turnNumber_->Initialize();
 
+
+	borderScoreNumber_ = std::make_unique<Number>();
+	borderScoreNumber_->Initialize();
+
+	clearScorePing_ = std::make_unique<Sprite>();
+	clearScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("clearScore.png"));
+	clearScorePing_->SetPozition({ 700,0 });
+	clearScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	clearScorePing_->Update();
+
+	perfectScorePing_ = std::make_unique<Sprite>();
+	perfectScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("perfectScore.png"));
+	perfectScorePing_->SetPozition({ 700,0 });
+	perfectScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	perfectScorePing_->Update();
+	
 	explanationPing_ = std::make_unique<Sprite>();
 	explanationPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("explanation1.png"));
 	explanationPing_->Update();
@@ -78,6 +94,13 @@ void Lesson::Draw() {
 	player_->Draw(perfectScore_);
 	remainingTurnPing_->Draw();
 	turnNumber_->Draw({ 466,21 }, maxTurn_ - turn_, 0.4f);
+	if (player_->GetScore() < clearScore_) {
+		clearScorePing_->Draw();
+		borderScoreNumber_->Draw({ 760,21 }, clearScore_ - player_->GetScore(), 0.4f);
+	}else {
+		perfectScorePing_->Draw();
+		borderScoreNumber_->Draw({ 760,21 }, perfectScore_ - player_->GetScore(), 0.4f);
+	}
 	if (isLoopEnd_ == true) {
 		if (player_->GetScore() >= clearScore_) {
 			player_->DrawAddSkill();

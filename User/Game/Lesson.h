@@ -19,6 +19,9 @@ private:
 	int maxTurn_;
 	int turn_;
 	std::unique_ptr<Number>	turnNumber_;
+	std::unique_ptr<Number>	borderScoreNumber_;
+	std::unique_ptr<Sprite> clearScorePing_;
+	std::unique_ptr<Sprite> perfectScorePing_;
 	std::unique_ptr<Sprite> remainingTurnPing_;
 	std::unique_ptr<Sprite> explanationPing_;
 
