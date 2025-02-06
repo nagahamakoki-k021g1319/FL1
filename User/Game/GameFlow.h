@@ -31,5 +31,9 @@ private:
 	bool isEndSchedule_;
 	bool isFinalTest_;
 	bool isFirstPick_;
+
+	int perfectScore[4];
+	int spPerfectScore[4];
+	bool isSp_[3];
 };
 

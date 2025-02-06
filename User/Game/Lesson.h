@@ -5,7 +5,7 @@
 
 class Lesson{
 public:
-	void Initialize(int maxTurn, int clearScore,int perfectScore,int type);
+	void Initialize(int maxTurn, int perfectScore, int type);
 	void Update();
 	void Draw();
 

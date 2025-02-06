@@ -1,9 +1,9 @@
 #include "Lesson.h"
 
-void Lesson::Initialize(int maxTurn, int clearScore, int perfectScore,int type) {
+void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	maxTurn_ = maxTurn;
 	turn_ = 0;
-	clearScore_ = clearScore;
+	clearScore_ = perfectScore / 2;
 	perfectScore_ = perfectScore;
 	isLoopEnd_ = false;
 	isLessonEnd_ = false;
