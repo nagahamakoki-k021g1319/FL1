@@ -72,7 +72,7 @@ void FinalTest::SetPlayer(Player* player) {
 void FinalTest::Update(){
 	if (isLoopEnd_ == false) {
 		
-		player_->Update(statusRate_[turnType[turn_]]);
+		player_->Update(0,statusRate_[turnType[turn_]]);
 
 		if (player_->IsTurnEnd() == true) {
 			turn_++;
@@ -174,7 +174,7 @@ int FinalTest::CalculationRequiredScore(int score) {
 void FinalTest::Draw() {
 	if (isLoopEnd_ == false) {
 		explanationPing_->Draw();
-		player_->Draw(statusRate_[turnType[turn_]]);
+		player_->Draw(0,statusRate_[turnType[turn_]]);
 		remainingTurnPing_->Draw();
 		turnNumber_->Draw({ 466,21 }, maxTurn_ - turn_, 0.4f);
 		if (isLoopEnd_ == true) {

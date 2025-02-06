@@ -96,8 +96,8 @@ void Deck::SetDeck() {
 	copy(hasSkills_.begin(), hasSkills_.end(), back_inserter(deck_));
 }
 
-void Deck::Update(ScoreData* scoreData, int* hp, float rate) {
-	UseSkill(scoreData, hp, rate);
+void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
+	UseSkill(scoreData, hp, maxScore,rate);
 
 	//スキップ
 	if (Input::GetInstance()->TriggerKey(DIK_S)) {
@@ -164,7 +164,7 @@ void Deck::DrawSkill() {
 	}
 }
 
-ScoreData Deck::GetChangedScoreData(ScoreData* scoreData,float rate) {
+ScoreData Deck::GetChangedScoreData(ScoreData* scoreData, int maxScore, float rate) {
 	//スキル使用後予想
 	ScoreData changedScoreData;
 	changedScoreData.score = 0;
@@ -181,6 +181,7 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData,float rate) {
 
 	//スコア計算
 	if (scoredata.score > 0) {
+		int newScore = 0;
 		if (scoreData->condition > 0) {
 			float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
 			changedScoreData.score += static_cast<int>(ceil(addScore * rate));
@@ -188,6 +189,7 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData,float rate) {
 		else {
 			changedScoreData.score += static_cast<int>(ceil((scoredata.score + scoreData->concentration) * rate));
 		}
+
 		if (GetSelectedSkill().name_ == "twice") {
 			if (scoreData->condition > 0) {
 				float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
@@ -195,6 +197,13 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData,float rate) {
 			}
 			else {
 				changedScoreData.score += static_cast<int>(ceil((scoredata.score + scoreData->concentration) * rate));
+			}
+		}
+
+		newScore = scoreData->score + changedScoreData.score;
+		if (maxScore > 0) {
+			if (maxScore < newScore) {
+				changedScoreData.score = maxScore - scoreData->score;
 			}
 		}
 	}
@@ -221,7 +230,7 @@ int Deck::GetChangedHp(ScoreData* scoreData) {
 	return 0;
 }
 
-void Deck::UseSkill(ScoreData* scoreData, int* hp, float rate) {
+void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	Input* input = Input::GetInstance();
 
 	for (int i = 0; i < 3; i++) {
@@ -232,7 +241,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, float rate) {
 	if (input->TriggerKey(DIK_Q) && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
 			usedSkill_ = hand_[0];
-			usedSkill_.Use(scoreData, hp, rate);
+			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
 			if (hand_[0].isOneTime_ == true) {
 				banish_.push_back(hand_[0]);
@@ -256,7 +265,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, float rate) {
 	else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
-			usedSkill_.Use(scoreData, hp, rate);
+			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
 			if (hand_[1].isOneTime_ == true) {
 				banish_.push_back(hand_[1]);
@@ -280,7 +289,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, float rate) {
 	else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
-			usedSkill_.Use(scoreData, hp, rate);
+			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
 			if (hand_[2].isOneTime_ == true) {
 				banish_.push_back(hand_[2]);

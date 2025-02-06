@@ -17,7 +17,7 @@ public:
 	ScoreData GetScoreData() { return scoreData_; };
 
 	bool CanUseSkill(ScoreData* scoreData, int hp);
-	void Use(ScoreData* scoreData, int* hp, float rate = 1);
+	void Use(ScoreData* scoreData, int* hp, int maxScore = 0, float rate = 1);
 public:
 	std::string name_;
 	ScoreData scoreData_;

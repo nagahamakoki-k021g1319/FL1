@@ -109,14 +109,14 @@ void Player::Initilize() {
 	status_ = Vector3(150, 150, 150);
 }
 
-void Player::Update(float rate) {
-	deck_->Update(&scoreData_, &hp_, rate);
+void Player::Update(int maxScore, float rate) {
+	deck_->Update(&scoreData_, &hp_,maxScore, rate);
 	if (deck_->IsUsedSkill() == true) {
 		isTurnEnd_ = true;
 	}
 }
 
-void Player::Draw(float rate) {
+void Player::Draw(int maxScore, float rate) {
 	deck_->DrawHand();
 	deck_->DrawList();
 
@@ -130,7 +130,7 @@ void Player::Draw(float rate) {
 	conditionNumber_->Draw({ 440, 129 }, scoreData_.condition, 0.35f);
 
 	if (deck_->IsSelectedSkill()) {
-		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_,rate);
+		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_, maxScore, rate);
 		int changeHp = deck_->GetChangedHp(&scoreData_);
 
 		if (changedScoreData.score != 0) {

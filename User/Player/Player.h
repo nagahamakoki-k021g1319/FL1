@@ -7,8 +7,8 @@
 class Player {
 public:
 	void Initilize();
-	void Update(float rate = 1);
-	void Draw(float rate=1);
+	void Update(int maxScore = 0, float rate = 1);
+	void Draw(int maxScore = 0 , float rate = 1);
 
 	void DrawStatus();
 	bool IsTurnEnd();
