@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include"Input.h"
+#include <set>
 
 void Deck::Initilize(Skills skills) {
 	AddSkill(skills, "appeal");
@@ -56,8 +57,18 @@ void Deck::AddRandSkillDraw(Skills skills) {
 	skillName[5] = "sign";
 
 	addRandList_.clear();
+
+	std::set<int> uniqueNumbers;
+	while (uniqueNumbers.size() < 3) {
+		int number = rand() % 6;//スキルカードの種類数
+		uniqueNumbers.insert(number);
+	}
+
+
 	for (int i = 0; i < 3; i++) {
-		Skill newSkill = skills.GetSkill(skillName[rand() % 6]);
+		auto it = uniqueNumbers.begin();
+		std::advance(it, i);
+		Skill newSkill = skills.GetSkill(skillName[*it]);
 		newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(newSkill.name_ + ".png"));
 		newSkill.sprite_.SetSize({ 64,64 });
 		newSkill.sprite_.SetPozition({440.0f+100.0f*static_cast<float>(i),450});
@@ -74,6 +85,8 @@ bool Deck::AddRandSkill() {
 		return true;
 	}else if (Input::GetInstance()->TriggerKey(DIK_E)) {
 		hasSkills_.push_back(addRandList_[2]);
+		return true;
+	}else if (Input::GetInstance()->TriggerKey(DIK_S)) {
 		return true;
 	}
 	return false;
