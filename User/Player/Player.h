@@ -24,6 +24,7 @@ public:
 	int* GetShield() { return &scoreData_.shield; }
 	ScoreData GetScoreData() { return scoreData_; }
 	Vector3 GetStatus() { return status_; }
+	void Heal(int healPoint);
 
 private:
 	//スコア関連

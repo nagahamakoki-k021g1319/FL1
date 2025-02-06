@@ -198,3 +198,10 @@ void Player::AddStatus(int add, int type) {
 		status_.z += add;
 	}
 }
+
+void Player::Heal(int healPoint) {
+	hp_ += healPoint;
+	if (hp_ > maxHp_) {
+		hp_ = maxHp_;
+	}
+}

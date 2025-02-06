@@ -66,6 +66,7 @@ void GameFlow::Update(){
 			player_.DeckReset();
 			player_.ScoreReset();
 			scheduleCount_++;
+			player_.Heal(20);
 		}
 	}
 }
