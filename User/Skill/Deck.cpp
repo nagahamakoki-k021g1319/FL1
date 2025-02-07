@@ -144,22 +144,54 @@ void Deck::DrawSkill() {
 	if (hand_.size() != 3) {
 		int drawNum = 3;
 		std::size_t deckNum = deck_.size();
+		std::vector<int> indices;
+
+
 
 		if (deckNum >= drawNum) {
-			copy(deck_.begin(), deck_.begin() + drawNum, back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + drawNum);
+			while (indices.size() < 3) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+				}
+			}
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
+		}else {
+			int num = 0;
+			while (indices.size() < deckNum) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+					num++;
+				}
+			}
 
-		}
-		else {
-			copy(deck_.begin(), deck_.begin() + deckNum, back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + deckNum);
-
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
+			indices.clear();
 			copy(discard_.begin(), discard_.end(), back_inserter(deck_));
 			discard_.clear();
 			Shuffle();
 
-			copy(deck_.begin(), deck_.begin() + (drawNum - deckNum), back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + (drawNum - deckNum));
+			while (indices.size() < drawNum - num) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+				}
+			}
+
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
 		}
 	}
 }
