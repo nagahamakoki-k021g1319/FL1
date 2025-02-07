@@ -94,7 +94,7 @@ BarGraph::~BarGraph()
 {
 }
 
-void BarGraph::Initialize(Vector2 startPos,const std::string& spriteName)
+void BarGraph::Initialize(Vector2 startPos, const std::string& spriteName)
 {
 	startPos_ = startPos;
 	isDraw = true;
@@ -107,8 +107,10 @@ void BarGraph::Initialize(Vector2 startPos,const std::string& spriteName)
 void BarGraph::Update()
 {
 	//sprite_.SetSize({ MyEngine::Easing::lerpFloat(minBarSize_,maxBarSize_,0.5f), 30});
-	sprite_.SetPozition({ startPos_.x ,startPos_.y });
-	sprite_.SetSize({ (float)params_* size_.x, size_.y });
+	//sprite_.SetPozition({ startPos_.x ,startPos_.y });
+	if (paramsUpdate_) {
+		sprite_.SetSize({ (float)params_ * size_.x, size_.y });
+	}
 	sprite_.Update();
 }
 
@@ -119,5 +121,45 @@ void BarGraph::Draw()
 	}
 	else {
 
+	}
+}
+
+void BarGraph::EaseParms(float startParams, float endParams, float time)
+{
+	if (time > 0) {
+		paramsUpdate_ = true;
+		params_ = MyEngine::Easing::lerpFloat(startParams, endParams, time);
+	}
+	else {
+		paramsUpdate_ = false;
+	}
+}
+
+void BarGraph::AutoEaseParms(float& oldParams, float newParams){
+
+	if (params_ != newParams) {
+		timeStart = true;
+	}
+	else {
+		timeStart = false;
+	}
+
+	if (timeStart) {
+		if (count <= easeMaxCount) {
+			count++;
+		}
+		else {
+			count = easeMaxCount;
+			params_ = newParams;
+			oldParams = params_;
+		}
+		easetime = (float)count / (float)easeMaxCount;
+		EaseParms((float)oldParams, (float)newParams, easetime);
+	}
+	else {
+		count = 0;
+		easetime = 0;
+		params_ = newParams;
+		oldParams = params_;
 	}
 }
