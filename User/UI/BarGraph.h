@@ -48,7 +48,7 @@ private:
 	float maxSize_ = 800;
 	float minSize_ = 0;
 	uint32_t progress;
-	uint32_t params_;
+	float params_;
 	uint32_t division_;
 	std::vector<Block> bars_;
 private:
@@ -66,18 +66,27 @@ public:
 	void Draw();
 	void SetDivision(uint32_t div) { division_ = div; }
 	void SetHP(uint32_t HP) { HP_ = HP; }
-	void SetParams(uint32_t params) { params_ = params; }
+	void SetParams(float params) { params_ = params; }
+	float GetParams() { return params_; }
 	void SetStartPos(Vector2 startPos) { startPos_ = startPos; }
 	void SetSize(Vector2 size) { size_ = size; }
 
+	void EaseParms(float startParams, float endParams, float time);
+	void AutoEaseParms(float oldParams, float newParams);
 private:
 	Vector2 startPos_;
 	Vector2 size_ = { 8.0f,30.0f };
 	uint32_t HP_;
-	uint32_t params_=100;
+	float params_=100;
 	uint32_t division_;
 private:
 	Sprite sprite_;
 	bool isDraw;
+	bool paramsUpdate_;
+
+	uint32_t count;
+	uint32_t easeMaxCount = 40;
+	float easetime;
+	bool timeStart;
 };
 

@@ -51,6 +51,8 @@ void GameScene::Update() {
 	player_->Update();
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
+	//hpShieldUI_->GetScoreData(player_->GetScoreData());
+
 	hpShieldUI_->Update();
 
 	StateTransition();
