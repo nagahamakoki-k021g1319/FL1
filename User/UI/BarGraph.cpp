@@ -135,7 +135,8 @@ void BarGraph::EaseParms(float startParams, float endParams, float time)
 	}
 }
 
-void BarGraph::AutoEaseParms(float oldParams, float newParams){
+void BarGraph::AutoEaseParms(float& oldParams, float newParams){
+
 	if (params_ != newParams) {
 		timeStart = true;
 	}
@@ -149,8 +150,8 @@ void BarGraph::AutoEaseParms(float oldParams, float newParams){
 		}
 		else {
 			count = easeMaxCount;
-			timeStart = false;
 			params_ = newParams;
+			oldParams = params_;
 		}
 		easetime = (float)count / (float)easeMaxCount;
 		EaseParms((float)oldParams, (float)newParams, easetime);
@@ -158,5 +159,7 @@ void BarGraph::AutoEaseParms(float oldParams, float newParams){
 	else {
 		count = 0;
 		easetime = 0;
+		params_ = newParams;
+		oldParams = params_;
 	}
 }

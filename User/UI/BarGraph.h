@@ -72,7 +72,7 @@ public:
 	void SetSize(Vector2 size) { size_ = size; }
 
 	void EaseParms(float startParams, float endParams, float time);
-	void AutoEaseParms(float oldParams, float newParams);
+	void AutoEaseParms(float& oldParams, float newParams);
 private:
 	Vector2 startPos_;
 	Vector2 size_ = { 8.0f,30.0f };

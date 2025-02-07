@@ -48,9 +48,9 @@ void HpShieldUI::Initialize()
 
 void HpShieldUI::Update()
 {
-	hpBar_->AutoEaseParms((float)oldHp_,(float)*hp_);
+	hpBar_->AutoEaseParms((float&)oldHp_,(float)*hp_);
 
-	shieldBar_->AutoEaseParms((float)oldShield_, (float)*shield_);
+	shieldBar_->AutoEaseParms((float&)oldShield_, (float)*shield_);
 
 	//if (oldShield_ != *shield_) {
 	//	timeStart = true;
