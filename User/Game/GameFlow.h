@@ -5,9 +5,8 @@
 
 #include"Player.h"
 #include "Game/Lesson.h"
+#include"FinalTest.h"
 
-#include "HpShieldUI.h"
-#include "BufUI.h"
 
 class GameFlow{
 public:
@@ -19,12 +18,22 @@ public:
 
 	void ApplyGlobalVariables();
 
+	bool IsEndSchedule() { return isEndSchedule_; };
 private:
 	Player player_;
-
-	unique_ptr<HpShieldUI> hpShieldUI_ = nullptr;
-	unique_ptr<BufUI> bufUI_ = nullptr;
 	
 	unique_ptr<Lesson> lesson_ = nullptr;
+	unique_ptr<FinalTest> finalTest_ = nullptr;
+
+	const int scheduleNum_ = 6;
+	int scheduleCount_;
+	int schedule_[6];
+	bool isEndSchedule_;
+	bool isFinalTest_;
+	bool isFirstPick_;
+
+	int perfectScore[4];
+	int spPerfectScore[4];
+	bool isSp_[3];
 };
 

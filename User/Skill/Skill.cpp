@@ -54,7 +54,7 @@ bool Skill::CanUseSkill(ScoreData* scoreData, int hp) {
 }
 
 
-void Skill::Use(ScoreData* scoreData, int* hp) {
+void Skill::Use(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	//体力計算
 	if (scoreData->shield >= scoreData_.cost) {
 		scoreData->shield -= scoreData_.cost;
@@ -67,23 +67,66 @@ void Skill::Use(ScoreData* scoreData, int* hp) {
 
 	//スコア計算
 	if (scoreData_.score > 0) {
+		int newScore = 0;
 		//--基本--
 		if (scoreData->condition > 0) {
 			float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
-			scoreData->score += static_cast<int>(ceil(addScore));
+			newScore = scoreData->score + static_cast<int>(ceil(addScore * rate));
+			if (maxScore > 0) {
+				if (maxScore > newScore) {
+					scoreData->score = newScore;
+				}else {
+					scoreData->score = maxScore;
+				}
+			}else {
+				scoreData->score = newScore;
+			}
 		}
 		else {
-			scoreData->score += scoreData_.score + scoreData->concentration;
+			newScore = scoreData->score + static_cast<int>(ceil((scoreData_.score + scoreData->concentration) * rate));
+			if (maxScore > 0) {
+				if (maxScore > newScore) {
+					scoreData->score = newScore;
+				}
+				else {
+					scoreData->score = maxScore;
+				}
+			}
+			else {
+				scoreData->score = newScore;
+			}
 		}
 		//------
 
 		if (name_ == "twice") {
 			if (scoreData->condition > 0) {
 				float addScore = static_cast<float>(scoreData_.score + scoreData->concentration) * 1.5f;
-				scoreData->score += static_cast<int>(ceil(addScore));
+				newScore = scoreData->score + static_cast<int>(ceil(addScore * rate));
+				if (maxScore > 0) {
+					if (maxScore > newScore) {
+						scoreData->score = newScore;
+					}
+					else {
+						scoreData->score = maxScore;
+					}
+				}
+				else {
+					scoreData->score = newScore;
+				}
 			}
 			else {
-				scoreData->score += scoreData_.score + scoreData->concentration;
+				newScore = scoreData->score + static_cast<int>(ceil((scoreData_.score + scoreData->concentration) * rate));
+				if (maxScore > 0) {
+					if (maxScore > newScore) {
+						scoreData->score = newScore;
+					}
+					else {
+						scoreData->score = maxScore;
+					}
+				}
+				else {
+					scoreData->score = newScore;
+				}
 			}
 		}
 	}

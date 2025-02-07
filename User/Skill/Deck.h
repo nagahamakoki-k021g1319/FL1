@@ -16,12 +16,12 @@ public:
 	bool AddRandSkill();
 	void AddRandSkillDraw(Skills skills);
 
-	void Update(ScoreData* scoreData, int* hp);
+	void Update(ScoreData* scoreData, int* hp, int maxScore = 0, float rate = 1.0f);
 	
 	void SetDeck();
 	void DrawSkill();
-	void UseSkill(ScoreData* scoreData,int* hp);
-	ScoreData GetChangedScoreData(ScoreData* scoreData);
+	void UseSkill(ScoreData* scoreData, int* hp, int maxScore = 0, float rate = 1.0f);
+	ScoreData GetChangedScoreData(ScoreData* scoreData, int maxScore = 0, float rate = 1);
 	int GetChangedHp(ScoreData* scoreData);
 	void Discard();
 	void Shuffle();

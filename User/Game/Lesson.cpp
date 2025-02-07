@@ -1,9 +1,9 @@
 #include "Lesson.h"
 
-void Lesson::Initialize(int maxTurn, int clearScore, int perfectScore,int type) {
+void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	maxTurn_ = maxTurn;
 	turn_ = 0;
-	clearScore_ = clearScore;
+	clearScore_ = perfectScore / 2;
 	perfectScore_ = perfectScore;
 	isLoopEnd_ = false;
 	isLessonEnd_ = false;
@@ -17,16 +17,44 @@ void Lesson::Initialize(int maxTurn, int clearScore, int perfectScore,int type) 
 	turnNumber_ = std::make_unique<Number>();
 	turnNumber_->Initialize();
 
+
+	borderScoreNumber_ = std::make_unique<Number>();
+	borderScoreNumber_->Initialize();
+
+	clearScorePing_ = std::make_unique<Sprite>();
+	clearScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("clearScore.png"));
+	clearScorePing_->SetPozition({ 700,0 });
+	clearScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	clearScorePing_->Update();
+
+	perfectScorePing_ = std::make_unique<Sprite>();
+	perfectScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("perfectScore.png"));
+	perfectScorePing_->SetPozition({ 700,0 });
+	perfectScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	perfectScorePing_->Update();
+	
 	explanationPing_ = std::make_unique<Sprite>();
 	explanationPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("explanation1.png"));
 	explanationPing_->Update();
 
 	type_ = type;
+
+	hpShieldUI_ = make_unique<HpShieldUI>();
+	bufUI_ = make_unique<BufUI>();
+	bufUI_->Initialize();
+
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Initialize();
+}
+
+void Lesson::SetPlayer(Player* player){
+	player_ = player;
 }
 
 void Lesson::Update() {
 	if (isLoopEnd_ == false) {
-		player_->Update();
+		player_->Update(perfectScore_);
 		if (player_->IsTurnEnd() == true) {
 			turn_++;
 		}
@@ -34,7 +62,9 @@ void Lesson::Update() {
 		//終了判定
 		if (turn_ == maxTurn_) {
 			isLoopEnd_ = true;
-			player_->AddRandSkillDraw();
+			if (player_->GetScore() >= clearScore_) {
+				player_->AddRandSkillDraw();
+			}
 			player_->AddStatus(player_->GetScore(), type_);
 		}
 		if (player_->GetScore() > perfectScore_) {
@@ -44,19 +74,38 @@ void Lesson::Update() {
 		}
 	}
 	else {
-		if (player_->addRandSkill()) {
+		if (player_->GetScore() >= clearScore_) {
+			if (player_->addRandSkill()) {
+				isLessonEnd_ = true;
+			}
+		}else {
 			isLessonEnd_ = true;
 		}
 	}
 
+	hpShieldUI_->GetHPpt(player_->GetHP());
+	hpShieldUI_->GetShieldpt(player_->GetShield());
+	hpShieldUI_->Update();
+	bufUI_->Update();
 }
 
 void Lesson::Draw() {
 	explanationPing_->Draw();
-	player_->Draw();
+	player_->Draw(perfectScore_);
 	remainingTurnPing_->Draw();
 	turnNumber_->Draw({ 466,21 }, maxTurn_ - turn_, 0.4f);
-	if (isLoopEnd_==true) {
-		player_->DrawAddSkill();
+	if (player_->GetScore() < clearScore_) {
+		clearScorePing_->Draw();
+		borderScoreNumber_->Draw({ 760,21 }, clearScore_ - player_->GetScore(), 0.4f);
+	}else {
+		perfectScorePing_->Draw();
+		borderScoreNumber_->Draw({ 760,21 }, perfectScore_ - player_->GetScore(), 0.4f);
 	}
+	if (isLoopEnd_ == true) {
+		if (player_->GetScore() >= clearScore_) {
+			player_->DrawAddSkill();
+		}
+	}
+	hpShieldUI_->Draw();
+	bufUI_->Draw();
 }

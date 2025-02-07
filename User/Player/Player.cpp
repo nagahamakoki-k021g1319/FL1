@@ -106,19 +106,17 @@ void Player::Initilize() {
 
 	isTurnEnd_ = false;
 
-	status_[0] = 150;
-	status_[1] = 150;
-	status_[2] = 150;
+	status_ = Vector3(150, 150, 150);
 }
 
-void Player::Update() {
-	deck_->Update(&scoreData_, &hp_);
+void Player::Update(int maxScore, float rate) {
+	deck_->Update(&scoreData_, &hp_,maxScore, rate);
 	if (deck_->IsUsedSkill() == true) {
 		isTurnEnd_ = true;
 	}
 }
 
-void Player::Draw() {
+void Player::Draw(int maxScore, float rate) {
 	deck_->DrawHand();
 	deck_->DrawList();
 
@@ -132,7 +130,7 @@ void Player::Draw() {
 	conditionNumber_->Draw({ 440, 129 }, scoreData_.condition, 0.35f);
 
 	if (deck_->IsSelectedSkill()) {
-		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_);
+		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_, maxScore, rate);
 		int changeHp = deck_->GetChangedHp(&scoreData_);
 
 		if (changedScoreData.score != 0) {
@@ -166,9 +164,9 @@ void Player::Draw() {
 }
 
 void Player::DrawStatus() {
-	for (int i = 0; i < 3; i++) {
-		statusNumber_[i]->Draw({ 490.0f + (100.0f * static_cast<float>(i)),400.0f }, status_[i], 0.8f);
-	}
+	statusNumber_[0]->Draw({ 490.0f,400.0f }, static_cast<size_t>(status_.x), 0.8f);
+	statusNumber_[1]->Draw({ 490.0f + 100.0f,400.0f }, static_cast<size_t>(status_.y), 0.8f);
+	statusNumber_[2]->Draw({ 490.0f + 200.0f,400.0f }, static_cast<size_t>(status_.z), 0.8f);
 }
 
 bool Player::IsTurnEnd() {
@@ -192,5 +190,18 @@ void Player::ScoreReset() {
 }
 
 void Player::AddStatus(int add, int type) {
-	status_[type] += add;
+	if (type == 0) {
+		status_.x += add;
+	}else if (type == 1) {
+		status_.y += add;
+	}else if (type == 2) {
+		status_.z += add;
+	}
+}
+
+void Player::Heal(int healPoint) {
+	hp_ += healPoint;
+	if (hp_ > maxHp_) {
+		hp_ = maxHp_;
+	}
 }
