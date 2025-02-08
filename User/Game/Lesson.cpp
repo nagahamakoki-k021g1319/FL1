@@ -10,8 +10,8 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 
 	remainingTurnPing_ = std::make_unique<Sprite>();
 	remainingTurnPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("remainingTurn.png"));
-	remainingTurnPing_->SetPozition({ 426,0 });
-	remainingTurnPing_->SetSize({106,21});
+	remainingTurnPing_->SetPozition({ 411,15 });
+	remainingTurnPing_->SetSize({ 350.0f / 3.0f,200.0f / 3.0f });
 	remainingTurnPing_->Update();
 
 	turnNumber_ = std::make_unique<Number>();
@@ -23,14 +23,12 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 
 	clearScorePing_ = std::make_unique<Sprite>();
 	clearScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("clearScore.png"));
-	clearScorePing_->SetPozition({ 700,0 });
-	clearScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	clearScorePing_->SetPozition({ 810 - (400 / 3 / 2), 15 });
 	clearScorePing_->Update();
 
 	perfectScorePing_ = std::make_unique<Sprite>();
 	perfectScorePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("perfectScore.png"));
-	perfectScorePing_->SetPozition({ 700,0 });
-	perfectScorePing_->SetSize({ 400.0f * 0.4f,64.0f * 0.4f });
+	perfectScorePing_->SetPozition({ 810 - (400 / 3 / 2), 15 });
 	perfectScorePing_->Update();
 	
 	explanationPing_ = std::make_unique<Sprite>();
@@ -93,14 +91,16 @@ void Lesson::Draw() {
 	explanationPing_->Draw();
 	player_->Draw(perfectScore_);
 	remainingTurnPing_->Draw();
-	turnNumber_->Draw({ 466,21 }, maxTurn_ - turn_, 0.4f);
+	turnNumber_->Draw({ 450,43 }, maxTurn_ - turn_, 0.5f);
+
 	if (player_->GetScore() < clearScore_) {
 		clearScorePing_->Draw();
-		borderScoreNumber_->Draw({ 760,21 }, clearScore_ - player_->GetScore(), 0.4f);
+		borderScoreNumber_->Draw({ 780,40 }, clearScore_ - player_->GetScore(), 0.4f);
 	}else {
 		perfectScorePing_->Draw();
-		borderScoreNumber_->Draw({ 760,21 }, perfectScore_ - player_->GetScore(), 0.4f);
+		borderScoreNumber_->Draw({ 780,40 }, perfectScore_ - player_->GetScore(), 0.4f);
 	}
+
 	if (isLoopEnd_ == true) {
 		if (player_->GetScore() >= clearScore_) {
 			player_->DrawAddSkill();

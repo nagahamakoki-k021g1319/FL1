@@ -5,12 +5,12 @@ void Player::Initilize() {
 	scoreSprite_ = std::make_unique<Sprite>();
 	scoreSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("score.png"));
 	scoreSprite_->SetAnchorPoint({ 0.5f,0.0f });
-	scoreSprite_->SetSize({123,48});
-	scoreSprite_->SetPozition({ 640,0 });
+	scoreSprite_->SetPozition({ 640,25 });
 	scoreSprite_->Update();
+
 	scorePlusSprite_ = std::make_unique<Sprite>();
 	scorePlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	scorePlusSprite_->SetPozition({ 640,90 });
+	scorePlusSprite_->SetPozition({ 640,100 });
 	scorePlusSprite_->SetAnchorPoint({ 0.5f,0 });
 	scorePlusSprite_->SetSize({32,32});
 	scorePlusSprite_->Update();
@@ -123,7 +123,7 @@ void Player::Draw(int maxScore, float rate) {
 	deck_->DrawList();
 
 	scoreSprite_->Draw();
-	scoreNumber_->Draw({ 605,48 }, scoreData_.score, 0.8f);
+	scoreNumber_->Draw({ 605,65 }, scoreData_.score, 0.7f);
 	
 	concentrationSprite_->Draw();
 	concentrationNumber_->Draw({ 440,85 }, scoreData_.concentration, 0.35f);
@@ -136,7 +136,7 @@ void Player::Draw(int maxScore, float rate) {
 		int changeHp = deck_->GetChangedHp(&scoreData_);
 
 		if (changedScoreData.score != 0) {
-			changeScoreNumber_->Draw({ 615,110 }, changedScoreData.score, 0.4f);
+			changeScoreNumber_->Draw({ 615,120 }, changedScoreData.score, 0.4f);
 			scorePlusSprite_->Draw();
 		}
 
