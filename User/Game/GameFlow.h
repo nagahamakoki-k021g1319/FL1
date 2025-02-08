@@ -33,6 +33,8 @@ private:
 	bool isFinalTest_;
 	bool isFirstPick_;
 
+	bool bgmStart_;
+
 	int perfectScore[4];
 	int spPerfectScore[4];
 	bool isSp_[3];

@@ -45,6 +45,9 @@ void GameFlow::Initialize(){
 	daButton_->Initialize("selectDa", { 640,500 });
 	viButton_ = std::make_unique<Button>();
 	viButton_->Initialize("selectVi", { 740,500 });
+	
+	bgmStart_ = false;
+	//スケジュール選択画面BGMサウンド鳴らす
 }
 
 void GameFlow::Update(){
@@ -58,6 +61,11 @@ void GameFlow::Update(){
 			}
 		}
 	}else if ((lesson_->GetIsLessonEnd() == true && isFinalTest_ == false) || isFirstPick_ == true) {
+		if (bgmStart_ == true) {
+			//スケジュール選択画面BGMサウンド鳴らす
+			bgmStart_ = false;
+		}
+
 		if (scheduleCount_ < scheduleNum_) {
 			if (schedule_[scheduleCount_] == 0 || schedule_[scheduleCount_] == 1|| schedule_[scheduleCount_] == 2|| schedule_[scheduleCount_] == 3) {
 				voButton_->Update();
@@ -73,6 +81,8 @@ void GameFlow::Update(){
 					player_.ScoreReset();
 					scheduleCount_++;
 					isFirstPick_ = false;
+					bgmStart_ = true;
+					//スケジュール選択画面BGMサウンド止める
 				}else if (daButton_->IsMouseClick()) {
 					if (isSp_[1] == true) {
 						lesson_->Initialize(6, spPerfectScore[schedule_[scheduleCount_]], 1);
@@ -83,6 +93,8 @@ void GameFlow::Update(){
 					player_.ScoreReset();
 					scheduleCount_++;
 					isFirstPick_ = false;
+					bgmStart_ = true;
+					//スケジュール選択画面BGMサウンド止める
 				}else if (viButton_->IsMouseClick()) {
 					if (isSp_[2] == true) {
 						lesson_->Initialize(6, spPerfectScore[schedule_[scheduleCount_]], 2);
@@ -93,6 +105,8 @@ void GameFlow::Update(){
 					player_.ScoreReset();
 					scheduleCount_++;
 					isFirstPick_ = false;
+					bgmStart_ = true;
+					//スケジュール選択画面BGMサウンド止める
 				}
 			}
 		}

@@ -44,6 +44,8 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Initialize();
+
+	//レッスン中bgmサウンド鳴らす
 }
 
 void Lesson::SetPlayer(Player* player){
@@ -75,9 +77,11 @@ void Lesson::Update() {
 		if (player_->GetScore() >= clearScore_) {
 			if (player_->addRandSkill()) {
 				isLessonEnd_ = true;
+				//レッスン中bgmサウンド止める
 			}
 		}else {
 			isLessonEnd_ = true;
+			//レッスン中bgmサウンド止める
 		}
 	}
 
