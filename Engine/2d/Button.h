@@ -7,17 +7,17 @@ using namespace MyEngine;
 namespace MyEngine {
 	class Button {
 	public:
-		void Initilize();
+		void Initilize(std::string spriteName, Vector2 position);
 		void Update();
 		void Draw();
 
-		bool isMouseOver();
-		bool isMouseclick();
+		bool IsMouseOver() { return isMouseOver; };
+		bool IsMouseClick() { return isMouseClick; };
 
 	private:
 		std::unique_ptr<Sprite> sprite_;
-		Vector2 spritePos_;
-		Vector2 spriteSize_;
+		bool isMouseOver;
+		bool isMouseClick;
 
 	};
 }

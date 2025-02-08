@@ -25,6 +25,11 @@ void StageSelectScene::Initialize() {
 	select_ = std::make_unique<Sprite>();
 	select_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("select.png"));
 
+	easyButton_ = std::make_unique<Button>();
+	easyButton_->Initilize("easy", { 440,450 });
+	normalButton_ = std::make_unique<Button>();
+	normalButton_->Initilize("normal", { 840,450 });
+
 }
 
 StageSelectScene::~StageSelectScene() {
@@ -35,6 +40,8 @@ StageSelectScene::~StageSelectScene() {
 void StageSelectScene::Update() {
 	gameCamera_->Update();
 	select_->Update();
+	easyButton_->Update();
+	normalButton_->Update();
 	StateTransition();
 }
 
@@ -47,12 +54,15 @@ void StageSelectScene::FbxDraw() {
 
 void StageSelectScene::SpriteDraw() {
 	select_->Draw();
+	easyButton_->Draw();
+	normalButton_->Draw();
 }
 
 void StageSelectScene::StateTransition() {
-	if (Input::GetInstance()->TriggerKey(DIK_1)) {
+	if (easyButton_->IsMouseClick()==true) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
-	}else if (Input::GetInstance()->TriggerKey(DIK_2)) {
+	}
+	if (normalButton_->IsMouseClick() == true) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
 	}
 }
