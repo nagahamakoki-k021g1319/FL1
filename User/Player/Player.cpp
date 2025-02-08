@@ -85,7 +85,7 @@ void Player::Initilize() {
 
 	addSelectSprite_ = std::make_unique<Sprite>();
 	addSelectSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("addselect.png"));
-	addSelectSprite_->SetPozition({425,360});
+	addSelectSprite_->SetPozition({440,320});
 	addSelectSprite_->Update();
 
 	for (int i = 0; i < 3; i++) {
@@ -205,5 +205,11 @@ void Player::Heal(int healPoint) {
 	hp_ += healPoint;
 	if (hp_ > maxHp_) {
 		hp_ = maxHp_;
+	}
+}
+
+void Player::AddRandSkillReload() {
+	if (deck_->IsReloard()) {
+		deck_->AddRandSkillDraw(skills_);
 	}
 }

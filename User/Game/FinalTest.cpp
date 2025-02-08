@@ -47,8 +47,8 @@ void FinalTest::Initialize(){
 	explanationPing_->Update();
 
 	hpShieldUI_ = make_unique<HpShieldUI>();
-	bufUI_ = make_unique<BufUI>();
-	bufUI_->Initialize();
+	//bufUI_ = make_unique<BufUI>();
+	//bufUI_->Initialize();
 
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
@@ -98,7 +98,7 @@ void FinalTest::Update(){
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Update();
-	bufUI_->Update();
+	//bufUI_->Update();
 }
 
 
@@ -185,7 +185,7 @@ void FinalTest::Draw() {
 			player_->DrawAddSkill();
 		}
 		hpShieldUI_->Draw();
-		bufUI_->Draw();
+		//bufUI_->Draw();
 		for (int i = 0; i < 3; i++) {
 			statusRateNumber_[i]->Draw({ 0.0f, 60.0f*i },static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
 		}

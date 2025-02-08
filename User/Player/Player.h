@@ -17,6 +17,7 @@ public:
 	void ScoreReset();
 	void AddStatus(int add,int type);
 	void AddRandSkillDraw() { deck_->AddRandSkillDraw(skills_); };
+	void AddRandSkillReload();
 	bool addRandSkill() { return deck_->AddRandSkill(); };
 	void DrawAddSkill() { addSelectSprite_->Draw(); deck_->DrawAddSkill(); };
 

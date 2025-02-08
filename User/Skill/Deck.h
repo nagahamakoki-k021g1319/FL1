@@ -5,7 +5,7 @@
 #include"Skill.h"
 #include"Sprite.h"
 #include"SpriteLoader.h"
-
+#include"Number.h"
 
 using namespace std;
 
@@ -39,6 +39,7 @@ public:
 	Skill GetUsedSkil();
 	bool IsSelectedSkill();
 	Skill GetSelectedSkill();
+	bool IsReloard();
 private:
 	vector<Skill> hasSkills_;
 	vector<Skill> deck_;
@@ -48,7 +49,6 @@ private:
 	vector<Skill> addRandList_;
 
 	Sprite deckSprite_;
-	Sprite handSprite_;
 	Sprite discardSprite_;
 	Sprite banishSprite_;
 
@@ -64,4 +64,7 @@ private:
 	Skill selectedSkill_;
 
 	Button skipButton_;
+	Button reloadButton_;
+	int reloadNum_;
+	Number reloadNumber_;
 };
