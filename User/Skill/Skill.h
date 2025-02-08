@@ -25,6 +25,8 @@ public:
 	ScoreData scoreData_;
 	bool isOneTime_;//一度きり
 	Button button_;
+	Sprite explanation_;
+	bool isSelected_;
 };
 
 class Skills {

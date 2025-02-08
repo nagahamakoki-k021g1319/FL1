@@ -47,6 +47,9 @@ void Deck::AddSkill(Skills skills, std::string name) {
 	Skill newSkill = skills.GetSkill(name);
 	newSkill.button_.Initialize(newSkill.name_);
 	newSkill.button_.SetSize({ 64,64 });
+	newSkill.explanation_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("test.png"));//変更予定箇所
+	newSkill.explanation_.SetAnchorPoint({ 0.5f,0.5f });
+	newSkill.explanation_.SetPozition({ 640,300 });
 	hasSkills_.push_back(newSkill);
 }
 
@@ -78,6 +81,9 @@ void Deck::AddRandSkillDraw(Skills skills) {
 		Skill newSkill = skills.GetSkill(skillName[*it]);
 		newSkill.button_.Initialize(newSkill.name_, { 472.0f + 100.0f * static_cast<float>(i),482 });
 		newSkill.button_.SetSize({ 64,64 });
+		newSkill.explanation_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("test.png"));//変更予定箇所
+		newSkill.explanation_.SetAnchorPoint({ 0.5f,0.5f });
+		newSkill.explanation_.SetPozition({ 640,300 });
 		addRandList_.push_back(newSkill);
 	}
 }
@@ -110,6 +116,47 @@ void Deck::SetDeck() {
 }
 
 void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
+	//どこかでクリック時一度全部解除
+	if (Input::GetInstance()->TriggerMouse(0)) {
+		bool select[3] = { false,false,false };
+		for (int i = 0; i < hand_.size(); i++) {
+			hand_[i].button_.Update();
+			if (hand_[i].button_.IsMouseClick()) {
+				hand_[i].isSelected_ = true;
+				select[i] = true;
+			}else {
+				hand_[i].isSelected_ = false;
+			}
+		}
+		if (select[0] == false && select[1] == false && select[2] == false) {
+			selectedSkillNum_ = -1;
+		}
+
+		for (int i = 0; i < deck_.size(); i++) {
+			deck_[i].button_.Update();
+			if (deck_[i].button_.IsMouseClick()) {
+				deck_[i].isSelected_ = true;
+			}else {
+				deck_[i].isSelected_ = false;
+			}
+		}
+		for (int i = 0; i < discard_.size(); i++) {
+			discard_[i].button_.Update();
+			if (discard_[i].button_.IsMouseClick()) {
+				discard_[i].isSelected_ = true;
+			}else {
+				discard_[i].isSelected_ = false;
+			}
+		}
+		for (int i = 0; i < banish_.size(); i++) {
+			banish_[i].button_.Update();
+			if (banish_[i].button_.IsMouseClick()) {
+				banish_[i].isSelected_ = true;
+			}else {
+				banish_[i].isSelected_ = false;
+			}
+		}
+	}
 	for (int i = 0; i < hand_.size(); i++) {
 		hand_[i].button_.Update();
 	}
@@ -122,8 +169,8 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	for (int i = 0; i < banish_.size(); i++) {
 		banish_[i].button_.Update();
 	}
+		
 	skipButton_.Update();
-
 
 	UseSkill(scoreData, hp, maxScore,rate);
 
@@ -335,6 +382,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			usedSkill_ = hand_[0];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
+			hand_[0].isSelected_ = false;
 			if (hand_[0].isOneTime_ == true) {
 				banish_.push_back(hand_[0]);
 				hand_.erase(hand_.begin());
@@ -359,6 +407,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			usedSkill_ = hand_[1];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
+			hand_[1].isSelected_ = false;
 			if (hand_[1].isOneTime_ == true) {
 				banish_.push_back(hand_[1]);
 				hand_.erase(hand_.begin() + 1);
@@ -383,6 +432,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			usedSkill_ = hand_[2];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
+			hand_[2].isSelected_ = false;
 			if (hand_[2].isOneTime_ == true) {
 				banish_.push_back(hand_[2]);
 				hand_.erase(hand_.begin() + 2);
@@ -464,6 +514,9 @@ void Deck::DrawHand() {
 	if (hand_.size() == 3) {
 		for (int i = 0; i < 3; i++) {
 			hand_[i].button_.Draw();
+			if (hand_[i].isSelected_) {
+				hand_[i].explanation_.Draw();
+			}
 		}
 	}
 	skipButton_.Draw();
@@ -473,16 +526,25 @@ void Deck::DrawList() {
 	deckSprite_.Draw();
 	for (int i = 0; i < deck_.size(); i++) {
 		deck_[i].button_.Draw();
+		if (deck_[i].isSelected_) {
+			deck_[i].explanation_.Draw();
+		}
 	}
 
 	discardSprite_.Draw();
 	for (int i = 0; i < discard_.size(); i++) {
 		discard_[i].button_.Draw();
+		if (discard_[i].isSelected_) {
+			discard_[i].explanation_.Draw();
+		}
 	}
 
 	banishSprite_.Draw();
 	for (int i = 0; i < banish_.size(); i++) {
 		banish_[i].button_.Draw();
+		if (banish_[i].isSelected_) {
+			banish_[i].explanation_.Draw();
+		}
 	}
 }
 
