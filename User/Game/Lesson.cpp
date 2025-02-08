@@ -67,7 +67,7 @@ void Lesson::Update() {
 			}
 			player_->AddStatus(player_->GetScore(), type_);
 		}
-		if (player_->GetScore() > perfectScore_) {
+		if (player_->GetScore() >= perfectScore_) {
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
 			player_->AddStatus(player_->GetScore(),type_);

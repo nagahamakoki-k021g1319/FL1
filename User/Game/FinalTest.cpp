@@ -82,7 +82,6 @@ void FinalTest::Update(){
 		if (turn_ == maxTurn_) {
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
-			player_->AddStatus(player_->GetScore(), type_);
 		}
 	}else {
 		Calculation(player_->GetStatus(), player_->GetScore());

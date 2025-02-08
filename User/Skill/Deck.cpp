@@ -14,6 +14,7 @@ void Deck::Initilize(Skills skills) {
 	AddSkill(skills, "face");
 	AddSkill(skills, "face");
 	AddSkill(skills, "behavior");
+	AddSkill(skills, "highFive");
 
 	SetDeck();
 	Shuffle();
@@ -48,19 +49,23 @@ void Deck::AddSkill(Skills skills, std::string name) {
 }
 
 void Deck::AddRandSkillDraw(Skills skills) {
-	string skillName[6];
+	const int skillNum = 9;
+	string skillName[skillNum];
 	skillName[0] = "step";
 	skillName[1] = "warmUp";
 	skillName[2] = "fanService";
 	skillName[3] = "talkTime";
 	skillName[4] = "stubborn";
 	skillName[5] = "sign";
+	skillName[6] = "will";
+	skillName[7] = "breath";
+	skillName[8] = "highFive";
 
 	addRandList_.clear();
 
 	std::set<int> uniqueNumbers;
 	while (uniqueNumbers.size() < 3) {
-		int number = rand() % 6;//スキルカードの種類数
+		int number = rand() % skillNum;//スキルカードの種類数
 		uniqueNumbers.insert(number);
 	}
 
@@ -140,26 +145,83 @@ bool Deck::IsSelectedSkill() {
 	return false;
 }
 
+void Deck::FirstDrawSkill() {
+	int num = 0;
+	hand_.clear();
+	for (auto it = deck_.begin(); it != deck_.end();) {
+		if (it->name_ == "will") {
+			hand_.push_back(*it);  // hand_ に追加
+			it = deck_.erase(it);  // deck_ から削除
+			num++;
+		}
+		else {
+			++it; // 削除しなかった場合は次へ
+		}
+	}
+	std::vector<int> indices;
+	while (indices.size() < 3 - num) {
+		int randIndex = rand() % deck_.size();
+		if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+			indices.push_back(randIndex);
+		}
+	}
+	std::sort(indices.rbegin(), indices.rend());
+	for (int index : indices) {
+		hand_.push_back(deck_[index]); // hand_ に追加
+		deck_.erase(deck_.begin() + index); // deck_ から削除
+	}
+}
+
 void Deck::DrawSkill() {
 	if (hand_.size() != 3) {
 		int drawNum = 3;
 		std::size_t deckNum = deck_.size();
+		std::vector<int> indices;
 
 		if (deckNum >= drawNum) {
-			copy(deck_.begin(), deck_.begin() + drawNum, back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + drawNum);
+			while (indices.size() < 3) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+				}
+			}
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
+		}else {
+			int num = 0;
+			while (indices.size() < deckNum) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+					num++;
+				}
+			}
 
-		}
-		else {
-			copy(deck_.begin(), deck_.begin() + deckNum, back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + deckNum);
-
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
+			indices.clear();
 			copy(discard_.begin(), discard_.end(), back_inserter(deck_));
 			discard_.clear();
 			Shuffle();
 
-			copy(deck_.begin(), deck_.begin() + (drawNum - deckNum), back_inserter(hand_));
-			deck_.erase(deck_.begin(), deck_.begin() + (drawNum - deckNum));
+			while (indices.size() < drawNum - num) {
+				int randIndex = rand() % deck_.size();
+				if (std::find(indices.begin(), indices.end(), randIndex) == indices.end()) {
+					indices.push_back(randIndex);
+				}
+			}
+
+			std::sort(indices.rbegin(), indices.rend());
+			for (int index : indices) {
+				hand_.push_back(deck_[index]); // hand_ に追加
+				deck_.erase(deck_.begin() + index); // deck_ から削除
+			}
 		}
 	}
 }
@@ -183,11 +245,20 @@ ScoreData Deck::GetChangedScoreData(ScoreData* scoreData, int maxScore, float ra
 	if (scoredata.score > 0) {
 		int newScore = 0;
 		if (scoreData->condition > 0) {
-			float addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
+			float addScore = 0;
+			if (GetSelectedSkill().name_ == "highFive") {
+				addScore = static_cast<float>(scoredata.score + (scoreData->concentration * 2)) * 1.5f;
+			}else {
+				addScore = static_cast<float>(scoredata.score + scoreData->concentration) * 1.5f;
+			}
 			changedScoreData.score += static_cast<int>(ceil(addScore * rate));
 		}
 		else {
-			changedScoreData.score += static_cast<int>(ceil((scoredata.score + scoreData->concentration) * rate));
+			if (GetSelectedSkill().name_ == "highFive") {
+				changedScoreData.score += static_cast<int>(ceil((scoredata.score + (scoreData->concentration * 2)) * rate));
+			}else {
+				changedScoreData.score += static_cast<int>(ceil((scoredata.score + scoreData->concentration) * rate));
+			}
 		}
 
 		if (GetSelectedSkill().name_ == "twice") {
@@ -334,7 +405,7 @@ void Deck::ResetDeck() {
 	hand_.clear();
 	discard_.clear();
 	banish_.clear();
-	DrawSkill();
+	FirstDrawSkill();
 }
 
 void Deck::SpriteSort() {
