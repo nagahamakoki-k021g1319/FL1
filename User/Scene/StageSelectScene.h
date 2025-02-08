@@ -11,6 +11,7 @@
 #include"FBXObject3d.h"
 #include"Object3d.h"
 #include"ParticleManager.h"
+#include"Button.h"
 
 using namespace std;
 
@@ -50,5 +51,8 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	std::unique_ptr<Sprite> select_;
+
+	unique_ptr<Button> easyButton_ = nullptr;
+	unique_ptr<Button> normalButton_ = nullptr;
 
 };

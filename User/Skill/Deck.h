@@ -44,7 +44,7 @@ private:
 	vector<Skill> deck_;
 	vector<Skill> hand_;
 	vector<Skill> discard_;
-	vector<Skill> banish_ ;
+	vector<Skill> banish_;
 	vector<Skill> addRandList_;
 
 	Sprite deckSprite_;
