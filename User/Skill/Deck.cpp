@@ -124,6 +124,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			if (hand_[i].button_.IsMouseClick()) {
 				hand_[i].isSelected_ = true;
 				select[i] = true;
+				//スキル選択時サウンド鳴らす
 			}else {
 				hand_[i].isSelected_ = false;
 			}
@@ -136,6 +137,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			deck_[i].button_.Update();
 			if (deck_[i].button_.IsMouseClick()) {
 				deck_[i].isSelected_ = true;
+				//スキル選択時サウンド鳴らす
 			}else {
 				deck_[i].isSelected_ = false;
 			}
@@ -144,6 +146,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			discard_[i].button_.Update();
 			if (discard_[i].button_.IsMouseClick()) {
 				discard_[i].isSelected_ = true;
+				//スキル選択時サウンド鳴らす
 			}else {
 				discard_[i].isSelected_ = false;
 			}
@@ -152,6 +155,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			banish_[i].button_.Update();
 			if (banish_[i].button_.IsMouseClick()) {
 				banish_[i].isSelected_ = true;
+				//スキル選択時サウンド鳴らす
 			}else {
 				banish_[i].isSelected_ = false;
 			}
@@ -379,6 +383,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	//実行
 	if (hand_[0].button_.IsMouseClick() && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
+			//スキル使用時サウンド鳴らす
 			usedSkill_ = hand_[0];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
@@ -404,6 +409,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	}
 	else if (hand_[1].button_.IsMouseClick() && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
+			//スキル使用時サウンド鳴らす
 			usedSkill_ = hand_[1];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
@@ -429,6 +435,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	}
 	else if (hand_[2].button_.IsMouseClick() && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
+			//スキル使用時サウンド鳴らす
 			usedSkill_ = hand_[2];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;

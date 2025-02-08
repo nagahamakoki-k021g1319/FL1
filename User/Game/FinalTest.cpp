@@ -63,6 +63,8 @@ void FinalTest::Initialize(){
 	clearRankPing_->SetSize({ 256,256 });
 	clearRankPing_->SetPozition({ 0,300 });
 	clearRankPing_->Update();
+
+	//最終試験BGMサウンド鳴らす
 }
 
 void FinalTest::SetPlayer(Player* player) {
@@ -82,11 +84,14 @@ void FinalTest::Update(){
 		if (turn_ == maxTurn_) {
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
+			//最終試験BGMサウンド止める
+			//評価値画面BGMサウンド鳴らす
 		}
 	}else {
 		Calculation(player_->GetStatus(), player_->GetScore());
 		if (Input::GetInstance()->TriggerMouse(0)) {
 			isLessonEnd_ = true;
+			//評価値画面BGMサウンド止める
 		}
 	}
 
