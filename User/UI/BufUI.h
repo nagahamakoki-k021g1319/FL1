@@ -21,6 +21,5 @@ private:
 	unique_ptr<Sprite>	qSprite_;
 	unique_ptr<Sprite>	wSprite_;
 	unique_ptr<Sprite>	eSprite_;
-	unique_ptr<Sprite>	sSprite_;
 };
 

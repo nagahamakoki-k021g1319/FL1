@@ -54,5 +54,5 @@ private:
 
 	unique_ptr<Button> easyButton_ = nullptr;
 	unique_ptr<Button> normalButton_ = nullptr;
-
+	unique_ptr<Button> goTitleButton_ = nullptr;
 };

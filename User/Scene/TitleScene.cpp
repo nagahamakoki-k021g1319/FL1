@@ -44,8 +44,6 @@ void TitleScene::Update() {
 }
 
 void TitleScene::ObjectDraw() {
-
-	//donut_->Draw(MyEngine::SpriteCommon::GetInstance()->GetDxCommon()->GetCommandList());
 }
 
 void TitleScene::FbxDraw() {
@@ -57,7 +55,7 @@ void TitleScene::SpriteDraw() {
 }
 
 void TitleScene::StateTransition() {
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	if (Input::GetInstance()->TriggerMouse(0)) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::SELECT);
 	}
 }
