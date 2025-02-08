@@ -66,7 +66,7 @@ public:
 	void Draw();
 	void SetDivision(uint32_t div) { division_ = div; }
 	void SetHP(uint32_t HP) { HP_ = HP; }
-	void SetParams(float params) { params_ = params; }
+	void SetParams(float params) { params_ = params; paramsUpdate_ = true;}
 	float GetParams() { return params_; }
 	void SetStartPos(Vector2 startPos) { startPos_ = startPos; }
 	void SetSize(Vector2 size) { size_ = size; }
