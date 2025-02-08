@@ -2,6 +2,7 @@
 #include"Player.h"
 #include "HpShieldUI.h"
 #include "BufUI.h"
+#include "Audio.h"
 
 class Lesson{
 public:
@@ -28,10 +29,15 @@ private:
 	unique_ptr<HpShieldUI> hpShieldUI_ = nullptr;
 	unique_ptr<BufUI> bufUI_ = nullptr;
 
+	Audio* audio_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice_;
+
 	int clearScore_;
 	int perfectScore_;
 
 	bool isLoopEnd_;
 	bool isLessonEnd_;
+
+	bool isBGMStart = false;
 };
 

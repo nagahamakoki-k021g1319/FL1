@@ -65,6 +65,17 @@ void FinalTest::Initialize(){
 	clearRankPing_->Update();
 
 	//最終試験BGMサウンド鳴らす
+	audio_ = new Audio();
+	audio_->Initialize();
+	audio_->LoadWave("lessonBGM.wav");
+
+
+
+	audio2_ = new Audio();
+	audio2_->Initialize();
+	audio2_->LoadWave("lessonFinish.wav");
+
+
 }
 
 void FinalTest::SetPlayer(Player* player) {
@@ -72,6 +83,13 @@ void FinalTest::SetPlayer(Player* player) {
 }
 
 void FinalTest::Update(){
+	if (isBGMStart == false) {
+		if (isLoopEnd_==false) {
+			pSourceVoice_ = audio_->PlayWave("lessonBGM.wav");
+			isBGMStart = true;
+		}
+	}
+
 	if (isLoopEnd_ == false) {
 		
 		player_->Update(0,statusRate_[turnType[turn_]]);
@@ -85,13 +103,17 @@ void FinalTest::Update(){
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
 			//最終試験BGMサウンド止める
+			audio_->StopWave(pSourceVoice_);
 			//評価値画面BGMサウンド鳴らす
+			pSourceVoice2_ = audio2_->PlayWave("lessonFinish.wav");
 		}
 	}else {
 		Calculation(player_->GetStatus(), player_->GetScore());
 		if (Input::GetInstance()->TriggerMouse(0)) {
 			isLessonEnd_ = true;
 			//評価値画面BGMサウンド止める
+			audio2_->StopWave(pSourceVoice2_);
+			isBGMStart = false;
 		}
 	}
 

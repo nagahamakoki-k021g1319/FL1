@@ -6,6 +6,8 @@
 #include"Sprite.h"
 #include"SpriteLoader.h"
 
+#include"Audio.h"
+
 
 using namespace std;
 
@@ -64,4 +66,9 @@ private:
 	Skill selectedSkill_;
 
 	Button skipButton_;
+
+	Audio* audio_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice_;
+	Audio* audio2_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice2_;
 };
