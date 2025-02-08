@@ -2,6 +2,7 @@
 #include<map>
 #include<string>
 #include"Sprite.h"
+#include"Button.h"
 
 struct ScoreData{
 	int cost;//消費体力
@@ -18,11 +19,12 @@ public:
 
 	bool CanUseSkill(ScoreData* scoreData, int hp);
 	void Use(ScoreData* scoreData, int* hp, int maxScore = 0, float rate = 1);
+	
 public:
 	std::string name_;
 	ScoreData scoreData_;
 	bool isOneTime_;//一度きり
-	Sprite sprite_;
+	Button button_;
 };
 
 class Skills {

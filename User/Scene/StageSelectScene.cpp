@@ -26,9 +26,9 @@ void StageSelectScene::Initialize() {
 	select_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("select.png"));
 
 	easyButton_ = std::make_unique<Button>();
-	easyButton_->Initilize("easy", { 440,450 });
+	easyButton_->Initialize("easy", { 440,450 });
 	normalButton_ = std::make_unique<Button>();
-	normalButton_->Initilize("normal", { 840,450 });
+	normalButton_->Initialize("normal", { 840,450 });
 
 }
 

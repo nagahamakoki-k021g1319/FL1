@@ -30,11 +30,11 @@ void Skills::AddSkill(std::string name, int score, int cost, int shield, int con
 	newSkill.SetScoreData(newScoreData);
 	newSkill.isOneTime_ = isOneTime;
 
-	skills_[name] = newSkill;
+	skills_[name] = newSkill;//ここでエラー:C++ 関数 (暗黙的に宣言) は参照できません -- これは削除された関数です
 }
 
 Skill Skills::GetSkill(std::string name) {
-	return skills_.at(name);
+	return skills_.at(name);//ここでエラー:C++ 関数 (暗黙的に宣言) は参照できません -- これは削除された関数です
 }
 
 bool Skill::CanUseSkill(ScoreData* scoreData, int hp) {

@@ -29,9 +29,9 @@ void Deck::Initilize(Skills skills) {
 	handSprite_.SetPozition({ 440,430 });
 
 	addSelecthandPos_ = -20;
-	defaultHandPos_[0] = { 440,500 };
-	defaultHandPos_[1] = { 540,500 };
-	defaultHandPos_[2] = { 640,500 };
+	defaultHandPos_[0] = { 472,532 };
+	defaultHandPos_[1] = { 572,532 };
+	defaultHandPos_[2] = { 672,532 };
 	handPos_[0] = defaultHandPos_[0];
 	handPos_[1] = defaultHandPos_[1];
 	handPos_[2] = defaultHandPos_[2];
@@ -42,8 +42,8 @@ void Deck::Initilize(Skills skills) {
 
 void Deck::AddSkill(Skills skills, std::string name) {
 	Skill newSkill = skills.GetSkill(name);
-	newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(newSkill.name_ + ".png"));
-	newSkill.sprite_.SetSize({ 64,64 });
+	newSkill.button_.Initialize(newSkill.name_);
+	newSkill.button_.SetSize({ 64,64 });
 	hasSkills_.push_back(newSkill);
 }
 
@@ -69,21 +69,25 @@ void Deck::AddRandSkillDraw(Skills skills) {
 		auto it = uniqueNumbers.begin();
 		std::advance(it, i);
 		Skill newSkill = skills.GetSkill(skillName[*it]);
-		newSkill.sprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex(newSkill.name_ + ".png"));
-		newSkill.sprite_.SetSize({ 64,64 });
-		newSkill.sprite_.SetPozition({440.0f+100.0f*static_cast<float>(i),450});
+		newSkill.button_.Initialize(newSkill.name_, { 472.0f + 100.0f * static_cast<float>(i),482 });
+		newSkill.button_.SetSize({ 64,64 });
 		addRandList_.push_back(newSkill);
 	}
 }
 
 bool Deck::AddRandSkill() {
-	if (Input::GetInstance()->TriggerKey(DIK_Q)) {
+	
+	for (int i = 0; i < addRandList_.size(); i++) {
+		addRandList_[i].button_.Update();
+	}
+
+	if (addRandList_[0].button_.IsMouseClick()) {
 		hasSkills_.push_back(addRandList_[0]);
 		return true;
-	}else if (Input::GetInstance()->TriggerKey(DIK_W)) {
+	}else if (addRandList_[1].button_.IsMouseClick()) {
 		hasSkills_.push_back(addRandList_[1]);
 		return true;
-	}else if (Input::GetInstance()->TriggerKey(DIK_E)) {
+	}else if (addRandList_[2].button_.IsMouseClick()) {
 		hasSkills_.push_back(addRandList_[2]);
 		return true;
 	}else if (Input::GetInstance()->TriggerKey(DIK_S)) {
@@ -97,6 +101,19 @@ void Deck::SetDeck() {
 }
 
 void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
+	for (int i = 0; i < hand_.size(); i++) {
+		hand_[i].button_.Update();
+	}
+	for (int i = 0; i < deck_.size(); i++) {
+		deck_[i].button_.Update();
+	}
+	for (int i = 0; i < discard_.size(); i++) {
+		discard_[i].button_.Update();
+	}
+	for (int i = 0; i < banish_.size(); i++) {
+		banish_[i].button_.Update();
+	}
+
 	UseSkill(scoreData, hp, maxScore,rate);
 
 	//スキップ
@@ -231,14 +248,12 @@ int Deck::GetChangedHp(ScoreData* scoreData) {
 }
 
 void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
-	Input* input = Input::GetInstance();
-
 	for (int i = 0; i < 3; i++) {
 		canUseSkill_[i] = hand_[i].CanUseSkill(scoreData, *hp);
 	}
 
 	//実行
-	if (input->TriggerKey(DIK_Q) && canUseSkill_[0]) {
+	if (hand_[0].button_.IsMouseClick() && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
 			usedSkill_ = hand_[0];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
@@ -262,7 +277,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
 	}
-	else if (input->TriggerKey(DIK_W) && canUseSkill_[1]) {
+	else if (hand_[1].button_.IsMouseClick() && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			usedSkill_ = hand_[1];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
@@ -286,7 +301,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			handPos_[2].y = defaultHandPos_[2].y;
 		}
 	}
-	else if (input->TriggerKey(DIK_E) && canUseSkill_[2]) {
+	else if (hand_[2].button_.IsMouseClick() && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			usedSkill_ = hand_[2];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
@@ -340,30 +355,30 @@ void Deck::ResetDeck() {
 void Deck::SpriteSort() {
 	//hand
 	if (hand_.size() == 3) {
-		hand_[0].sprite_.SetPozition(handPos_[0]);
-		hand_[0].sprite_.Update();
-		hand_[1].sprite_.SetPozition(handPos_[1]);
-		hand_[1].sprite_.Update();
-		hand_[2].sprite_.SetPozition(handPos_[2]);
-		hand_[2].sprite_.Update();
+		hand_[0].button_.SetPosition(handPos_[0]);
+		hand_[0].button_.Update();
+		hand_[1].button_.SetPosition(handPos_[1]);
+		hand_[1].button_.Update();
+		hand_[2].button_.SetPosition(handPos_[2]);
+		hand_[2].button_.Update();
 	}
 
 	//deck
 	for (int i = 0; i < deck_.size(); i++) {
-		deck_[i].sprite_.SetPozition({ i % 4 * 80.0f + 900,i / 4 * 80.0f + 70 });
-		deck_[i].sprite_.Update();
+		deck_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 102 });
+		deck_[i].button_.Update();
 	}
 
 	//discard
 	for (int i = 0; i < discard_.size(); i++) {
-		discard_[i].sprite_.SetPozition({ i % 4 * 80.0f + 900,i / 4 * 80.0f + 370 });
-		discard_[i].sprite_.Update();
+		discard_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 402 });
+		discard_[i].button_.Update();
 	}
 
 	//banish
 	for (int i = 0; i < banish_.size(); i++) {
-		banish_[i].sprite_.SetPozition({ i % 4 * 80.0f + 900,i / 4 * 80.0f + 630 });
-		banish_[i].sprite_.Update();
+		banish_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 662 });
+		banish_[i].button_.Update();
 	}
 }
 
@@ -371,7 +386,7 @@ void Deck::DrawHand() {
 	handSprite_.Draw();
 	if (hand_.size() == 3) {
 		for (int i = 0; i < 3; i++) {
-			hand_[i].sprite_.Draw();
+			hand_[i].button_.Draw();
 		}
 	}
 }
@@ -379,28 +394,28 @@ void Deck::DrawHand() {
 void Deck::DrawList() {
 	deckSprite_.Draw();
 	for (int i = 0; i < deck_.size(); i++) {
-		deck_[i].sprite_.Draw();
+		deck_[i].button_.Draw();
 	}
 
 	discardSprite_.Draw();
 	for (int i = 0; i < discard_.size(); i++) {
-		discard_[i].sprite_.Draw();
+		discard_[i].button_.Draw();
 	}
 
 	banishSprite_.Draw();
 	for (int i = 0; i < banish_.size(); i++) {
-		banish_[i].sprite_.Draw();
+		banish_[i].button_.Draw();
 	}
 }
 
 void Deck::DrawDeck() {
 	for (int i = 0; i < hasSkills_.size(); i++) {
-		hasSkills_[i].sprite_.Draw();
+		hasSkills_[i].button_.Draw();
 	}
 }
 
 void Deck::DrawAddSkill() {
 	for (int i = 0; i < 3; i++) {
-		addRandList_[i].sprite_.Draw();
+		addRandList_[i].button_.Draw();
 	}
 }
