@@ -13,6 +13,7 @@
 #include"ParticleManager.h"
 #include "DonutGraph.h"
 #include "BarGraph.h"
+#include"Button.h"
 
 using namespace std;
 
@@ -52,4 +53,6 @@ private:
 	unique_ptr<GameCamera> gameCamera_ = nullptr;
 
 	unique_ptr<Sprite> title_;
+	unique_ptr<Button> titleButton_;
+	unique_ptr<Button> titleButtonPink_;
 };

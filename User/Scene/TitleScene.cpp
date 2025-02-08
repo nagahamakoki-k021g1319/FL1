@@ -24,6 +24,9 @@ void TitleScene::Initialize() {
 
 	title_ = std::make_unique<Sprite>();
 	title_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("title.png"));
+
+	titleButton_ = std::make_unique<Button>();
+	titleButton_->Initialize("start", { 640,600 });
 }
 
 TitleScene::~TitleScene() {
@@ -36,7 +39,7 @@ void TitleScene::Update() {
 
 
 	title_->Update();
-
+	titleButton_->Update();
 	StateTransition();
 }
 
@@ -50,7 +53,7 @@ void TitleScene::FbxDraw() {
 
 void TitleScene::SpriteDraw() {
 	title_->Draw();
-	
+	titleButton_->Draw();
 }
 
 void TitleScene::StateTransition() {
