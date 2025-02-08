@@ -6,6 +6,7 @@
 #include"Player.h"
 #include "Game/Lesson.h"
 #include"FinalTest.h"
+#include"Button.h"
 
 
 class GameFlow{
@@ -35,5 +36,9 @@ private:
 	int perfectScore[4];
 	int spPerfectScore[4];
 	bool isSp_[3];
+
+	unique_ptr<Button> voButton_ = nullptr;
+	unique_ptr<Button> daButton_ = nullptr;
+	unique_ptr<Button> viButton_ = nullptr;
 };
 

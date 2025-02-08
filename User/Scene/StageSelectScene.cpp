@@ -30,6 +30,8 @@ void StageSelectScene::Initialize() {
 	normalButton_ = std::make_unique<Button>();
 	normalButton_->Initialize("normal", { 840,450 });
 
+	goTitleButton_ = std::make_unique<Button>();
+	goTitleButton_->Initialize("goTitle", { 1100,50 });
 }
 
 StageSelectScene::~StageSelectScene() {
@@ -42,6 +44,7 @@ void StageSelectScene::Update() {
 	select_->Update();
 	easyButton_->Update();
 	normalButton_->Update();
+	goTitleButton_->Update();
 	StateTransition();
 }
 
@@ -56,6 +59,7 @@ void StageSelectScene::SpriteDraw() {
 	select_->Draw();
 	easyButton_->Draw();
 	normalButton_->Draw();
+	goTitleButton_->Draw();
 }
 
 void StageSelectScene::StateTransition() {
@@ -64,5 +68,8 @@ void StageSelectScene::StateTransition() {
 	}
 	if (normalButton_->IsMouseClick() == true) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
+	}
+	if (goTitleButton_->IsMouseClick() == true) {
+		sceneManager_->TransitionTo(SceneManager::SCENE::TITLE);
 	}
 }

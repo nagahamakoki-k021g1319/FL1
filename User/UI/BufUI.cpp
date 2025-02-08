@@ -25,10 +25,6 @@ void BufUI::Initialize()
 	eSprite_->SetPozition({ 640,560 });
 	eSprite_->Update();
 
-	sSprite_ = std::make_unique<Sprite>();
-	sSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("s.png"));
-	sSprite_->SetPozition({ 730,420 });
-	sSprite_->Update();
 
 }
 
@@ -37,7 +33,6 @@ void BufUI::Update()
 	qSprite_->Update();
 	wSprite_->Update();
 	eSprite_->Update();
-	sSprite_->Update();
 }
 
 void BufUI::Draw()
@@ -45,5 +40,4 @@ void BufUI::Draw()
 	qSprite_->Draw();
 	wSprite_->Draw();
 	eSprite_->Draw();
-	sSprite_->Draw();
 }

@@ -39,6 +39,8 @@ void Deck::Initilize(Skills skills) {
 	isUsedSkill_ = false;
 	isSelectedSkill_ = false;
 	selectedSkillNum_ = -1;
+
+	skipButton_.Initialize("s", { 730,420 });
 }
 
 void Deck::AddSkill(Skills skills, std::string name) {
@@ -95,9 +97,11 @@ bool Deck::AddRandSkill() {
 	}else if (addRandList_[2].button_.IsMouseClick()) {
 		hasSkills_.push_back(addRandList_[2]);
 		return true;
-	}else if (Input::GetInstance()->TriggerKey(DIK_S)) {
-		return true;
 	}
+	//スキル獲得スキップ
+	//else if (Input::GetInstance()->TriggerKey(DIK_S)) {
+	//	return true;
+	//}
 	return false;
 }
 
@@ -118,11 +122,13 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	for (int i = 0; i < banish_.size(); i++) {
 		banish_[i].button_.Update();
 	}
+	skipButton_.Update();
+
 
 	UseSkill(scoreData, hp, maxScore,rate);
 
 	//スキップ
-	if (Input::GetInstance()->TriggerKey(DIK_S)) {
+	if (skipButton_.IsMouseClick()) {
 		*(hp) += 2;
 		const int maxHp = 40;
 		if (*(hp) > maxHp) {
@@ -460,6 +466,7 @@ void Deck::DrawHand() {
 			hand_[i].button_.Draw();
 		}
 	}
+	skipButton_.Draw();
 }
 
 void Deck::DrawList() {

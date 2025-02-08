@@ -85,7 +85,7 @@ void FinalTest::Update(){
 		}
 	}else {
 		Calculation(player_->GetStatus(), player_->GetScore());
-		if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+		if (Input::GetInstance()->TriggerMouse(0)) {
 			isLessonEnd_ = true;
 		}
 	}

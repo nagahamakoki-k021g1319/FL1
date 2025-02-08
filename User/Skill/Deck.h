@@ -62,4 +62,6 @@ private:
 	Skill usedSkill_;
 	bool isSelectedSkill_;
 	Skill selectedSkill_;
+
+	Button skipButton_;
 };
