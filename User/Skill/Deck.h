@@ -20,6 +20,7 @@ public:
 	
 	void SetDeck();
 	void DrawSkill();
+	void FirstDrawSkill();
 	void UseSkill(ScoreData* scoreData, int* hp, int maxScore = 0, float rate = 1.0f);
 	ScoreData GetChangedScoreData(ScoreData* scoreData, int maxScore = 0, float rate = 1);
 	int GetChangedHp(ScoreData* scoreData);

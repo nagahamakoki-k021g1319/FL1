@@ -106,7 +106,9 @@ void Player::Initilize() {
 
 	isTurnEnd_ = false;
 
-	status_ = Vector3(150, 150, 150);
+	status_ = Vector3(200, 230, 250);
+	//status_ += Vector3{ 90,180,90 };
+	//status_ += Vector3{ 145,310,145 };
 }
 
 void Player::Update(int maxScore, float rate) {
