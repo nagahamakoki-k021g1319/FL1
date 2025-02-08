@@ -41,6 +41,9 @@ void Deck::Initilize(Skills skills) {
 	selectedSkillNum_ = -1;
 
 	skipButton_.Initialize("s", { 730,420 });
+	reloadButton_.Initialize("reload", { 750,500 });
+	reloadNum_ = 3;
+	reloadNumber_.Initialize();
 }
 
 void Deck::AddSkill(Skills skills, std::string name) {
@@ -95,19 +98,48 @@ bool Deck::AddRandSkill() {
 	}
 
 	if (addRandList_[0].button_.IsMouseClick()) {
-		hasSkills_.push_back(addRandList_[0]);
-		return true;
+		if (addRandList_[0].isSelected_ == true) {
+			hasSkills_.push_back(addRandList_[0]);
+			return true;
+		}else {
+			addRandList_[0].isSelected_ = true;
+			return false;
+		}
 	}else if (addRandList_[1].button_.IsMouseClick()) {
-		hasSkills_.push_back(addRandList_[1]);
-		return true;
+		if (addRandList_[1].isSelected_ == true) {
+			hasSkills_.push_back(addRandList_[1]);
+			return true;
+		}else {
+			addRandList_[1].isSelected_ = true;
+			return false;
+		}
 	}else if (addRandList_[2].button_.IsMouseClick()) {
-		hasSkills_.push_back(addRandList_[2]);
-		return true;
+		if (addRandList_[2].isSelected_ == true) {
+			hasSkills_.push_back(addRandList_[2]);
+			return true;
+		}else {
+			addRandList_[2].isSelected_ = true;
+			return false;
+		}
 	}
+
+
 	//スキル獲得スキップ
 	//else if (Input::GetInstance()->TriggerKey(DIK_S)) {
 	//	return true;
 	//}
+
+	return false;
+}
+
+bool Deck::IsReloard() {
+	if (reloadNum_ > 0) {
+		reloadButton_.Update();
+		if (reloadButton_.IsMouseClick()) {
+			reloadNum_--;
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -564,5 +596,10 @@ void Deck::DrawDeck() {
 void Deck::DrawAddSkill() {
 	for (int i = 0; i < 3; i++) {
 		addRandList_[i].button_.Draw();
+		if (addRandList_[i].isSelected_ == true) {
+			addRandList_[i].explanation_.Draw();
+		}
 	}
+	reloadButton_.Draw();
+	reloadNumber_.Draw({ 743,500 }, reloadNum_, 0.3f);
 }

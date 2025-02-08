@@ -75,6 +75,7 @@ void Lesson::Update() {
 	}
 	else {
 		if (player_->GetScore() >= clearScore_) {
+			player_->AddRandSkillReload();
 			if (player_->addRandSkill()) {
 				isLessonEnd_ = true;
 				//レッスン中bgmサウンド止める

@@ -207,3 +207,9 @@ void Player::Heal(int healPoint) {
 		hp_ = maxHp_;
 	}
 }
+
+void Player::AddRandSkillReload() {
+	if (deck_->IsReloard()) {
+		deck_->AddRandSkillDraw(skills_);
+	}
+}
