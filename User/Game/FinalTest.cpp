@@ -71,7 +71,7 @@ void FinalTest::Initialize(){
 	clearRankPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("clearRank.png"));
 	clearRankPing_->SetTexLeftTop({ 0.0f,0.0f });
 	clearRankPing_->SetSize({ 256,256 });
-	clearRankPing_->SetPozition({ 0,300 });
+	clearRankPing_->SetPozition({ 640,250 });
 	clearRankPing_->Update();
 
 	voPercentPing_ = std::make_unique<Sprite>();
@@ -122,6 +122,10 @@ void FinalTest::Initialize(){
 	viPercentBlackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percentBlack.png"));
 	viPercentBlackPing_->SetPozition({ 230,255 });
 	viPercentBlackPing_->Update();
+
+
+	clearPing_ = std::make_unique<Sprite>();
+	clearPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("end.png"));
 
 
 	//最終試験BGMサウンド鳴らす
@@ -207,7 +211,7 @@ void FinalTest::Calculation(Vector3 status, int score) {
 		clearRank_ = 0;
 	}
 
-	clearRankPing_->SetPozition({ 0,300 });
+	clearRankPing_->SetPozition({ 500,200 });
 	clearRankPing_->SetTexLeftTop({ 256.f * static_cast<float>(clearRank_) ,0.0f });
 	clearRankPing_->SetTexSize({ 256,256 });
 	clearRankPing_->Update();
@@ -259,6 +263,7 @@ int FinalTest::CalculationRequiredScore(int score) {
 }
 
 void FinalTest::Draw() {
+	
 	if (isLoopEnd_ == false) {
 		explanationPing_->Draw();
 		player_->Draw(0,statusRate_[turnType[turn_]]);
@@ -295,6 +300,7 @@ void FinalTest::Draw() {
 		}
 	}else {
 		//評価値表示画面
+		clearPing_->Draw();
 		evaluationValueNumber_->Draw({ 0,0 }, evaluationValue_, 1.0f);
 		clearRankPing_->Draw();
 	}
