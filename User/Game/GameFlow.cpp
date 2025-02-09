@@ -48,9 +48,18 @@ void GameFlow::Initialize(){
 	
 	bgmStart_ = false;
 	//スケジュール選択画面BGMサウンド鳴らす
+	audio_ = new Audio();
+	audio_->Initialize();
+	audio_->LoadWave("lessonSelectionBGM.wav");
+
+	pSourceVoice_ = audio_->PlayWave("lessonSelectionBGM.wav");
 }
 
 void GameFlow::Update(){
+	//if (isBGMStart == false) {
+	//	pSourceVoice_ = audio_->PlayWave("lessonSelectionBGM.wav");
+	//	isBGMStart = true;
+	//}
 	if (lesson_->GetIsLessonEnd() == false && isFirstPick_ == false) {
 		lesson_->Update();
 		for (int i = 0; i < 3; i++) {
@@ -63,6 +72,7 @@ void GameFlow::Update(){
 	}else if ((lesson_->GetIsLessonEnd() == true && isFinalTest_ == false) || isFirstPick_ == true) {
 		if (bgmStart_ == true) {
 			//スケジュール選択画面BGMサウンド鳴らす
+			pSourceVoice_ = audio_->PlayWave("lessonSelectionBGM.wav");
 			bgmStart_ = false;
 		}
 
@@ -83,6 +93,7 @@ void GameFlow::Update(){
 					isFirstPick_ = false;
 					bgmStart_ = true;
 					//スケジュール選択画面BGMサウンド止める
+					audio_->StopWave(pSourceVoice_);
 				}else if (daButton_->IsMouseClick()) {
 					if (isSp_[1] == true) {
 						lesson_->Initialize(6, spPerfectScore[schedule_[scheduleCount_]], 1);
@@ -95,6 +106,7 @@ void GameFlow::Update(){
 					isFirstPick_ = false;
 					bgmStart_ = true;
 					//スケジュール選択画面BGMサウンド止める
+					audio_->StopWave(pSourceVoice_);
 				}else if (viButton_->IsMouseClick()) {
 					if (isSp_[2] == true) {
 						lesson_->Initialize(6, spPerfectScore[schedule_[scheduleCount_]], 2);
@@ -107,6 +119,7 @@ void GameFlow::Update(){
 					isFirstPick_ = false;
 					bgmStart_ = true;
 					//スケジュール選択画面BGMサウンド止める
+					audio_->StopWave(pSourceVoice_);
 				}
 			}
 		}

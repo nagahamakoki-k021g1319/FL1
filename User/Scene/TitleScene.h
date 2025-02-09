@@ -14,6 +14,7 @@
 #include "DonutGraph.h"
 #include "BarGraph.h"
 #include"Button.h"
+#include"Audio.h"
 
 using namespace std;
 
@@ -55,4 +56,9 @@ private:
 	unique_ptr<Sprite> title_;
 	unique_ptr<Button> titleButton_;
 	unique_ptr<Button> titleButtonPink_;
+
+	Audio* audio_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice_;
+
+
 };

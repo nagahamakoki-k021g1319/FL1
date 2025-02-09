@@ -27,6 +27,12 @@ void TitleScene::Initialize() {
 
 	titleButton_ = std::make_unique<Button>();
 	titleButton_->Initialize("start", { 640,600 });
+
+	audio_ = new Audio();
+	audio_->Initialize();
+	audio_->LoadWave("TitleBGM.wav");
+
+	pSourceVoice_ = audio_->PlayWave("TitleBGM.wav");
 }
 
 TitleScene::~TitleScene() {
@@ -56,6 +62,7 @@ void TitleScene::SpriteDraw() {
 
 void TitleScene::StateTransition() {
 	if (Input::GetInstance()->TriggerMouse(0)) {
+		audio_->StopWave(pSourceVoice_);
 		sceneManager_->TransitionTo(SceneManager::SCENE::SELECT);
 	}
 }

@@ -46,6 +46,10 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	hpShieldUI_->Initialize();
 
 	//レッスン中bgmサウンド鳴らす
+	audio_ = new Audio();
+	audio_->Initialize();
+	audio_->LoadWave("lessonBGM.wav");
+
 }
 
 void Lesson::SetPlayer(Player* player){
@@ -53,6 +57,11 @@ void Lesson::SetPlayer(Player* player){
 }
 
 void Lesson::Update() {
+	if (isBGMStart == false) {
+		pSourceVoice_ = audio_->PlayWave("lessonBGM.wav");
+		isBGMStart = true;
+	}
+	
 	if (isLoopEnd_ == false) {
 		player_->Update(perfectScore_);
 		if (player_->IsTurnEnd() == true) {
@@ -80,10 +89,15 @@ void Lesson::Update() {
 			if (player_->addRandSkill()) {
 				isLessonEnd_ = true;
 				//レッスン中bgmサウンド止める
+				audio_->StopWave(pSourceVoice_);
+				isBGMStart = false;
 			}
 		}else {
 			isLessonEnd_ = true;
 			//レッスン中bgmサウンド止める
+
+			audio_->StopWave(pSourceVoice_);
+			isBGMStart = false;
 		}
 	}
 

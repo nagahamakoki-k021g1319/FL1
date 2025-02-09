@@ -37,7 +37,15 @@ void Deck::Initilize(Skills skills) {
 	isSelectedSkill_ = false;
 	selectedSkillNum_ = -1;
 
-	skipButton_.Initialize("s", { 830,470 });
+	audio_ = new Audio();
+	audio_->Initialize();
+	audio_->LoadWave("cursorMove.wav");
+
+	audio2_ = new Audio();
+	audio2_->Initialize();
+	audio2_->LoadWave("cursorClick.wav");
+
+  skipButton_.Initialize("s", { 830,470 });
 	reloadButton_.Initialize("reload", { 790,650 });
 	reloadNum_ = 3;
 	reloadNumber_.Initialize();
@@ -169,6 +177,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 				hand_[i].isSelected_ = true;
 				select[i] = true;
 				//スキル選択時サウンド鳴らす
+				pSourceVoice_ = audio_->PlayWave("cursorMove.wav");
 			}else {
 				hand_[i].isSelected_ = false;
 			}
@@ -182,6 +191,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			if (deck_[i].button_.IsMouseClick()) {
 				deck_[i].isSelected_ = true;
 				//スキル選択時サウンド鳴らす
+				pSourceVoice_ = audio_->PlayWave("cursorMove.wav");
 			}else {
 				deck_[i].isSelected_ = false;
 			}
@@ -191,6 +201,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			if (discard_[i].button_.IsMouseClick()) {
 				discard_[i].isSelected_ = true;
 				//スキル選択時サウンド鳴らす
+				pSourceVoice_ = audio_->PlayWave("cursorMove.wav");
 			}else {
 				discard_[i].isSelected_ = false;
 			}
@@ -200,6 +211,7 @@ void Deck::Update(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 			if (banish_[i].button_.IsMouseClick()) {
 				banish_[i].isSelected_ = true;
 				//スキル選択時サウンド鳴らす
+				pSourceVoice_ = audio_->PlayWave("cursorMove.wav");
 			}else {
 				banish_[i].isSelected_ = false;
 			}
@@ -438,6 +450,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	if (hand_[0].button_.IsMouseClick() && canUseSkill_[0]) {
 		if (selectedSkillNum_ == 0) {
 			//スキル使用時サウンド鳴らす
+			pSourceVoice2_ = audio2_->PlayWave("cursorClick.wav");
 			usedSkill_ = hand_[0];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
@@ -467,6 +480,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	else if (hand_[1].button_.IsMouseClick() && canUseSkill_[1]) {
 		if (selectedSkillNum_ == 1) {
 			//スキル使用時サウンド鳴らす
+			pSourceVoice2_ = audio2_->PlayWave("cursorClick.wav");
 			usedSkill_ = hand_[1];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;
@@ -496,6 +510,7 @@ void Deck::UseSkill(ScoreData* scoreData, int* hp, int maxScore, float rate) {
 	else if (hand_[2].button_.IsMouseClick() && canUseSkill_[2]) {
 		if (selectedSkillNum_ == 2) {
 			//スキル使用時サウンド鳴らす
+			pSourceVoice2_ = audio2_->PlayWave("cursorClick.wav");
 			usedSkill_ = hand_[2];
 			usedSkill_.Use(scoreData, hp, maxScore, rate);
 			isUsedSkill_ = true;

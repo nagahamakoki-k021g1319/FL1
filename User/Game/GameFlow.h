@@ -7,6 +7,7 @@
 #include "Game/Lesson.h"
 #include"FinalTest.h"
 #include"Button.h"
+#include "Audio.h"
 
 
 class GameFlow{
@@ -42,5 +43,10 @@ private:
 	unique_ptr<Button> voButton_ = nullptr;
 	unique_ptr<Button> daButton_ = nullptr;
 	unique_ptr<Button> viButton_ = nullptr;
+
+	Audio* audio_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice_;
+
+	bool isBGMStart = false;
 };
 

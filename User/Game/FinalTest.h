@@ -2,6 +2,7 @@
 #include"Player.h"
 #include "HpShieldUI.h"
 #include "BufUI.h"
+#include "Audio.h"
 
 class FinalTest
 {
@@ -55,4 +56,13 @@ private:
 	int clearRank_ = 0;
 	std::unique_ptr<Number>	evaluationValueNumber_;
 	std::unique_ptr<Sprite> clearRankPing_;
+
+	//試験用
+	Audio* audio_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice_;
+	//評価用
+	Audio* audio2_ = nullptr;
+	IXAudio2SourceVoice* pSourceVoice2_;
+
+	bool isBGMStart = false;
 };
