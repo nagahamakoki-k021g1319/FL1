@@ -52,6 +52,7 @@ private:
 	Sprite deckSprite_;
 	Sprite discardSprite_;
 	Sprite banishSprite_;
+	Sprite deckBackSprite_;
 
 	Vector2 handPos_[3];
 	float addSelecthandPos_;
