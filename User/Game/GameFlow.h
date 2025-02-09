@@ -21,6 +21,7 @@ public:
 	void ApplyGlobalVariables();
 
 	bool IsEndSchedule() { return isEndSchedule_; };
+	bool IsRetire();
 private:
 	Player player_;
 	
@@ -48,5 +49,10 @@ private:
 	IXAudio2SourceVoice* pSourceVoice_;
 
 	bool isBGMStart = false;
+
+	unique_ptr<Sprite> schedulePng_ = nullptr;
+	unique_ptr<Sprite> spPng_[3];
+	unique_ptr<Button> retire_ = nullptr;
+	unique_ptr<Sprite> selectBackGround_ = nullptr;
 };
 

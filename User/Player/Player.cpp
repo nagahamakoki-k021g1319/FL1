@@ -180,9 +180,9 @@ void Player::Draw(int maxScore, float rate) {
 }
 
 void Player::DrawStatus() {
-	statusNumber_[0]->Draw({ 490.0f,400.0f }, static_cast<size_t>(status_.x), 0.8f);
-	statusNumber_[1]->Draw({ 490.0f + 100.0f,400.0f }, static_cast<size_t>(status_.y), 0.8f);
-	statusNumber_[2]->Draw({ 490.0f + 200.0f,400.0f }, static_cast<size_t>(status_.z), 0.8f);
+	statusNumber_[0]->Draw({ 490.0f, 400.0f }, static_cast<size_t>(status_.x), 0.8f);
+	statusNumber_[1]->Draw({ 640.0f, 400.0f }, static_cast<size_t>(status_.y), 0.8f);
+	statusNumber_[2]->Draw({ 790.0f, 400.0f }, static_cast<size_t>(status_.z), 0.8f);
 }
 
 bool Player::IsTurnEnd() {
