@@ -45,6 +45,8 @@ private:
 	std::unique_ptr<Sprite>	conditionSprite_;
 	std::unique_ptr<Sprite>	conditionPlusSprite_;
 	std::unique_ptr<Sprite>	addSelectSprite_;
+	std::unique_ptr<Sprite>	hpChangedFrameSprite_;
+	std::unique_ptr<Sprite>	shieldChangedFrameSprite_;
 
 	std::unique_ptr<Number>	scoreNumber_;
 	std::unique_ptr<Number>	hpNumber_;
