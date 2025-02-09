@@ -12,8 +12,8 @@ void Deck::Initilize(Skills skills) {
 	AddSkill(skills, "expression");
 	AddSkill(skills, "expression");
 	AddSkill(skills, "face");
-	AddSkill(skills, "face");
 	AddSkill(skills, "behavior");
+	AddSkill(skills, "highFive");
 	AddSkill(skills, "highFive");
 
 	SetDeck();

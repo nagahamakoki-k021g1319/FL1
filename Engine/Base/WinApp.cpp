@@ -61,7 +61,7 @@ void WinApp::Initialize()
 
 	//ウィンドウオブジェクトの生成
 	/*HWND*/ hwnd_ = CreateWindow(w_.lpszClassName,//クラス名指定
-		_T("NEMESIS"),	//タイトルバーの文字
+		_T("INSITE"),	//タイトルバーの文字
 		WS_OVERLAPPEDWINDOW,			//タイトルバーと境界線があるウィンドウ
 		CW_USEDEFAULT,					//表示x座標はOSにお任せ
 		CW_USEDEFAULT,					//表示y座標はOSにお任せ

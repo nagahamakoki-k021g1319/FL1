@@ -63,9 +63,9 @@ void GameFlow::Initialize(){
 	schedulePng_->SetPozition({ 60, 135 });
 	schedulePng_->Update();
 
-	selectBackGround_ = std::make_unique<Sprite>();
-	selectBackGround_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("backGround.png"));
-	selectBackGround_->Update();
+	//selectBackGround_ = std::make_unique<Sprite>();
+	//selectBackGround_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("backGround.png"));
+	//selectBackGround_->Update();
 
 	spPng_[0] = std::make_unique<Sprite>();
 	spPng_[0]->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("SP.png"));
@@ -80,15 +80,15 @@ void GameFlow::Initialize(){
 	spPng_[2]->SetPozition({ 810, 460 });
 	spPng_[2]->Update();
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 3; j++) {
-			selectBlack_[i][j] = std::make_unique<Sprite>();
-			selectBlack_[i][j]->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("selectBlack.png"));
-			selectBlack_[i][j]->SetPozition({ 130.0f + 72.0f * j,515.0f - 64.0f * i});
-			selectBlack_[i][j]->Update();
-		}
-		selectedSchedule_[i] = -1;
-	}
+	//for (int i = 0; i < 4; i++) {
+	//	for (int j = 0; j < 3; j++) {
+	//		selectBlack_[i][j] = std::make_unique<Sprite>();
+	//		selectBlack_[i][j]->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("selectBlack.png"));
+	//		selectBlack_[i][j]->SetPozition({ 130.0f + 72.0f * j,515.0f - 64.0f * i});
+	//		selectBlack_[i][j]->Update();
+	//	}
+	//	selectedSchedule_[i] = -1;
+	//}
 }
 
 void GameFlow::Update(){
@@ -126,7 +126,7 @@ void GameFlow::Update(){
 					}
 					player_.DeckReset();
 					player_.ScoreReset();
-					selectedSchedule_[scheduleCount_] = 0;
+					//selectedSchedule_[scheduleCount_] = 0;
 					scheduleCount_++;
 					isFirstPick_ = false;
 					bgmStart_ = true;
@@ -140,7 +140,7 @@ void GameFlow::Update(){
 					}
 					player_.DeckReset();
 					player_.ScoreReset();
-					selectedSchedule_[scheduleCount_] = 1;
+					//selectedSchedule_[scheduleCount_] = 1;
 					scheduleCount_++;
 					isFirstPick_ = false;
 					bgmStart_ = true;
@@ -154,7 +154,7 @@ void GameFlow::Update(){
 					}
 					player_.DeckReset();
 					player_.ScoreReset();
-					selectedSchedule_[scheduleCount_] = 2;
+					//selectedSchedule_[scheduleCount_] = 2;
 					scheduleCount_++;
 					isFirstPick_ = false;
 					bgmStart_ = true;
@@ -186,17 +186,17 @@ void GameFlow::Draw(){
 	if (lesson_->GetIsLessonEnd() == false && isFirstPick_ == false) {
 		lesson_->Draw();
 	}else if ((lesson_->GetIsLessonEnd() == true && isFinalTest_ == false) || isFirstPick_ == true) {
-		selectBackGround_->Draw();
+		//selectBackGround_->Draw();
 		schedulePng_->Draw();
-		for (int i = 0; i < 4; i++) {
-			if (i < scheduleCount_) {
-				for (int j = 0; j < 3; j++) {
-					if (j != selectedSchedule_[i]) {
-						selectBlack_[i][j]->Draw();
-					}
-				}
-			}
-		}
+		//for (int i = 0; i < 4; i++) {
+		//	if (i < scheduleCount_) {
+		//		for (int j = 0; j < 3; j++) {
+		//			if (j != selectedSchedule_[i]) {
+		//				selectBlack_[i][j]->Draw();
+		//			}
+		//		}
+		//	}
+		//}
 		player_.DrawStatus();
 		voButton_->Draw();
 		daButton_->Draw();
@@ -206,7 +206,7 @@ void GameFlow::Draw(){
 			spPng_[0]->Draw();
 		}
 		if (isSp_[1]) {
-			spPng_[2]->Draw();
+			spPng_[1]->Draw();
 		}
 		if (isSp_[2]) {
 			spPng_[2]->Draw();
