@@ -69,4 +69,7 @@ void GameScene::StateTransition() {
 	if (gameFlow_->IsEndSchedule()) {
 		sceneManager_->TransitionTo(SceneManager::SCENE::TITLE);
 	}
+	if (gameFlow_->IsRetire()) {
+		sceneManager_->TransitionTo(SceneManager::SCENE::TITLE);
+	}
 }

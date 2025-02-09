@@ -63,6 +63,6 @@ void TitleScene::SpriteDraw() {
 void TitleScene::StateTransition() {
 	if (Input::GetInstance()->TriggerMouse(0)) {
 		audio_->StopWave(pSourceVoice_);
-		sceneManager_->TransitionTo(SceneManager::SCENE::SELECT);
+		sceneManager_->TransitionTo(SceneManager::SCENE::GAME);
 	}
 }

@@ -19,12 +19,14 @@ void Deck::Initilize(Skills skills) {
 	SetDeck();
 	Shuffle();
 
+	deckBackSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("deckBack.png"));
+	deckBackSprite_.SetPozition({ 895,0 });
 	deckSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("deck.png"));
-	deckSprite_.SetPozition({ 900,0 });
+	deckSprite_.SetPozition({ 920,10 });
 	discardSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("discard.png"));
-	discardSprite_.SetPozition({ 900,300 });
+	discardSprite_.SetPozition({ 920,300 });
 	banishSprite_.Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("banish.png"));
-	banishSprite_.SetPozition({ 900,560 });
+	banishSprite_.SetPozition({ 920,590 });
 
 	addSelecthandPos_ = -20;
 	defaultHandPos_[0] = { 530,572 };
@@ -580,19 +582,19 @@ void Deck::SpriteSort() {
 
 	//deck
 	for (int i = 0; i < deck_.size(); i++) {
-		deck_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 102 });
+		deck_[i].button_.SetPosition({ i % 4 * 80.0f + 967,i / 4 * 80.0f + 92 });
 		deck_[i].button_.Update();
 	}
 
 	//discard
 	for (int i = 0; i < discard_.size(); i++) {
-		discard_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 402 });
+		discard_[i].button_.SetPosition({ i % 4 * 80.0f + 967,i / 4 * 80.0f + 382 });
 		discard_[i].button_.Update();
 	}
 
 	//banish
 	for (int i = 0; i < banish_.size(); i++) {
-		banish_[i].button_.SetPosition({ i % 4 * 80.0f + 932,i / 4 * 80.0f + 662 });
+		banish_[i].button_.SetPosition({ i % 4 * 80.0f + 967,i / 4 * 80.0f + 672 });
 		banish_[i].button_.Update();
 	}
 }
@@ -610,6 +612,7 @@ void Deck::DrawHand() {
 }
 
 void Deck::DrawList() {
+	deckBackSprite_.Draw();
 	deckSprite_.Draw();
 	for (int i = 0; i < deck_.size(); i++) {
 		deck_[i].button_.Draw();
