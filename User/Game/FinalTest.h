@@ -56,6 +56,7 @@ private:
 	int clearRank_ = 0;
 	std::unique_ptr<Number>	evaluationValueNumber_;
 	std::unique_ptr<Sprite> clearRankPing_;
+	std::unique_ptr<Sprite> clearPing_;
 
 	//試験用
 	Audio* audio_ = nullptr;
