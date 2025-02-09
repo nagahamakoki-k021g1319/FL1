@@ -60,7 +60,16 @@ private:
 	bool isLoopEnd_;
 	bool isLessonEnd_;
 
-	int border[7] = { 3000,4500,6000,8000,10000,11500,13000};
+	int border[7] = {
+		6000,//C
+		6500,//C+
+		7000,//B
+		7500,//B+
+		8000,//A
+		8500,//A+
+		9000//S
+	};
+	
 	int maxState = 1800;
 	int pointSeparator[5] = { 5000,10000,20000,30000,40000, };
 

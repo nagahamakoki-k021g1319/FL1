@@ -206,7 +206,7 @@ void GameFlow::Draw(){
 			spPng_[0]->Draw();
 		}
 		if (isSp_[1]) {
-			spPng_[2]->Draw();
+			spPng_[1]->Draw();
 		}
 		if (isSp_[2]) {
 			spPng_[2]->Draw();
