@@ -40,8 +40,20 @@ private:
 
 	std::unique_ptr<Number>	turnNumber_;
 	std::unique_ptr<Sprite> remainingTurnPing_;
+	std::unique_ptr<Sprite> turnSchedulePing_;
 	std::unique_ptr<Sprite> explanationPing_;
+	std::unique_ptr<Sprite> arrowPing_;
 
+	std::unique_ptr<Sprite> voPercentPing_;
+	std::unique_ptr<Sprite> daPercentPing_;
+	std::unique_ptr<Sprite> viPercentPing_;
+	std::unique_ptr<Sprite> voPercentBackPing_;
+	std::unique_ptr<Sprite> daPercentBackPing_;
+	std::unique_ptr<Sprite> viPercentBackPing_;
+	std::unique_ptr<Sprite> voPercentBlackPing_;
+	std::unique_ptr<Sprite> daPercentBlackPing_;
+	std::unique_ptr<Sprite> viPercentBlackPing_;
+	
 	unique_ptr<HpShieldUI> hpShieldUI_ = nullptr;
 	//unique_ptr<BufUI> bufUI_ = nullptr;
 
