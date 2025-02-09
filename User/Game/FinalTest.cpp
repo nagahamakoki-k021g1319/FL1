@@ -34,10 +34,20 @@ void FinalTest::Initialize(){
 	isLessonEnd_ = false;
 
 	remainingTurnPing_ = std::make_unique<Sprite>();
-	remainingTurnPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("remainingTurn.png"));
-	remainingTurnPing_->SetPozition({ 426,0 });
-	remainingTurnPing_->SetSize({ 106,21 });
+	remainingTurnPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("finalremainingTurn.png"));
+	remainingTurnPing_->SetPozition({ 411,15 });
+	remainingTurnPing_->SetSize({ 350.0f / 3.0f,590.0f / 3.0f });
 	remainingTurnPing_->Update();
+
+	turnSchedulePing_ = std::make_unique<Sprite>();
+	turnSchedulePing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("finalTestSchedule.png"));
+	turnSchedulePing_->SetPozition({ 471,97 });
+	turnSchedulePing_->Update();
+	
+	arrowPing_ = std::make_unique<Sprite>();
+	arrowPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("arrow.png"));
+	arrowPing_->SetPozition({ 459,95 });
+	arrowPing_->Update();
 
 	turnNumber_ = std::make_unique<Number>();
 	turnNumber_->Initialize();
@@ -64,15 +74,64 @@ void FinalTest::Initialize(){
 	clearRankPing_->SetPozition({ 640,250 });
 	clearRankPing_->Update();
 
+	voPercentPing_ = std::make_unique<Sprite>();
+	voPercentPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percent.png"));
+	voPercentPing_->SetPozition({ 320,160 });
+	voPercentPing_->Update();
+
+	daPercentPing_ = std::make_unique<Sprite>();
+	daPercentPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percent.png"));
+	daPercentPing_->SetPozition({ 320,220 });
+	daPercentPing_->Update();
+
+	viPercentPing_ = std::make_unique<Sprite>();
+	viPercentPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percent.png"));
+	viPercentPing_->SetPozition({ 320,280 });
+	viPercentPing_->Update();
+
+
+
+	voPercentBackPing_ = std::make_unique<Sprite>();
+	voPercentBackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("voPercentBack.png"));
+	voPercentBackPing_->SetPozition({ 230,135 });
+	voPercentBackPing_->Update();
+
+	daPercentBackPing_ = std::make_unique<Sprite>();
+	daPercentBackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("daPercentBack.png"));
+	daPercentBackPing_->SetPozition({ 230,195 });
+	daPercentBackPing_->Update();
+
+	viPercentBackPing_ = std::make_unique<Sprite>();
+	viPercentBackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("viPercentBack.png"));
+	viPercentBackPing_->SetPozition({ 230,255 });
+	viPercentBackPing_->Update();
+
+
+
+	voPercentBlackPing_ = std::make_unique<Sprite>();
+	voPercentBlackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percentBlack.png"));
+	voPercentBlackPing_->SetPozition({ 230,135 });
+	voPercentBlackPing_->Update();
+
+	daPercentBlackPing_ = std::make_unique<Sprite>();
+	daPercentBlackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percentBlack.png"));
+	daPercentBlackPing_->SetPozition({ 230,195 });
+	daPercentBlackPing_->Update();
+
+	viPercentBlackPing_ = std::make_unique<Sprite>();
+	viPercentBlackPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("percentBlack.png"));
+	viPercentBlackPing_->SetPozition({ 230,255 });
+	viPercentBlackPing_->Update();
+
+
 	clearPing_ = std::make_unique<Sprite>();
 	clearPing_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("end.png"));
+
 
 	//最終試験BGMサウンド鳴らす
 	audio_ = new Audio();
 	audio_->Initialize();
 	audio_->LoadWave("lessonBGM.wav");
-
-
 
 	audio2_ = new Audio();
 	audio2_->Initialize();
@@ -96,6 +155,9 @@ void FinalTest::Update(){
 	if (isLoopEnd_ == false) {
 		
 		player_->Update(0,statusRate_[turnType[turn_]]);
+
+		arrowPing_->SetPozition({ 459.0f,96.0f + (static_cast<float>(turn_) * 8.0f) });
+		arrowPing_->Update();
 
 		if (player_->IsTurnEnd() == true) {
 			turn_++;
@@ -206,14 +268,35 @@ void FinalTest::Draw() {
 		explanationPing_->Draw();
 		player_->Draw(0,statusRate_[turnType[turn_]]);
 		remainingTurnPing_->Draw();
-		turnNumber_->Draw({ 466,21 }, maxTurn_ - turn_, 0.4f);
+		turnNumber_->Draw({ 450,43 }, maxTurn_ - turn_, 0.5f);
+		turnSchedulePing_->Draw();
+		arrowPing_->Draw();
 		if (isLoopEnd_ == true) {
 			player_->DrawAddSkill();
 		}
 		hpShieldUI_->Draw();
-		//bufUI_->Draw();
+		
+		voPercentBackPing_->Draw();
+		daPercentBackPing_->Draw();
+		viPercentBackPing_->Draw();
 		for (int i = 0; i < 3; i++) {
-			statusRateNumber_[i]->Draw({ 240.0f, 140.0f + 60.0f * i }, static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
+			if (statusRate_[i] * 100.0f < 1000.0f) {
+				statusRateNumber_[i]->Draw({ 240.0f, 140.0f + 60.0f * i }, static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
+			}else {
+				statusRateNumber_[i]->Draw({ 220.0f, 140.0f + 60.0f * i }, static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
+			}
+		}
+		voPercentPing_->Draw();
+		daPercentPing_->Draw();
+		viPercentPing_->Draw();
+		if (turnType[turn_] != 0) {
+			voPercentBlackPing_->Draw();
+		}
+		if (turnType[turn_] != 1) {
+			daPercentBlackPing_->Draw();
+		}
+		if (turnType[turn_] != 2) {
+			viPercentBlackPing_->Draw();
 		}
 	}else {
 		//評価値表示画面
