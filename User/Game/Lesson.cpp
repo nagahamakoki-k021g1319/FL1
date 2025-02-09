@@ -71,6 +71,7 @@ void Lesson::Update() {
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
 			player_->AddStatus(player_->GetScore(),type_);
+			player_->Heal((maxTurn_ - turn_) * 2);
 		}
 	}
 	else {

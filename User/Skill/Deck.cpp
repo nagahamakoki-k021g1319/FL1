@@ -546,6 +546,9 @@ void Deck::ResetDeck() {
 	hand_.clear();
 	discard_.clear();
 	banish_.clear();
+	for (int i = 0; i < deck_.size();i++) {
+		deck_[i].button_.SetSize({ 64,64 });
+	}
 	FirstDrawSkill();
 }
 
