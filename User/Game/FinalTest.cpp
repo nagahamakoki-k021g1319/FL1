@@ -211,7 +211,7 @@ void FinalTest::Calculation(Vector3 status, int score) {
 		clearRank_ = 0;
 	}
 
-	clearRankPing_->SetPozition({ 500,200 });
+	clearRankPing_->SetPozition({ 500,170 });
 	clearRankPing_->SetTexLeftTop({ 256.f * static_cast<float>(clearRank_) ,0.0f });
 	clearRankPing_->SetTexSize({ 256,256 });
 	clearRankPing_->Update();
@@ -301,7 +301,7 @@ void FinalTest::Draw() {
 	}else {
 		//評価値表示画面
 		clearPing_->Draw();
-		evaluationValueNumber_->Draw({ 0,0 }, evaluationValue_, 1.0f);
+		evaluationValueNumber_->Draw({ 530,470 }, evaluationValue_, 1.0f);
 		clearRankPing_->Draw();
 	}
 }
