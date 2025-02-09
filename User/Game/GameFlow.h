@@ -54,5 +54,9 @@ private:
 	unique_ptr<Sprite> spPng_[3];
 	unique_ptr<Button> retire_ = nullptr;
 	unique_ptr<Sprite> selectBackGround_ = nullptr;
+
+
+	unique_ptr<Sprite> selectBlack_[4][3];
+	int selectedSchedule_[4];
 };
 

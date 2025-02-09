@@ -55,7 +55,7 @@ void Player::Initilize() {
 	concentrationSprite_->Update();
 	concentrationPlusSprite_ = std::make_unique<Sprite>();
 	concentrationPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	concentrationPlusSprite_->SetPozition({ 80,150 });
+	concentrationPlusSprite_->SetPozition({ 100,150 });
 	concentrationPlusSprite_->SetSize({ 32,32 });
 	concentrationPlusSprite_->Update();
 	
@@ -66,7 +66,7 @@ void Player::Initilize() {
 	conditionSprite_->Update();
 	conditionPlusSprite_ = std::make_unique<Sprite>();
 	conditionPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	conditionPlusSprite_->SetPozition({ 80,194 });
+	conditionPlusSprite_->SetPozition({ 100,194 });
 	conditionPlusSprite_->SetSize({ 32,32 });
 	conditionPlusSprite_->Update();
 
@@ -137,10 +137,10 @@ void Player::Draw(int maxScore, float rate) {
 	scoreNumber_->Draw({ 605,65 }, scoreData_.score, 0.7f);
 	
 	concentrationSprite_->Draw();
-	concentrationNumber_->Draw({ 64,155 }, scoreData_.concentration, 0.35f);
+	concentrationNumber_->Draw({ 74,155 }, scoreData_.concentration, 0.35f);
 	
 	conditionSprite_->Draw();
-	conditionNumber_->Draw({ 64, 199 }, scoreData_.condition, 0.35f);
+	conditionNumber_->Draw({ 74, 199 }, scoreData_.condition, 0.35f);
 
 	if (deck_->IsSelectedSkill()) {
 		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_, maxScore, rate);
@@ -168,12 +168,12 @@ void Player::Draw(int maxScore, float rate) {
 		}
 
 		if (changedScoreData.concentration != 0) {
-			changeConcentrationNumber_->Draw({ 94,155 }, changedScoreData.concentration, 0.35f);
+			changeConcentrationNumber_->Draw({ 114,155 }, changedScoreData.concentration, 0.35f);
 			concentrationPlusSprite_->Draw();
 		}
 
 		if (changedScoreData.condition != 0) {
-			changeConditionNumber_->Draw({ 94, 199 }, changedScoreData.condition, 0.35f);
+			changeConditionNumber_->Draw({ 114, 199 }, changedScoreData.condition, 0.35f);
 			conditionPlusSprite_->Draw();
 		}
 	}
