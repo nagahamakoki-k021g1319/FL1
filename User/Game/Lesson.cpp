@@ -38,8 +38,8 @@ void Lesson::Initialize(int maxTurn, int perfectScore,int type) {
 	type_ = type;
 
 	hpShieldUI_ = make_unique<HpShieldUI>();
-	bufUI_ = make_unique<BufUI>();
-	bufUI_->Initialize();
+	//bufUI_ = make_unique<BufUI>();
+	//bufUI_->Initialize();
 
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
@@ -80,10 +80,12 @@ void Lesson::Update() {
 			isLoopEnd_ = true;
 			player_->AddRandSkillDraw();
 			player_->AddStatus(player_->GetScore(),type_);
+			player_->Heal((maxTurn_ - turn_) * 2);
 		}
 	}
 	else {
 		if (player_->GetScore() >= clearScore_) {
+			player_->AddRandSkillReload();
 			if (player_->addRandSkill()) {
 				isLessonEnd_ = true;
 				//レッスン中bgmサウンド止める
@@ -102,7 +104,6 @@ void Lesson::Update() {
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Update();
-	bufUI_->Update();
 }
 
 void Lesson::Draw() {
@@ -125,5 +126,4 @@ void Lesson::Draw() {
 		}
 	}
 	hpShieldUI_->Draw();
-	bufUI_->Draw();
 }

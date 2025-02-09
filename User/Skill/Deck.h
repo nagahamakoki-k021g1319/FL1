@@ -5,9 +5,8 @@
 #include"Skill.h"
 #include"Sprite.h"
 #include"SpriteLoader.h"
-
 #include"Audio.h"
-
+#include"Number.h"
 
 using namespace std;
 
@@ -41,6 +40,7 @@ public:
 	Skill GetUsedSkil();
 	bool IsSelectedSkill();
 	Skill GetSelectedSkill();
+	bool IsReloard();
 private:
 	vector<Skill> hasSkills_;
 	vector<Skill> deck_;
@@ -50,7 +50,6 @@ private:
 	vector<Skill> addRandList_;
 
 	Sprite deckSprite_;
-	Sprite handSprite_;
 	Sprite discardSprite_;
 	Sprite banishSprite_;
 
@@ -67,8 +66,12 @@ private:
 
 	Button skipButton_;
 
-	Audio* audio_ = nullptr;
+  Audio* audio_ = nullptr;
 	IXAudio2SourceVoice* pSourceVoice_;
 	Audio* audio2_ = nullptr;
 	IXAudio2SourceVoice* pSourceVoice2_;
+
+	Button reloadButton_;
+	int reloadNum_;
+	Number reloadNumber_;
 };

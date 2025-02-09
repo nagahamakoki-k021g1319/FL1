@@ -47,8 +47,8 @@ void FinalTest::Initialize(){
 	explanationPing_->Update();
 
 	hpShieldUI_ = make_unique<HpShieldUI>();
-	bufUI_ = make_unique<BufUI>();
-	bufUI_->Initialize();
+	//bufUI_ = make_unique<BufUI>();
+	//bufUI_->Initialize();
 
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
@@ -120,12 +120,12 @@ void FinalTest::Update(){
 	hpShieldUI_->GetHPpt(player_->GetHP());
 	hpShieldUI_->GetShieldpt(player_->GetShield());
 	hpShieldUI_->Update();
-	bufUI_->Update();
+	//bufUI_->Update();
 }
 
 
 void FinalTest::Calculation(Vector3 status, int score) {
-    int totalStatePoint = static_cast<int>(floor((CalculationState(static_cast<int>(status.x)) + CalculationState(static_cast<int>(status.y)) + CalculationState(static_cast<int>(status.z))) * 2.3f));
+	int totalStatePoint = static_cast<int>(floor((CalculationState(static_cast<int>(status.x)) + CalculationState(static_cast<int>(status.y)) + CalculationState(static_cast<int>(status.z)) + 1100) * 2.3f));
     int scorePoint = CalculationRequiredScore(score);
 	int totalPoint = totalStatePoint + scorePoint + 1700;
 	evaluationValue_ = totalPoint;
@@ -207,9 +207,9 @@ void FinalTest::Draw() {
 			player_->DrawAddSkill();
 		}
 		hpShieldUI_->Draw();
-		bufUI_->Draw();
+		//bufUI_->Draw();
 		for (int i = 0; i < 3; i++) {
-			statusRateNumber_[i]->Draw({ 0.0f, 60.0f*i },static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
+			statusRateNumber_[i]->Draw({ 240.0f, 140.0f + 60.0f * i }, static_cast<size_t>(statusRate_[i] * 100.0f), 0.6f);
 		}
 	}else {
 		//評価値表示画面

@@ -21,8 +21,19 @@ void Player::Initilize() {
 	hpSprite_->Update();
 	hpMinusSprite_ = std::make_unique<Sprite>();
 	hpMinusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("minus.png"));
-	hpMinusSprite_->SetPozition({ 68,194 });
+	hpMinusSprite_->SetPozition({ 155,117 });
 	hpMinusSprite_->Update();
+
+
+	hpChangedFrameSprite_ = std::make_unique<Sprite>();
+	hpChangedFrameSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("ChangedFrame.png"));
+	hpChangedFrameSprite_->SetPozition({ 155,117 });
+	hpChangedFrameSprite_->Update();
+
+	shieldChangedFrameSprite_ = std::make_unique<Sprite>();
+	shieldChangedFrameSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("ChangedFrame.png"));
+	shieldChangedFrameSprite_->SetPozition({ 247,92 });
+	shieldChangedFrameSprite_->Update();
 	
 	shieldSprite_ = std::make_unique<Sprite>();
 	shieldSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("shield.png"));
@@ -30,32 +41,32 @@ void Player::Initilize() {
 	shieldSprite_->Update();
 	shieldMinusSprite_ = std::make_unique<Sprite>();
 	shieldMinusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("minus.png"));
-	shieldMinusSprite_->SetPozition({ 288,194 });
+	shieldMinusSprite_->SetPozition({ 245,92 });
 	shieldMinusSprite_->Update();
 	shieldPlusSprite_ = std::make_unique<Sprite>();
 	shieldPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	shieldPlusSprite_->SetPozition({ 288,194 });
+	shieldPlusSprite_->SetPozition({ 245,92 });
 	shieldPlusSprite_->Update();
 	
 	concentrationSprite_ = std::make_unique<Sprite>();
 	concentrationSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("concentration.png"));
-	concentrationSprite_->SetPozition({ 426,70 });
+	concentrationSprite_->SetPozition({ 50,140});
 	concentrationSprite_->SetSize({ 32,32 });
 	concentrationSprite_->Update();
 	concentrationPlusSprite_ = std::make_unique<Sprite>();
 	concentrationPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	concentrationPlusSprite_->SetPozition({ 466,80 });
+	concentrationPlusSprite_->SetPozition({ 80,150 });
 	concentrationPlusSprite_->SetSize({ 32,32 });
 	concentrationPlusSprite_->Update();
 	
 	conditionSprite_ = std::make_unique<Sprite>();
 	conditionSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("condition.png"));
-	conditionSprite_->SetPozition({ 426,114 });
+	conditionSprite_->SetPozition({ 50,184});
 	conditionSprite_->SetSize({ 32,32 });
 	conditionSprite_->Update();
 	conditionPlusSprite_ = std::make_unique<Sprite>();
 	conditionPlusSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("plus.png"));
-	conditionPlusSprite_->SetPozition({ 466,124 });
+	conditionPlusSprite_->SetPozition({ 80,194 });
 	conditionPlusSprite_->SetSize({ 32,32 });
 	conditionPlusSprite_->Update();
 
@@ -85,7 +96,7 @@ void Player::Initilize() {
 
 	addSelectSprite_ = std::make_unique<Sprite>();
 	addSelectSprite_->Initialize(SpriteCommon::GetInstance(), SpriteLoader::GetInstance()->GetTextureIndex("addselect.png"));
-	addSelectSprite_->SetPozition({425,360});
+	addSelectSprite_->SetPozition({440,320});
 	addSelectSprite_->Update();
 
 	for (int i = 0; i < 3; i++) {
@@ -126,10 +137,10 @@ void Player::Draw(int maxScore, float rate) {
 	scoreNumber_->Draw({ 605,65 }, scoreData_.score, 0.7f);
 	
 	concentrationSprite_->Draw();
-	concentrationNumber_->Draw({ 440,85 }, scoreData_.concentration, 0.35f);
+	concentrationNumber_->Draw({ 64,155 }, scoreData_.concentration, 0.35f);
 	
 	conditionSprite_->Draw();
-	conditionNumber_->Draw({ 440, 129 }, scoreData_.condition, 0.35f);
+	conditionNumber_->Draw({ 64, 199 }, scoreData_.condition, 0.35f);
 
 	if (deck_->IsSelectedSkill()) {
 		ScoreData changedScoreData = deck_->GetChangedScoreData(&scoreData_, maxScore, rate);
@@ -141,25 +152,28 @@ void Player::Draw(int maxScore, float rate) {
 		}
 
 		if (changeHp != 0) {
-			changeHpNumber_->Draw({ 100,194 }, changeHp, 0.8f);
+			hpChangedFrameSprite_->Draw();
+			changeHpNumber_->Draw({ 165,120 }, changeHp, 0.4f);
 			hpMinusSprite_->Draw();
 		}
 
 		if (changedScoreData.shield > 0) {
+			shieldChangedFrameSprite_->Draw();
 			shieldPlusSprite_->Draw();
-			changeShieldNumber_->Draw({ 320,194 }, changedScoreData.shield, 0.8f);
+			changeShieldNumber_->Draw({ 257,95 }, changedScoreData.shield, 0.4f);
 		}else if (changedScoreData.shield < 0) {
-			changeShieldNumber_->Draw({ 320,194 }, -changedScoreData.shield, 0.8f);
+			shieldChangedFrameSprite_->Draw();
+			changeShieldNumber_->Draw({ 257,95 }, -changedScoreData.shield, 0.4f);
 			shieldMinusSprite_->Draw();
 		}
 
 		if (changedScoreData.concentration != 0) {
-			changeConcentrationNumber_->Draw({ 480,85 }, changedScoreData.concentration, 0.35f);
+			changeConcentrationNumber_->Draw({ 94,155 }, changedScoreData.concentration, 0.35f);
 			concentrationPlusSprite_->Draw();
 		}
 
 		if (changedScoreData.condition != 0) {
-			changeConditionNumber_->Draw({ 480, 129 }, changedScoreData.condition, 0.35f);
+			changeConditionNumber_->Draw({ 94, 199 }, changedScoreData.condition, 0.35f);
 			conditionPlusSprite_->Draw();
 		}
 	}
@@ -205,5 +219,11 @@ void Player::Heal(int healPoint) {
 	hp_ += healPoint;
 	if (hp_ > maxHp_) {
 		hp_ = maxHp_;
+	}
+}
+
+void Player::AddRandSkillReload() {
+	if (deck_->IsReloard()) {
+		deck_->AddRandSkillDraw(skills_);
 	}
 }

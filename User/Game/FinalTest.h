@@ -43,7 +43,7 @@ private:
 	std::unique_ptr<Sprite> explanationPing_;
 
 	unique_ptr<HpShieldUI> hpShieldUI_ = nullptr;
-	unique_ptr<BufUI> bufUI_ = nullptr;
+	//unique_ptr<BufUI> bufUI_ = nullptr;
 
 	bool isLoopEnd_;
 	bool isLessonEnd_;
